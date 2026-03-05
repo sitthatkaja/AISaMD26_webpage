@@ -22,6 +22,15 @@
         <link href="css/bootstrap-icons.css" rel="stylesheet">
 
         <link href="css/templatemo-leadership-event.css" rel="stylesheet">
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-01XMBMPS1N"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-01XMBMPS1N');
+        </script>
         
 <!--
 
@@ -73,21 +82,41 @@ https://templatemo.com/tm-575-leadership-event
         <main>
 
             <section class="hero" id="section_1">
-                <div class="container">
-                    <div class="row">
-                    </div>
-                </div>
-
                 <div class="video-wrap">
                     <video autoplay="" loop="" muted="" class="custom-video" poster="">
                         <source src="videos/header video.mp4" type="video/mp4">
-
                         Your browser does not support the video tag.
                     </video>
                 </div>
+
+                <div class="hero-btn-container">
+                    <a href="#Register" class="btn custom-btn">ลงทะเบียนตอนนี้</a>
+                </div>
             </section>
 
+            <section class="about section-padding" id="Register">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-12 text-center d-flex flex-column align-items-center"> 
+                            
+                            <img src="images/Register.png" class="mx-auto d-block" style="display: block; width: 100%; height: auto;">
 
+                            <div class="registration-buttons d-flex justify-content-center flex-wrap mt-4">
+                                <a href="#" class="btn btn-blue-custom m-2" 
+                                onclick="gtag('event', 'click_registration', { 'button_name': 'individual', 'type': 'บุคคลธรรมดา' });">
+                                สำหรับบุคคลธรรมดา
+                                </a>
+
+                                <a href="#" class="btn btn-blue-custom m-2" 
+                                onclick="gtag('event', 'click_registration', { 'button_name': 'corporate', 'type': 'องค์กร' });">
+                                สำหรับองค์กร
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
 
 
             <section class="about section-padding" id="section_2">

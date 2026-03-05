@@ -490,6 +490,70 @@ strong {
   overflow: hidden;  /* ตัดส่วนวิดีโอที่ล้นออก ไม่ให้ไปทับส่วน Overview */
 }
 
+.hero-btn-container {
+    position: absolute;
+    bottom: 80px; /* ปรับระยะห่างจากขอบล่าง (เพิ่มเลขนี้ถ้าอยากให้ปุ่มลอยสูงขึ้น) */
+    left: 50%;
+    transform: translateX(-50%); /* ทำให้กึ่งกลางเป๊ะ */
+    z-index: 10; /* ให้ปุ่มอยู่บนสุดเหนือวิดีโอ */
+}
+
+/* 3. ตกแต่งปุ่มให้ดูเด่นบนวิดีโอ */
+.custom-btn {
+    background-color: #ffffff; /* สีปุ่ม */
+    color: #333;
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* ใส่เงาเพื่อให้ปุ่มไม่กลืนไปกับวิดีโอ */
+    transition: all 0.3s ease;
+}
+
+.custom-btn:hover {
+    background-color: #28a745; /* เปลี่ยนสีเมื่อเอาเมาส์วาง */
+    color: white;
+    transform: scale(1.05);
+}
+
+/* ตกแต่งปุ่มสีฟ้า */
+.btn-blue-custom {
+    background-color: #007bff; /* สีฟ้าหลัก */
+    color: white !important;
+    padding: 12px 30px;
+    border-radius: 50px; /* ทรงมนสวยงาม */
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid #007bff;
+    min-width: 200px; /* กำหนดความกว้างขั้นต่ำให้ปุ่มเท่ากัน */
+}
+
+/* เอฟเฟกต์เมื่อเอาเมาส์ไปวาง */
+.btn-blue-custom:hover {
+    background-color: transparent;
+    color: #007bff !important;
+    transform: translateY(-3px); /* ลอยขึ้นเล็กน้อย */
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+/* จัดระยะห่างระหว่างปุ่ม */
+.registration-buttons {
+    gap: 20px; /* ระยะห่างระหว่าง 2 ปุ่ม */
+}
+
+/* ปรับแต่งกรณีหน้าจอมือถือเล็กๆ ให้ปุ่มไม่เบียดกัน */
+@media (max-width: 576px) {
+    .registration-buttons {
+        flex-direction: column; /* มือถือให้วางเรียงแนวดิ่ง */
+        width: 100%;
+    }
+    .btn-blue-custom {
+        width: 80%; /* ปุ่มกว้างขึ้นในมือถือ */
+    }
+}
+
 .hero::after {
   content: "";
   background: rgba(0, 0, 0, 0) linear-gradient(rgba(39, 48, 83, 0.1) 0%, rgb(39, 48, 83) 100%) repeat scroll 0% 0%;
