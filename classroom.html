@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/logo.png" />
     <title>Classroom - AISaMD-WDP</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -284,20 +285,20 @@
         return html;
     }
 
+    // --- ส่วนที่แก้ไข: เปลี่ยนมาเช็คสิทธิ์ด้วย ID วิดีโอ ---
     function renderUI() {
         const grid = document.getElementById('courseGrid');
         const sidebar = document.getElementById('sidebarList');
         
-        // --- ดึงสิทธิ์ที่ถูกเก็บไว้ตอน Login ---
         const userAccess = localStorage.getItem('userAccess') || "";
-        const allowedCats = userAccess.split(',').map(s => s.trim());
+        const allowedVideoIds = userAccess.split(',').map(s => s.trim());
 
         const filtered = allCourses.filter(c => {
             const tMatch = currentTrack === 'all' || (c.track && c.track.toUpperCase().includes(currentTrack.toUpperCase()));
             const cMatch = currentCat === 'all' || c.category === currentCat;
             
-            // กรองตามสิทธิ์: ถ้า "ทั้งหมด" ให้ดูได้หมด หรือหมวดหมู่ตรงกับสิทธิ์ที่มี
-            const hasPermission = userAccess === 'ทั้งหมด' || allowedCats.includes(c.category);
+            // เปลี่ยนจาก allowedCats.includes(c.category) เป็นการเช็ค ID แทน
+            const hasPermission = userAccess === 'ทั้งหมด' || allowedVideoIds.includes(c.id.toString());
             
             return tMatch && cMatch && c.status === 'show' && hasPermission;
         });
