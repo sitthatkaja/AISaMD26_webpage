@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classroom - AISaMD-WDP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">    
+    <style>
+        * {
+            font-family: 'Noto Sans Thai', 'Sarabun', sans-serif !important;
+        }
+        :root { --track-purple: #0ea5e9; --cat-green: #06b6d4; }
+        body { 
+            font-family: 'Noto Sans Thai', 'Sarabun', sans-serif; 
+            background: linear-gradient(135deg, #0a1628 0%, #0d2137 60%, #0a3d5c 100%);
+            min-height: 100vh;
+            color: #e2e8f0; 
+        }        
+
+        .navbar { 
+            background: rgba(10, 22, 40, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(56,189,248,0.2);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3); 
+        }        
+        
+        .welcome-section { 
+            background: rgba(13, 42, 74, 0.60);
+            backdrop-filter: blur(12px);
+            border-radius: 16px; 
+            border-left: 6px solid #0ea5e9; 
+            border: 1px solid rgba(56,189,248,0.2);
+            position: relative; 
+        }    
+
+        .welcome-section h3 { color: white; }
+        .welcome-section p { color: rgba(255,255,255,0.55); }
+
+        .btn-logout-welcome { position: absolute; top: 20px; right: 20px; }
+
+        .filter-label { 
+            font-size: 0.85rem; font-weight: 700; 
+            color: rgba(255,255,255,0.6); 
+            text-transform: uppercase; margin-right: 15px; min-width: 140px; 
+        }
+
+        .btn-filter-track { 
+            border-radius: 20px; padding: 4px 15px; 
+            font-size: 0.85rem; font-weight: 600; 
+            border: 2px solid #0ea5e9; 
+            background: transparent; color: #0ea5e9; margin: 3px; 
+        }
+
+        .btn-filter-track.active { background: #0ea5e9; color: #fff; }
+        .btn-filter-cat { 
+            border-radius: 20px; padding: 4px 15px; 
+            font-size: 0.85rem; font-weight: 600; 
+            border: 2px solid #06b6d4; 
+            background: transparent; color: #06b6d4; margin: 3px; 
+        }        
+        .btn-filter-cat.active { background: #06b6d4; color: #fff; }
+
+        .bg-white { 
+            background: rgba(13, 42, 74, 0.60) !important;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56,189,248,0.2) !important;
+        }
+
+        .badge-cat { 
+            border: 1px solid #06b6d4; color: #06b6d4; 
+            background: rgba(6,182,212,0.12); 
+            font-weight: normal; font-size: 0.75rem; border-radius: 6px; 
+        }        
+        .badge-track { 
+            border: 1px solid #0ea5e9; color: #0ea5e9; 
+            background: rgba(14,165,233,0.12); 
+            font-weight: normal; font-size: 0.75rem; border-radius: 6px; 
+        }
+
+        .video-card { 
+            background: rgba(13, 42, 74, 0.70);
+            backdrop-filter: blur(8px);
+            border-radius: 12px; overflow: hidden; cursor: pointer; 
+            transition: 0.3s; height: 100%; 
+            border: 1px solid rgba(56,189,248,0.2) !important; 
+        }
+
+        .video-card:hover { 
+            transform: translateY(-4px); 
+            box-shadow: 0 10px 30px rgba(14,165,233,0.25);
+            border-color: rgba(56,189,248,0.5) !important;
+        }
+        .video-card .fw-bold { color: white !important; }
+        
+        .thumb-box { position: relative; padding-top: 56.25%; background: #000; }
+        .thumb-box img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+
+        #watch-view { display: none; }
+        .sidebar-container { 
+            background: rgba(13, 42, 74, 0.75); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(56,189,248,0.2) !important;
+            border-radius: 12px; 
+            overflow: hidden; max-height: 85vh;  
+            display: flex; flex-direction: column; }
+
+        .sidebar-item { 
+            display: flex; gap: 12px; padding: 12px; cursor: pointer; 
+            border-bottom: 1px solid rgba(56,189,248,0.1); transition: 0.2s; 
+        }        
+        .sidebar-item:hover { background: rgba(56,189,248,0.08); }
+        .sidebar-item.active { 
+            background: rgba(14,165,233,0.15); 
+            border-left: 5px solid #0ea5e9; 
+        }
+        .sidebar-item .fw-bold { color: white !important; }
+
+        .sidebar-thumb { width: 110px; min-width: 110px; height: 62px; border-radius: 6px; overflow: hidden; }
+        .sidebar-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .now-playing { font-size: 0.75rem; color: #38bdf8; font-weight: normal; margin-left: 5px; }
+
+        .border { border-color: rgba(56,189,248,0.2) !important; }
+        .shadow-sm { box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important; }
+        .bg-light { background: rgba(10,22,40,0.8) !important; }
+        .text-secondary { color: rgba(255,255,255,0.5) !important; }
+        .text-muted { color: rgba(255,255,255,0.45) !important; }
+        .text-dark { color: white !important; }
+        .text-primary { color: #38bdf8 !important; }
+
+        #mainTitle { color: white; }
+
+        .btn-light { 
+            background: rgba(56,189,248,0.12); 
+            border-color: rgba(56,189,248,0.3); 
+            color: #38bdf8; 
+        }
+        .btn-light:hover { background: rgba(56,189,248,0.25); color: #7dd3fc; }
+
+        .btn-outline-secondary { 
+            border-color: rgba(56,189,248,0.4); 
+            color: #38bdf8; 
+        }
+        .btn-outline-secondary:hover { background: rgba(56,189,248,0.15); color: #7dd3fc; }
+
+        .btn-outline-danger { 
+            border-color: rgba(248,113,113,0.5); 
+            color: #f87171; 
+        }
+        .btn-outline-danger:hover { background: rgba(248,113,113,0.15); }
+
+        h6.fw-bold { color: white; }
+        .sidebar-filter-row { display: flex; flex-wrap: wrap; gap: 2px; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm sticky-top">
+    <div class="container"><a class="navbar-brand fw-bold" href="#" onclick="goHome()">AISaMD-WDP Classroom</a></div>
+</nav>
+
+<div id="home-view" class="container mt-4 mb-5">
+    <div class="welcome-section p-4 mb-4 shadow-sm">
+        <h3 class="fw-bold mb-1 text-dark">ยินดีต้อนรับคุณ <span id="welcomeName" class="text-primary">...</span></h3>
+        <p class="text-muted mb-0">โครงการพัฒนาบุคลากรด้าน AI ทางการแพทย์ (AISaMD-WDP)</p>
+        <button class="btn btn-outline-danger btn-sm btn-logout-welcome rounded-pill" onclick="logout()">
+            ↪ ออกจากระบบ
+        </button>
+    </div>
+
+    <div class="bg-white p-4 rounded-4 shadow-sm mb-4">
+        <div class="d-flex align-items-center mb-3">
+            <div class="filter-label">สายการเรียน (TRACK)</div>
+            <div id="trackFiltersHome">
+                <button class="btn btn-filter-track active" onclick="filterData('all', 'track', this)">ทั้งหมด</button>
+                <button class="btn btn-filter-track" onclick="filterData('QA-RA', 'track', this)">QA-RA</button>
+                <button class="btn btn-filter-track" onclick="filterData('BD', 'track', this)">BD</button>
+            </div>
+        </div>
+        <div class="d-flex align-items-center">
+            <div class="filter-label">หมวดหมู่ (CATEGORY)</div>
+            <div id="catFiltersHome">
+                <button class="btn btn-filter-cat active" onclick="filterData('all', 'cat', this)">ทั้งหมด</button>
+                <button class="btn btn-filter-cat" onclick="filterData('กิจกรรมก่อนเริ่ม', 'cat', this)">กิจกรรมก่อนเริ่ม</button>
+                <button class="btn btn-filter-cat" onclick="filterData('อบรมเบื้องต้น', 'cat', this)">อบรมเบื้องต้น</button>
+                <button class="btn btn-filter-cat" onclick="filterData('Intensive-QA-RA', 'cat', this)">Intensive-QA-RA</button>
+                <button class="btn btn-filter-cat" onclick="filterData('Intensive-BD', 'cat', this)">Intensive-BD</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="courseGrid" class="row g-3"></div>
+</div>
+
+<div id="watch-view" class="container-fluid mt-3 mb-5 px-lg-4">
+    <div class="row">
+        <div class="col-xl-8 col-lg-7">
+            <button class="btn btn-sm btn-outline-secondary mb-3 rounded-pill" onclick="goHome()">
+                ↪ กลับหน้าหลัก
+            </button>
+            <div style="background:#000; border-radius:16px; overflow:hidden; position:relative; padding-top:56.25%;" class="shadow-lg">
+                <iframe id="mainPlayer" style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <div class="bg-white p-4 mt-3 rounded-4 shadow-sm border">
+                <div id="mainBadges" class="mb-2"></div>
+                <h4 id="mainTitle" class="fw-bold mb-3"></h4>
+                <div class="row">
+                    <div class="col-md-8 border-end">
+                        <h6 class="fw-bold text-secondary">สารบัญเนื้อหา</h6>
+                        <div id="mainTimestamps" class="mt-2"></div>
+                        <p id="mainDesc" class="mt-3 text-muted small"></p>
+                    </div>
+                    <div class="col-md-4"><a id="mainPdf" href="#" target="_blank" class="btn btn-danger w-100 py-3 rounded-3 shadow-sm"><i class="fas fa-file-pdf me-2"></i>PDF สไลด์</a></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-5">
+            <div class="sidebar-container shadow-sm mt-4 mt-lg-0">
+                <div class="p-3 border-bottom bg-light">
+                    <h6 class="fw-bold mb-3">บทเรียนอื่นๆ</h6>
+                    <div class="sidebar-filter-row mb-2">
+                        <button class="btn btn-filter-track active btn-sm" onclick="filterData('all', 'track', this)">ทั้งหมด</button>
+                        <button class="btn btn-filter-track btn-sm" onclick="filterData('QA-RA', 'track', this)">QA-RA</button>
+                        <button class="btn btn-filter-track btn-sm" onclick="filterData('BD', 'track', this)">BD</button>
+                    </div>
+                    <div class="sidebar-filter-row">
+                        <button class="btn btn-filter-cat active btn-sm" onclick="filterData('all', 'cat', this)">ทั้งหมด</button>
+                        <button class="btn btn-filter-cat btn-sm" onclick="filterData('กิจกรรมก่อนเริ่ม', 'cat', this)">กิจกรรมก่อนเริ่ม</button>
+                        <button class="btn btn-filter-cat btn-sm" onclick="filterData('อบรมเบื้องต้น', 'cat', this)">อบรมเบื้องต้น</button>
+                        <button class="btn btn-filter-cat btn-sm" onclick="filterData('Intensive-QA-RA', 'cat', this)">Intensive-QA-RA</button>
+                        <button class="btn btn-filter-cat btn-sm" onclick="filterData('Intensive-BD', 'cat', this)">Intensive-BD</button>
+                    </div>
+                </div>
+                <div id="sidebarList" style="overflow-y:auto;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwo27kml5torCJMlyNOqcpJ0aFZq9sDo0zDln483IS8csyiIHbsJZ53qQMdIWfAoK_k/exec";
+    let allCourses = [];
+    let currentTrack = 'all', currentCat = 'all', activeIdx = -1;
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const name = localStorage.getItem('userDisplayName');
+        if (!name) window.location.href = "login.html";
+        document.getElementById('welcomeName').innerText = name;
+        fetchData();
+    });
+
+    async function fetchData() {
+        try {
+            const res = await fetch(SCRIPT_URL);
+            allCourses = await res.json();
+            renderUI();
+        } catch (e) { console.error(e); }
+    }
+
+    function filterData(val, type, btn) {
+        const allMatchingBtns = document.querySelectorAll(`button[onclick^="filterData('${val}', '${type}'"]`);
+        document.querySelectorAll(`.btn-filter-${type}`).forEach(b => b.classList.remove('active'));
+        allMatchingBtns.forEach(b => b.classList.add('active'));
+
+        if (type === 'track') currentTrack = val;
+        if (type === 'cat') currentCat = val;
+        renderUI();
+    }
+
+    function getYTId(url) {
+        const m = url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/);
+        return (m && m[2].length === 11) ? m[2] : null;
+    }
+
+    function renderBadges(cat, track) {
+        let html = `<span class="badge badge-cat px-2 py-1 me-1">${cat}</span>`;
+        if (track) {
+            track.split(',').forEach(t => {
+                html += `<span class="badge badge-track px-2 py-1 me-1">${t.trim()}</span>`;
+            });
+        }
+        return html;
+    }
+
+    function renderUI() {
+        const grid = document.getElementById('courseGrid');
+        const sidebar = document.getElementById('sidebarList');
+        
+        // --- ดึงสิทธิ์ที่ถูกเก็บไว้ตอน Login ---
+        const userAccess = localStorage.getItem('userAccess') || "";
+        const allowedCats = userAccess.split(',').map(s => s.trim());
+
+        const filtered = allCourses.filter(c => {
+            const tMatch = currentTrack === 'all' || (c.track && c.track.toUpperCase().includes(currentTrack.toUpperCase()));
+            const cMatch = currentCat === 'all' || c.category === currentCat;
+            
+            // กรองตามสิทธิ์: ถ้า "ทั้งหมด" ให้ดูได้หมด หรือหมวดหมู่ตรงกับสิทธิ์ที่มี
+            const hasPermission = userAccess === 'ทั้งหมด' || allowedCats.includes(c.category);
+            
+            return tMatch && cMatch && c.status === 'show' && hasPermission;
+        });
+
+        grid.innerHTML = filtered.map(c => {
+            const oriIdx = allCourses.findIndex(x => x.title === c.title);
+            return `
+            <div class="col-6 col-md-4 col-xl-3">
+                <div class="video-card" onclick="openVideo(${oriIdx})">
+                    <div class="thumb-box"><img src="https://img.youtube.com/vi/${getYTId(c.videoUrl)}/mqdefault.jpg"></div>
+                    <div class="p-2">
+                        <div class="mb-2 d-flex flex-wrap">${renderBadges(c.category, c.track)}</div>
+                        <div class="fw-bold small text-dark">${c.title}</div>
+                    </div>
+                </div>
+            </div>`;
+        }).join('');
+
+        sidebar.innerHTML = filtered.map(c => {
+            const oriIdx = allCourses.findIndex(x => x.title === c.title);
+            const isActive = oriIdx === activeIdx;
+            return `
+            <div class="sidebar-item ${isActive ? 'active' : ''}" onclick="openVideo(${oriIdx})">
+                <div class="sidebar-thumb"><img src="https://img.youtube.com/vi/${getYTId(c.videoUrl)}/mqdefault.jpg"></div>
+                <div class="sidebar-info">
+                    <div class="small fw-bold text-dark">${c.title} ${isActive ? '<span class="now-playing">(กำลังเล่น)</span>' : ''}</div>
+                    <div class="mt-2 d-flex flex-wrap">${renderBadges(c.category, c.track)}</div>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    function openVideo(index) {
+        activeIdx = index;
+        const c = allCourses[index];
+        const vid = getYTId(c.videoUrl);
+        document.getElementById('home-view').style.display = 'none';
+        document.getElementById('watch-view').style.display = 'block';
+        window.scrollTo(0,0);
+        document.getElementById('mainPlayer').src = `https://www.youtube.com/embed/${vid}?autoplay=1&rel=0`;
+        document.getElementById('mainTitle').innerText = c.title;
+        document.getElementById('mainDesc').innerText = c.description;
+        document.getElementById('mainBadges').innerHTML = renderBadges(c.category, c.track);
+        
+        const pdfBtn = document.getElementById('mainPdf');
+        if (!c.pdfUrl || c.pdfUrl.trim() === "" || c.pdfUrl === "ไม่มี") {
+            pdfBtn.href = "javascript:void(0)";
+            pdfBtn.innerHTML = `<i class="fas fa-file-alt me-2"></i>ไม่มีไฟล์ PDF`;
+            pdfBtn.className = "btn btn-secondary w-100 py-3 rounded-3 shadow-sm disabled";
+            pdfBtn.style.opacity = "0.7";
+        } else {
+            pdfBtn.href = c.pdfUrl;
+            pdfBtn.innerHTML = `<i class="fas fa-file-pdf me-2"></i>PDF สไลด์`;
+            pdfBtn.className = "btn btn-danger w-100 py-3 rounded-3 shadow-sm";
+            pdfBtn.style.opacity = "1";
+        }
+
+        if (c.timestamps) {
+            document.getElementById('mainTimestamps').innerHTML = c.timestamps.split(',').map(i => {
+                const [t, l] = i.split('|').map(s => s?.trim());
+                return `<button class="btn btn-sm btn-light border mb-2 me-2" onclick="seek('${t}')">${t} ${l}</button>`;
+            }).join('');
+        }
+        renderUI();
+    }
+
+    function seek(time) {
+        const t = time.split(':');
+        let s = t.length === 3 ? (+t[0])*3600 + (+t[1])*60 + (+t[2]) : (+t[0])*60 + (+t[1]);
+        const currentSrc = document.getElementById('mainPlayer').src.split('&start=')[0];
+        document.getElementById('mainPlayer').src = `${currentSrc}&start=${s}`;
+    }
+
+    function goHome() { activeIdx = -1; document.getElementById('home-view').style.display = 'block'; document.getElementById('watch-view').style.display = 'none'; document.getElementById('mainPlayer').src = ""; renderUI(); }
+    function logout() { localStorage.clear(); window.location.href = "login.html"; }
+</script>
+</body>
+</html>

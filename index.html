@@ -15,13 +15,19 @@
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet" rel="stylesheet">
 
         <link href="css/bootstrap.min.css" rel="stylesheet">
 
         <link href="css/bootstrap-icons.css" rel="stylesheet">
 
         <link href="css/templatemo-leadership-event.css" rel="stylesheet">
+
+        <style>
+        * {
+            font-family: 'Noto Sans Thai', 'Sarabun', sans-serif !important;
+        }
+        </style>
 
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-01XMBMPS1N"></script>
         <script>
@@ -74,8 +80,135 @@ TemplateMo 575 Leadership Event
 https://templatemo.com/tm-575-leadership-event
 
 -->
+
+    <style>
+        /* ── NAVBAR ── */
+        .navbar {
+            padding: 10px 0 !important;
+            background: rgba(10, 22, 40, 0.95) !important;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(56,189,248,0.2);
+            transition: all 0.3s ease;
+        }
+
+        /* โลโก้เล็กลง */
+        .brand-logo {
+            height: 60px !important;
+            width: auto !important;
+        }
+
+        /* เส้นไฟสีฟ้าใต้ navbar */
+        .navbar::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #38bdf8, #0ea5e9, transparent);
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200px 0; }
+            100% { background-position: 200px 0; }
+        }
+        
+        /* navbar เล็กลงเมื่อ scroll */
+        .navbar.scrolled {
+            padding: 6px 0 !important;
+            background: rgba(6, 15, 30, 0.98) !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+        .navbar.scrolled .brand-logo {
+            height: 36px !important;
+            transition: height 0.3s ease;
+        }
+
+        .nav-link { color: rgba(255,255,255,0.80) !important; }
+        .nav-link:hover, .nav-link.active { color: #38bdf8 !important; }
+
+        /* ── SPONSORS ── */
+        #sponsor {
+            background: #ffffff;
+            padding: 60px 0;
+        }
+        #sponsor h2 { 
+            color: #0a1628 !important; 
+            -webkit-text-fill-color: #0a1628 !important;
+        }
+        
+        #sponsor h2, #partner h2 {
+            position: relative;
+            display: block;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        #sponsor h2::after, 
+        #partner h2::after {
+            content: '';
+            position: absolute;
+            left: 50%; 
+            bottom: -8px;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, #0ea5e9, #06b6d4);
+            border-radius: 2px;
+            animation: lineGrow 1s ease forwards
+        }
+        @keyframes lineGrow {
+            from { width: 0; }
+            to   { width: 60px; }
+        }
+        /* ── PARTNERS ── */
+        #partner {
+            background: #ffffff;
+            padding: 60px 0;
+        }
+        #partner h2 { 
+            color: #0a1628 !important;
+            -webkit-text-fill-color: #0a1628 !important;
+        }
+        /* ── CONTACT ── */
+        #section_4 {
+            background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%);
+            border-top: 1px solid rgba(56,189,248,0.15);
+        }
+        #section_4 h2 { color: white; }
+        #section_4 .contact-link { color: rgba(255,255,255,0.75) !important; }
+        #section_4 .contact-link:hover { color: #38bdf8 !important; }
+        #section_4 .bi-facebook,
+        #section_4 .bi-globe,
+        #section_4 .bi-telephone-fill { color: #38bdf8 !important; }
+        #section_4 .badge { background: rgba(255,255,255,0.1) !important; color: white !important; border-color: rgba(255,255,255,0.2) !important; }
+
+        /* ── FOOTER ── */
+        .site-footer {
+            background: #060f1e !important;
+            border-top: 1px solid rgba(56,189,248,0.15);
+        }
+        .site-footer .copyright-text { color: rgba(255,255,255,0.45) !important; }
+        .site-footer a { color: #38bdf8 !important; }
+        .site-footer .border-bottom { border-color: rgba(56,189,248,0.15) !important; }
+        .site-footer .bi-arrow-up { color: #38bdf8 !important; }
+
+        /* ── BUTTONS ── */
+        .btn-blue-custom {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7) !important;
+            border: none !important;
+            color: white !important;
+            border-radius: 25px !important;
+            padding: 10px 24px !important;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 16px rgba(14,165,233,0.4) !important;
+            transition: transform 0.2s, box-shadow 0.2s !important;
+        }
+        .btn-blue-custom:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(14,165,233,0.6) !important;
+            color: white !important;
+        }
+    </style>
     </head>
-    
+
     <body>
 
         <nav class="navbar navbar-expand-lg">
@@ -86,7 +219,7 @@ https://templatemo.com/tm-575-leadership-event
                 </button>
 
                 <a href="index.html" class="navbar-brand mx-auto mx-lg-0">
-                    <img src="images/logo.png" class="brand-logo img-fluid"> 
+                    <img src="images/Logo_wh.png" class="brand-logo img-fluid"> 
                 </a>
 
 
@@ -113,6 +246,10 @@ https://templatemo.com/tm-575-leadership-event
                         </li> -->
                         <li class="nav-item">
                             <a class="nav-link click-scroll" href="#section_4">Contact us</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">Login</a>
                         </li>
 
                     </ul>
@@ -142,81 +279,665 @@ https://templatemo.com/tm-575-leadership-event
                 </div>
             </section>
 
-            <section class="about section-padding" id="Register">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 col-12 text-center d-flex flex-column align-items-center"> 
-                            
-                            <img src="images/Ann11.png" class="mx-auto d-block" style="display: block; width: 100%; height: auto;">
+            <section class="about section-padding" id="Register" style="
+                background: 
+                linear-gradient(135deg, rgba(10,22,40,0.75) 0%, rgba(13,33,55,0.70) 60%, rgba(10,61,92,0.65) 100%),
+                url('images/bg_02.png') center center / cover no-repeat;
+                padding: 80px 0;
+                position: relative;
+                overflow: hidden;
+            ">
+                <!-- แสงเรืองพื้นหลัง -->
+                <div style="
+                    position: absolute; top: 50%; left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 600px; height: 600px;
+                    background: radial-gradient(circle, rgba(56,189,248,0.08) 0%, transparent 70%);
+                    pointer-events: none;
+                "></div>
+                <div class="container" style="position: relative;">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 text-center">
 
-                            <div class="registration-buttons d-flex justify-content-center flex-wrap mt-4">
-                                <!-- <a href="https://forms.gle/hFbCwtG54bYFMixb6" class="btn btn-blue-custom m-2" 
-                                onclick="gtag('event', 'click_registration', { 'button_name': 'individual', 'type': 'บุคคลธรรมดา' });">
-                                สำหรับบุคคลธรรมดา
+                            <!-- Badge บน -->
+                            <div style="
+                                display: inline-block;
+                                background: rgba(56,189,248,0.1);
+                                border: 1px solid rgba(56,189,248,0.3);
+                                border-radius: 100px;
+                                padding: 8px 24px;
+                                font-size: 0.85rem;
+                                color: #38bdf8;
+                                letter-spacing: 0.08em;
+                                text-transform: uppercase;
+                                font-weight: 600;
+                                margin-bottom: 28px;
+                            ">ผลการคัดเลือก</div>
+
+                            <!-- หัวข้อหลัก -->
+                            <h2 style="
+                                font-size: 2.8rem;
+                                font-weight: 700;
+                                color: white;
+                                line-height: 1.3;
+                                margin-bottom: 16px;
+                            ">ประกาศผล<br>
+                            <span style="
+                                background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+                                -webkit-background-clip: text;
+                                -webkit-text-fill-color: transparent;
+                                background-clip: text;
+                            ">การคัดเลือกเข้าโครงการ</span>
+                            </h2>
+
+                            <h3 style="
+                                font-size: 1.8rem;
+                                font-weight: 700;
+                                color: white;
+                                margin-bottom: 40px;
+                                letter-spacing: 0.04em;
+                            ">AISaMD-WDP 2026</h3>
+
+                            <!-- กรอบการ์ดเรืองแสง -->
+                            <div style="
+                                background: rgba(13, 42, 74, 0.60);
+                                backdrop-filter: blur(12px);
+                                border: 1px solid rgba(56,189,248,0.25);
+                                border-radius: 20px;
+                                padding: 36px 40px;
+                                box-shadow: 0 0 40px rgba(56,189,248,0.08), 0 20px 60px rgba(0,0,0,0.3);
+                                margin-bottom: 32px;
+                            ">
+                                <p style="color: rgba(255,255,255,0.70); font-size: 1rem; line-height: 1.8; margin-bottom: 28px;">
+                                    ประกาศรายชื่อผู้ผ่านการคัดเลือก<br>
+                                    เข้าร่วมโครงการการพัฒนากําลังคนทักษะสูงด้านปัญญาประดิษฐ์สําหรับอุปกรณ์การแพทย์ขั้นสูง<br>
+                                    (Artificial Intelligence Software as a Medical Device Workforce Development Program)<br>
+                                </p>
+
+                                <!-- ปุ่ม -->
+                                <a href="https://drive.google.com/file/d/19FGHXgaX7uzuuvFqfJhPoHoCbqxNa5IM/view?usp=sharing"
+                                    class="btn"
+                                    onclick="gtag('event', 'Announcement1', { 'button_name': 'Announcement1', 'type': 'ประกาศครั้งที่1' });"
+                                    style="
+                                        background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+                                        color: white;
+                                        border: none;
+                                        border-radius: 12px;
+                                        padding: 14px 36px;
+                                        font-size: 1rem;
+                                        font-weight: 600;
+                                        letter-spacing: 0.03em;
+                                        box-shadow: 0 4px 20px rgba(14,165,233,0.45);
+                                        transition: transform 0.2s, box-shadow 0.2s;
+                                        text-decoration: none;
+                                    "
+                                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 28px rgba(14,165,233,0.6)'"
+                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(14,165,233,0.45)'"
+                                >
+                                    รายชื่อผู้เข้าร่วมโครงการ AISaMD-WDP 2026
                                 </a>
-
-                                <a href="https://forms.gle/LTYwUXaA1wWmaL388" class="btn btn-blue-custom m-2" 
-                                onclick="gtag('event', 'click_registration', { 'button_name': 'corporate', 'type': 'องค์กร' });">
-                                สำหรับองค์กร
-                                </a> -->
-
-                                <a href="https://drive.google.com/file/d/19FGHXgaX7uzuuvFqfJhPoHoCbqxNa5IM/view?usp=sharing" class="btn btn-blue-custom m-2" 
-                                onclick="gtag('event', 'Announcement1', { 'button_name': 'Announcement1', 'type': 'ประกาศครั้งที่1' });">
-                                ประกาศผลการคัดเลือกเข้าโครงการ AISaMD - WDP
-                                </a>
-
-                                <img src="images/Ann12.png" class="mx-auto d-block" style="display: block; width: 100%; height: auto;">
                             </div>
 
                         </div>
+                    </div>
+                </div>                
+            </section>
+
+
+            <section id="section_2" style="
+                background: linear-gradient(135deg, #0a1628 0%, #0d2137 60%, #0a3d5c 100%);
+                padding: 100px 0;
+                position: relative;
+                overflow: hidden;
+            ">
+                <!-- แสงพื้นหลัง -->
+                <div style="position:absolute;top:0;left:0;right:0;bottom:0;
+                    background: 
+                    linear-gradient(135deg, rgba(10,22,40,0.25) 0%, rgba(13,33,55,0.20) 60%, rgba(10,61,92,0.15) 100%),                        url('images/bg_01.png') center center / cover no-repeat;
+                    pointer-events:none;"></div>
+
+                <div class="container" style="position:relative;">
+
+                    <!-- หัวข้อ -->
+                    <div class="text-center mb-5">
+                        <div style="
+                            display:inline-block;
+                            background: rgba(56,189,248,0.1);
+                            border: 1px solid rgba(56,189,248,0.3);
+                            border-radius: 100px;
+                            padding: 8px 24px;
+                            font-size: 0.85rem;
+                            color: #38bdf8;
+                            letter-spacing: 0.08em;
+                            text-transform: uppercase;
+                            font-weight: 600;
+                            margin-bottom: 20px;
+                        ">เกี่ยวกับโครงการ</div>
+
+                        <h2 style="
+                            font-size: 3rem; font-weight: 700;
+                            background: linear-gradient(135deg, #ffffff, #38bdf8);
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                            background-clip: text;
+                            margin-bottom: 20px;
+                        ">OVERVIEW</h2>
+
+                        <p style="color:rgba(255,255,255,0.65); font-size:1.05rem; line-height:1.8; max-width:760px; margin:0 auto 16px;">
+                            ขอเชิญนักวิจัย นวัตกร และบุคลากรด้าน AI และการแพทย์<br>
+                            เข้าร่วมโครงการ <strong style="color:white;">AISaMD Workforce Development Program 2026 (AISaMD-WDP)</strong>
+                        </p>
+
+                        <p style="color:#38bdf8; font-size:1.1rem; font-weight:600; margin-bottom:8px;">
+                            โอกาสครั้งสำคัญที่จะยกระดับทักษะของคุณสู่
+                        </p>
+                        <p style="color:white; font-size:1.3rem; font-weight:700; margin-bottom:60px;">
+                            HIGH SKILLED TALENT ใน 2 สายงานที่เป็นที่ต้องการที่สุด
+                        </p>
+                    </div>
+
+                    <!-- 2 กล่องสายงาน -->
+                    <div class="row g-4 justify-content-center">
+
+                        <!-- QA-RA -->
+                        <div class="col-lg-5 col-md-6">
+                            <div style="
+                                background: rgba(13,42,74,0.70);
+                                backdrop-filter: blur(12px);
+                                border: 1px solid rgba(56,189,248,0.25);
+                                border-radius: 20px;
+                                padding: 40px 36px;
+                                height: 100%;
+                                box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 40px rgba(56,189,248,0.05);
+                                transition: transform 0.3s, box-shadow 0.3s;
+                                text-align: center;
+                            "
+                            onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 16px 48px rgba(14,165,233,0.2)'"
+                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 32px rgba(0,0,0,0.3)'"
+                            >
+                                <div style="
+                                    width:64px; height:64px; border-radius:16px;
+                                    background: linear-gradient(135deg, rgba(14,165,233,0.2), rgba(6,182,212,0.2));
+                                    border: 1px solid rgba(56,189,248,0.3);
+                                    display:flex; align-items:center; justify-content:center;
+                                    font-size:28px; margin:0 auto 20px;
+                                ">🏥</div>
+
+                                <div style="
+                                    display:inline-block;
+                                    background: rgba(14,165,233,0.15);
+                                    border: 1px solid rgba(14,165,233,0.3);
+                                    border-radius:100px; padding:4px 16px;
+                                    font-size:0.75rem; color:#38bdf8;
+                                    font-weight:600; letter-spacing:0.06em;
+                                    text-transform:uppercase; margin-bottom:16px;
+                                ">ทักษะที่ 1</div>
+
+                                <h3 style="color:white; font-size:1.3rem; font-weight:700; margin-bottom:8px;">
+                                    Quality Assurance<br>& Regulatory Specialist
+                                </h3>
+                                <p style="color:#38bdf8; font-size:1rem; font-weight:600; margin-bottom:16px;">(QA-RA)</p>
+                                <p style="color:rgba(255,255,255,0.60); font-size:0.9rem; line-height:1.7;">
+                                    เชี่ยวชาญด้านการประกันคุณภาพและกฎระเบียบ
+                                    สำหรับ AI Medical Device ในระบบสาธารณสุข
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- BD -->
+                        <div class="col-lg-5 col-md-6">
+                            <div style="
+                                background: rgba(13,42,74,0.70);
+                                backdrop-filter: blur(12px);
+                                border: 1px solid rgba(56,189,248,0.25);
+                                border-radius: 20px;
+                                padding: 40px 36px;
+                                height: 100%;
+                                box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 40px rgba(56,189,248,0.05);
+                                transition: transform 0.3s, box-shadow 0.3s;
+                                text-align: center;
+                            "
+                            onmouseover="this.style.transform='translateY(-6px)'; this.style.boxShadow='0 16px 48px rgba(14,165,233,0.2)'"
+                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 32px rgba(0,0,0,0.3)'"
+                            >
+                                <div style="
+                                    width:64px; height:64px; border-radius:16px;
+                                    background: linear-gradient(135deg, rgba(14,165,233,0.2), rgba(6,182,212,0.2));
+                                    border: 1px solid rgba(56,189,248,0.3);
+                                    display:flex; align-items:center; justify-content:center;
+                                    font-size:28px; margin:0 auto 20px;
+                                ">💡</div>
+
+                                <div style="
+                                    display:inline-block;
+                                    background: rgba(14,165,233,0.15);
+                                    border: 1px solid rgba(14,165,233,0.3);
+                                    border-radius:100px; padding:4px 16px;
+                                    font-size:0.75rem; color:#38bdf8;
+                                    font-weight:600; letter-spacing:0.06em;
+                                    text-transform:uppercase; margin-bottom:16px;
+                                ">ทักษะที่ 2</div>
+
+                                <h3 style="color:white; font-size:1.3rem; font-weight:700; margin-bottom:8px;">
+                                    AI Medical<br>Business Development
+                                </h3>
+                                <p style="color:#38bdf8; font-size:1rem; font-weight:600; margin-bottom:16px;">(BD)</p>
+                                <p style="color:rgba(255,255,255,0.60); font-size:0.9rem; line-height:1.7;">
+                                    พัฒนาธุรกิจด้าน AI ทางการแพทย์
+                                    ตั้งแต่การวิเคราะห์ตลาดจนถึงการนำผลิตภัณฑ์สู่ตลาด
+                                </p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </section>
 
 
-            <section class="about section-padding" id="section_2" style="background-color: #faf8eb;">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 col-12 text-center d-flex flex-column align-items-center"> 
-                            <!-- <h2 class="mb-5 text-center"> OVERVIEW </h2>  -->
-                                <img src="images/overview1.png" 
-                                    class="mx-auto d-block" 
-                                    style="display: block; width: 100%; height: auto;">
+            <section id="section_3" style="
+                position: relative;
+                padding: 100px 0;
+                overflow: hidden;
+            ">
+                <!--  พื้นหลัง -->
+                <div style="
+                    position: absolute;
+                    top: 0; left: 0;
+                    width: 100%; height: 100%;
+                    background: 
+                        linear-gradient(135deg, rgba(10,22,40,0.40) 0%, rgba(13,33,55,0.35) 60%, rgba(10,61,92,0.30) 100%),
+                        url('images/bg_03.png') center center / cover no-repeat;
+                    z-index: 0;
+                "></div>
 
-                                    <!-- <a class="custom-btn btn custom-link mt-3 btn-lg px-5 btn-blue-custom" 
-                                    href="#section_3">
-                                    Check out Timeline
-                                    </a> -->
-                        </div>
-                        </div>
+                <!-- overlay สีเข้มทับ vdo -->
+                <div style="
+                    position: absolute;
+                    top: 0; left: 0;
+                    width: 100%; height: 100%;
+                    background: rgba(10, 22, 40, 0.75);
+                    z-index: 1;
+                "></div>
 
+                <!-- เนื้อหาทั้งหมด -->
+                <div class="container" style="position:relative; z-index:2;">
+                
+
+                    <!-- หัวข้อ -->
+                    <div class="text-center mb-5">
+                        <div style="
+                            display:inline-block;
+                            background: rgba(56,189,248,0.1);
+                            border: 1px solid rgba(56,189,248,0.3);
+                            border-radius: 100px;
+                            padding: 8px 24px;
+                            font-size: 0.85rem;
+                            color: #38bdf8;
+                            letter-spacing: 0.08em;
+                            text-transform: uppercase;
+                            font-weight: 600;
+                            margin-bottom: 20px;
+                        ">ขั้นตอนโครงการ</div>
+
+                        <h2 style="
+                            font-size: 3rem; font-weight: 700;
+                            background: linear-gradient(135deg, #ffffff, #38bdf8);
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                            background-clip: text;
+                            margin-bottom: 16px;
+                        ">TIMELINE</h2>
+
+                        <p style="color:rgba(255,255,255,0.55); font-size:1rem;">
+                            เส้นทางการพัฒนาบุคลากรตลอดโครงการ AISaMD-WDP 2026
+                        </p>
                     </div>
-                </div>
-            </section>
 
+                    <!-- Timeline container -->
+                    <div style="position:relative; max-width:800px; margin:0 auto; padding: 0 20px;">
 
-            <section class="schedule section-padding" id="section_3" style="background-color: #fafbfb;">
-                <div class="container">
-                    <div class="row">
+                        <!-- เส้นกลาง -->
+                        <div style="
+                            position:absolute;
+                            left:50%; top:0; bottom:0;
+                            width:2px;
+                            background: linear-gradient(180deg, rgba(56,189,248,0.8), rgba(56,189,248,0.1));
+                            transform:translateX(-50%);
+                        "></div>
 
-                        <div class="col-lg-12 col-12">
-                            <!-- <h2 class="mb-5 text-center"> Timeline </h2>  -->
-                            <img src="images/Timeline11.png" 
-                                    class="mx-auto d-block" 
-                                    style="display: block; width: 100%; height: auto;">
-
-                            <div class="registration-buttons d-flex justify-content-center flex-wrap mt-4">        
-                                <a href="https://drive.google.com/file/d/19FGHXgaX7uzuuvFqfJhPoHoCbqxNa5IM/view?usp=sharing" class="btn btn-blue-custom m-2" 
-                                onclick="gtag('event', 'Announcement1', { 'button_name': 'Announcement1', 'type': 'ประกาศครั้งที่1' });">
-                                ประกาศผลการคัดเลือกเข้าโครงการ AISaMD - WDP
-                                </a>
+                        <!-- ITEM 1 — ซ้าย -->
+                        <div style="display:flex; align-items:center; margin-bottom:48px;">
+                            <!-- กล่องซ้าย -->
+                            <div style="width:45%;">
+                                <div style="
+                                    background: rgba(13,42,74,0.80);
+                                    backdrop-filter: blur(12px);
+                                    border: 1px solid rgba(56,189,248,0.25);
+                                    border-radius: 16px;
+                                    padding: 22px 24px;
+                                    text-align:right;
+                                    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+                                    transition: transform 0.3s;
+                                "
+                                onmouseover="this.style.transform='translateY(-4px)'"
+                                onmouseout="this.style.transform='translateY(0)'"
+                                >
+                                    <div style="color:#38bdf8; font-size:0.75rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px;">กิจกรรมที่ 1</div>
+                                    <h4 style="color:white; font-size:1rem; font-weight:700; margin-bottom:6px;">เปิดรับสมัคร</h4>
+                                    <p style="color:rgba(255,255,255,0.55); font-size:0.82rem; margin-bottom:0; line-height:1.6;">
+                                        9-31 มีนาคม 2569<br>
+                                        ประกาศผลคัดเลือก 25 มีนาคม 2569 <br>
+                                        เนื่องจากมีผู้สมัครเข้าร่วมโครงการเกินจำนวนที่กำหนด<br> 
+                                        โครงการจึงปิดรับสมัครก่อนกำหนด จาก 3 เมษายน 2569
+                                    </p>
+                                </div>
                             </div>
-                            <img src="images/Timeline12.png" 
-                                    class="mx-auto d-block" 
-                                    style="display: block; width: 100%; height: auto;">
+
+                            <!-- วงกลม -->
+                            <div style="width:10%; display:flex; justify-content:center;">
+                                <div style="
+                                    width:52px; height:52px; border-radius:50%;
+                                    background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+                                    border: 3px solid #0a1628;
+                                    display:flex; align-items:center; justify-content:center;
+                                    box-shadow: 0 0 20px rgba(14,165,233,0.5);
+                                    flex-shrink:0;
+                                    z-index:1;
+                                ">
+                                    <span style="color:white; font-size:1.2rem; font-weight:700;">●</span>
+                                    </div>
+                            </div>
+
+                            <!-- ฝั่งขวาว่าง -->
+                            <div style="width:45%;"></div>
                         </div>
+
+                        <!-- ITEM 2 — ขวา -->
+                        <div style="display:flex; align-items:center; margin-bottom:48px;">
+                            <!-- ฝั่งซ้ายว่าง -->
+                            <div style="width:45%;"></div>
+
+                            <!-- วงกลม -->
+                            <div style="width:10%; display:flex; justify-content:center;">
+                                <div style="
+                                    width:52px; height:52px; border-radius:50%;
+                                    background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+                                    border: 3px solid #0a1628;
+                                    display:flex; align-items:center; justify-content:center;
+                                    box-shadow: 0 0 20px rgba(14,165,233,0.5);
+                                    flex-shrink:0;
+                                    z-index:1;
+                                ">
+                                    <span style="color:white; font-size:1.2rem; font-weight:700;">●</span>
+                                </div>
+                            </div>
+
+                            <!-- กล่องขวา -->
+                            <div style="width:45%;">
+                                <div style="
+                                    background: rgba(13,42,74,0.80);
+                                    backdrop-filter: blur(12px);
+                                    border: 1px solid rgba(56,189,248,0.25);
+                                    border-radius: 16px;
+                                    padding: 22px 24px;
+                                    text-align:left;
+                                    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+                                    transition: transform 0.3s;
+                                "
+                                onmouseover="this.style.transform='translateY(-4px)'"
+                                onmouseout="this.style.transform='translateY(0)'"
+                                >
+                                    <div style="color:#38bdf8; font-size:0.75rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px;">กิจกรรมที่ 2</div>
+                                    <h4 style="color:white; font-size:1rem; font-weight:700; margin-bottom:6px;">ปฐมนิเทศเบื้องต้น</h4>
+                                    <p style="color:rgba(255,255,255,0.55); font-size:0.82rem; margin-bottom:0; line-height:1.6;">
+                                        23 เมษายน 2569
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ITEM 3 — ซ้าย -->
+                        <div style="display:flex; align-items:center; margin-bottom:48px;">
+                            <div style="width:45%;">
+                                <div style="
+                                    background: rgba(13,42,74,0.80);
+                                    backdrop-filter: blur(12px);
+                                    border: 1px solid rgba(56,189,248,0.25);
+                                    border-radius: 16px;
+                                    padding: 22px 24px;
+                                    text-align:right;
+                                    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+                                    transition: transform 0.3s;
+                                "
+                                onmouseover="this.style.transform='translateY(-4px)'"
+                                onmouseout="this.style.transform='translateY(0)'"
+                                >
+                                    <div style="color:#38bdf8; font-size:0.75rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px;">กิจกรรมที่ 3</div>
+                                    <h4 style="color:white; font-size:1rem; font-weight:700; margin-bottom:6px;">อบรมเบื้องต้น</h4>
+                                    <p style="color:rgba(255,255,255,0.55); font-size:0.82rem; margin-bottom:4px; line-height:1.6;">
+                                        27 เมษายน — 1 พฤษภาคม 2569
+                                    </p>
+                                    <p style="color:rgba(255,255,255,0.75); font-size:0.78rem; margin-bottom:0; font-style:italic;">
+                                        "ปูพื้นฐาน ปรับจูนทัศนคติ"
+                                    </p>
+                                    <button onclick="openModal(3, 'อบรมเบื้องต้น', 'act_03.png')" style="margin-top:12px; background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.35); border-radius:8px; padding:7px 16px; color:#38bdf8; font-size:0.8rem; font-weight:600; cursor:pointer; font-family:inherit;">ดูรายละเอียด ↗</button>
+                                </div>
+                            </div>
+                            <div style="width:10%; display:flex; justify-content:center;">
+                                <div style="
+                                    width:52px; height:52px; border-radius:50%;
+                                    background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+                                    border: 3px solid #0a1628;
+                                    display:flex; align-items:center; justify-content:center;
+                                    box-shadow: 0 0 20px rgba(14,165,233,0.5);
+                                    flex-shrink:0; z-index:1;
+                                ">
+                                    <span style="color:white; font-size:1.2rem; font-weight:700;">●</span>
+                                </div>
+                            </div>
+                            <div style="width:45%;"></div>
+                        </div>
+
+                        <!-- ITEM 4 — ขวา -->
+                        <div style="display:flex; align-items:center; margin-bottom:48px;">
+                            <div style="width:45%;"></div>
+                            <div style="width:10%; display:flex; justify-content:center;">
+                                <div style="
+                                    width:52px; height:52px; border-radius:50%;
+                                    background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+                                    border: 3px solid #0a1628;
+                                    display:flex; align-items:center; justify-content:center;
+                                    box-shadow: 0 0 20px rgba(14,165,233,0.5);
+                                    flex-shrink:0; z-index:1;
+                                ">
+                                    <span style="color:white; font-size:1.2rem; font-weight:700;">●</span>
+                                </div>
+                            </div>
+                            <div style="width:45%;">
+                                <div style="
+                                    background: rgba(13,42,74,0.80);
+                                    backdrop-filter: blur(12px);
+                                    border: 1px solid rgba(56,189,248,0.25);
+                                    border-radius: 16px;
+                                    padding: 22px 24px;
+                                    text-align:left;
+                                    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+                                    transition: transform 0.3s;
+                                "
+                                onmouseover="this.style.transform='translateY(-4px)'"
+                                onmouseout="this.style.transform='translateY(0)'"
+                                >
+                                    <div style="color:#38bdf8; font-size:0.75rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px;">กิจกรรมที่ 4</div>
+                                    <h4 style="color:white; font-size:1rem; font-weight:700; margin-bottom:6px;">อบรมเข้มข้น (Intensive)</h4>
+                                    <p style="color:rgba(255,255,255,0.55); font-size:0.82rem; margin-bottom:4px; line-height:1.6;">
+                                        พฤษภาคม — มิถุนายน 2569
+                                    </p>
+                                    <p style="color:rgba(255,255,255,0.75); font-size:0.78rem; margin-bottom:0; font-style:italic;">
+                                        "เจาะลึกเนื้อหา ปั้นทักษะขั้นสูง"
+                                    </p>
+                                    <button onclick="openModal(4, 'อบรมเข้มข้น (Intensive)', 'act_04a.png', 'act_04b.png')" style="margin-top:12px; background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.35); border-radius:8px; padding:7px 16px; color:#38bdf8; font-size:0.8rem; font-weight:600; cursor:pointer; font-family:inherit;">ดูรายละเอียด ↗</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ITEM 5 — ซ้าย -->
+                        <div style="display:flex; align-items:center;">
+                            <div style="width:45%;">
+                                <div style="
+                                    background: rgba(13,42,74,0.80);                                    backdrop-filter: blur(12px);
+                                    border: 1px solid rgba(56,189,248,0.25);                                    border-radius: 16px;
+                                    padding: 22px 24px;
+                                    text-align:right;
+                                    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+                                    transition: transform 0.3s;
+                                "
+                                onmouseover="this.style.transform='translateY(-4px)'"
+                                onmouseout="this.style.transform='translateY(0)'"
+                                >
+                                    <div style="color:#38bdf8; font-size:0.75rem; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:6px;">กิจกรรมที่ 5</div>
+                                    <h4 style="color:white; font-size:1rem; font-weight:700; margin-bottom:6px;">On-Job-Training</h4>
+                                    <p style="color:rgba(255,255,255,0.55); font-size:0.82rem; margin-bottom:4px; line-height:1.6;">
+                                        สิงหาคม — กันยายน 2569
+                                    </p>
+                                    <p style="color:rgba(255,255,255,0.75); font-size:0.78rem; margin-bottom:0; font-style:italic;">
+                                        "เรียนรู้จากหน้างาน ประสบการณ์จริง"
+                                    </p>
+                                    <button onclick="openModal(5, 'On-Job-Training', 'act_05.png')" style="margin-top:12px; background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.35); border-radius:8px; padding:7px 16px; color:#38bdf8; font-size:0.8rem; font-weight:600; cursor:pointer; font-family:inherit;">ดูรายละเอียด ↗</button>
+                                </div>
+                            </div>
+                            <div style="width:10%; display:flex; justify-content:center;">
+                                <div style="
+                                    width:52px; height:52px; border-radius:50%;
+                                    background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+                                    border: 3px solid #0a1628;
+                                    display:flex; align-items:center; justify-content:center;
+                                    box-shadow: 0 0 20px rgba(14,165,233,0.5);
+                                    flex-shrink:0; z-index:1;
+                                ">
+                                    <span style="color:white; font-size:1.2rem; font-weight:700;">●</span>
+                                </div>
+                            </div>
+                            <div style="width:45%;"></div>
+                        </div>
+
                     </div>
                 </div>
+
+                <!-- ══ MODAL ══ -->
+                <div id="modal-overlay" onclick="closeModal()" style="
+                    display:none;
+                    position:fixed; inset:0;
+                    background:rgba(0,0,0,0.75);
+                    backdrop-filter:blur(6px);
+                    z-index:9999;
+                    align-items:center;
+                    justify-content:center;
+                ">
+                    <div onclick="event.stopPropagation()" style="
+                        background: rgba(13,42,74,0.95);
+                        backdrop-filter:blur(16px);
+                        border:1px solid rgba(56,189,248,0.3);
+                        border-radius:20px;
+                        padding:32px;
+                        max-width:700px;
+                        width:90%;
+                        position:relative;
+                        box-shadow:0 20px 60px rgba(0,0,0,0.5);
+                        animation: modalIn 0.3s ease;
+                    ">
+                        <!-- ปุ่ม X -->
+                        <button type="button" onclick="closeModal()" style="
+                            position:absolute; top:16px; right:16px;
+                            background:rgba(255,255,255,0.1);
+                            border:1px solid rgba(255,255,255,0.2);
+                            border-radius:50%;
+                            width:36px; height:36px;
+                            color:white; font-size:16px;
+                            cursor:pointer; display:flex;
+                            align-items:center; justify-content:center;
+                            transition:background 0.2s;
+                        "
+                        onmouseover="this.style.background='rgba(255,255,255,0.2)'"
+                        onmouseout="this.style.background='rgba(255,255,255,0.1)'"
+                        >✕</button>
+
+                        <!-- หัวข้อ -->
+                        <div id="modal-badge" style="
+                            display:inline-block;
+                            background:rgba(56,189,248,0.1);
+                            border:1px solid rgba(56,189,248,0.3);
+                            border-radius:100px;
+                            padding:5px 18px;
+                            font-size:0.78rem; color:#38bdf8;
+                            font-weight:600; letter-spacing:0.06em;
+                            text-transform:uppercase;
+                            margin-bottom:12px;
+                        "></div>
+
+                        <h3 id="modal-title" style="
+                            color:white; font-size:1.3rem;
+                            font-weight:700; margin-bottom:20px;
+                        "></h3>
+
+                        <!-- รูปภาพ -->
+                        <img id="modal-img" src="" alt="" style="
+                            width:100%; border-radius:12px;
+                            object-fit:contain;
+                            max-height:420px;
+                            border:1px solid rgba(56,189,248,0.15);
+                            margin-bottom:12px;
+                        ">
+
+                        <img id="modal-img2" src="" alt="" style="
+                            width:100%; border-radius:12px;
+                            object-fit:contain;
+                            max-height:420px;
+                            border:1px solid rgba(56,189,248,0.15);
+                            display:none;
+                        ">
+                    </div>
+                </div>
+
+                <style>
+                @keyframes modalIn {
+                    from { opacity:0; transform:scale(0.92) translateY(16px); }
+                    to   { opacity:1; transform:scale(1) translateY(0); }
+                }
+                </style>
+
+                <script>
+                function openModal(num, title, img, img2) {
+                    document.getElementById('modal-badge').textContent = 'กิจกรรมที่ ' + num;
+                    document.getElementById('modal-title').textContent = title;
+                    document.getElementById('modal-img').src = 'images/' + img;
+
+                    const img2El = document.getElementById('modal-img2');
+                    if (img2) {
+                        img2El.src = 'images/' + img2;
+                        img2El.style.display = 'block';
+                    } else {
+                        img2El.src = '';
+                        img2El.style.display = 'none';
+                    }
+
+                    document.getElementById('modal-overlay').style.display = 'flex';
+                }
+
+                function closeModal() {
+                    document.getElementById('modal-overlay').style.display = 'none';
+                    document.getElementById('modal-img').src = '';
+                    const img2El = document.getElementById('modal-img2');
+                    if (img2El) {
+                        img2El.src = '';
+                        img2El.style.display = 'none';
+                    }
+                }
+
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') closeModal();
+                });
+                </script>
+
             </section>
 
 
@@ -233,7 +954,7 @@ https://templatemo.com/tm-575-leadership-event
                                 </div>
 
                                 <div class="col-lg-2 col-md-4 col-6 mb-4" style="text-align:center;">
-                                    <img src="./images/spon2rmw.png" style="height: 120px; width: auto; object-fit: contain;" />
+                                    <img src="./images/PMUB_LOGO-02.png" style="height: 120px; width: auto; object-fit: contain;" />
                                 </div>
 
                                 <div class="col-lg-2 col-md-4 col-6 mb-4" style="text-align:center;">
@@ -330,7 +1051,7 @@ https://templatemo.com/tm-575-leadership-event
             <div class="container">
                 <div class="row align-items-center">
 
-                    <div class="col-lg-12 col-12 border-bottom pb-5 mb-5">
+                    <div class="col-lg-12 col-12" style="display:none;">
                         <div class="d-flex">
                             <a href="index.html" class="navbar-brand">
                             </a>
@@ -362,5 +1083,38 @@ https://templatemo.com/tm-575-leadership-event
         <script src="js/click-scroll.js"></script>
         <script src="js/custom.js"></script>
 
+            
+        <style>
+            /* Scroll Animation */
+            .fade-in-section {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: opacity 0.7s ease, transform 0.7s ease;
+            }
+            .fade-in-section.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        </style>
+
+        <script>
+            // เพิ่ม class ให้ทุก section
+            document.querySelectorAll('section').forEach(el => {
+            el.classList.add('fade-in-section');
+            });
+
+            // สังเกตการณ์ scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in-section').forEach(el => {
+                observer.observe(el);
+            });
+        </script> 
     </body>
 </html>

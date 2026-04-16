@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AISaMD-WDP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <style>
+        * {
+            font-family: 'Noto Sans Thai', 'Sarabun', sans-serif !important;
+        }
+        body {
+            font-family: 'Noto Sans Thai', 'Sarabun', sans-serif;
+            background: #0a1628;
+            background-image: url('images/image_login2.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    }
+
+        .login-container {
+            background: rgba(13, 42, 74, 0.70);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(56,189,248,0.25);
+            padding: 44px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(56,189,248,0.08);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .login-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .login-header h2 {
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 5px;
+            font-size: 1.4rem;
+        }
+        .login-header p {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.88rem;
+        }
+
+        .form-label-custom {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+        .form-control {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(56,189,248,0.2);
+            border-radius: 10px;
+            padding: 13px 16px;
+            margin-bottom: 18px;
+            color: white;
+            font-size: 0.95rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-control::placeholder { 
+            color: rgba(255,255,255,0.4); 
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(56,189,248,0.15);
+            border-color: #38bdf8;
+            background: rgba(255,255,255,0.10);
+            color: white;
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            font-weight: 600;
+            font-size: 1rem;
+            width: 100%;
+            color: white;
+            margin-top: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(14,165,233,0.45);
+            letter-spacing: 0.04em;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            color: white;
+            box-shadow: 0 8px 28px rgba(14,165,233,0.6);
+        }
+
+        .extra-links {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.83rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.42);
+        }
+
+        .contact-link {
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-link:hover { color: #7dd3fc; }
+        .btn-back {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.7);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .btn-back:hover {
+            background: rgba(255,255,255,0.1);
+            color: #38bdf8;
+        }
+        .login-logo {
+            max-width: 120px;
+            height: auto;
+            display: block;
+            margin: 0 auto 16px;
+            filter: drop-shadow(0 0 14px rgba(56,189,248,0.35));
+        }
+
+        .text-muted { 
+            color: rgba(255,255,255,0.4) !important; 
+        }
+
+        a.text-muted { 
+            color: rgba(255,255,255,0.4) !important; 
+            text-decoration: none; 
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <div class="login-header">
+        <img src="images/Logo_wh.png" alt="AISaMD-WDP Logo" class="login-logo">
+        <h2>ยินดีต้อนรับผู้เข้าร่วมโครงการ</h2>
+        <h2>AISaMD-WDP</h2>
+        <p class="text-muted">โปรด Login เพื่อเข้าสู่ห้องเรียน</p>
+    </div>
+
+    <div id="loginForm">
+        <div class="mb-3">
+            <input type="text" id="userInput" class="form-control" placeholder="Username" required>
+        </div>
+        <div class="mb-3">
+            <input type="password" id="passInput" class="form-control" placeholder="Password" required>
+        </div>
+
+        <div class="d-flex justify-content-end align-items-center mb-4">
+            <a href="#" onclick="forgotPassword()" class="text-muted" style="font-size: 0.85rem; text-decoration: none;">ลืมรหัสผ่าน</a>
+        </div>
+
+        <button type="button" onclick="handleLogin()" class="btn btn-login">LOGIN</button>
+    </div>
+
+    <div class="extra-links">
+        <div class="mb-4">
+            <span class="text-muted">โปรดจำไว้ว่าโครงการ AISaMD-WDP ให้สิทธิเฉพาะผู้เข้าร่วมโครงการเท่านั้น หากท่านเป็นสมาชิกจากโครงการ AISaMD-WDP แล้วยังไม่ได้ติดต่อโปรดติดต่อที่</span>
+            <br>
+            <div class="mt-2">
+                <a href="https://www.facebook.com/AISaMDwdp/" target="_blank" class="contact-link me-2">
+                    <i class="fab fa-facebook me-1"></i> AISaMD-WDP 
+                </a> 
+                <span class="text-muted">หรือ</span>
+                <a href="tel:+66982398088" class="contact-link ms-2 fw-bold">
+                    <i class="fas fa-phone-alt me-1"></i> ศูนย์เก้าแปดสองสามเก้า-8088
+                </a>
+            </div>
+        </div>
+        <a href="index.html" class="btn btn-back">
+            <i class="fas fa-home me-2"></i> กลับไปยังหน้าหลัก
+        </a>
+    </div>
+</div>
+
+<script>
+    // อัปเดต URL ใหม่เรียบร้อยแล้วครับ
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzxLTjMGcETwZP3GdaRCFE5XQV2TDjFhRajzD15uowY1SLVyOFAq3WRFboEx-J1q_Y-sw/exec";
+
+    // ฟังก์ชันเข้าสู่ระบบ
+    async function handleLogin() {
+        const userVal = document.getElementById('userInput').value;
+        const passVal = document.getElementById('passInput').value;
+
+        if (!userVal || !passVal) {
+            return showError("กรุณากรอก Username และ Password");
+        }
+
+        Swal.fire({
+            title: 'กำลังเข้าสู่ระบบ...',
+            allowOutsideClick: false,
+            didOpen: () => { Swal.showLoading(); }
+        });
+
+        try {
+            const response = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: "login",
+                    username: userVal,
+                    password: passVal
+                })
+            });
+
+            const result = await response.json();
+
+            if (result.status === "success") {
+                // เก็บชื่อลง localStorage
+                localStorage.setItem('userDisplayName', result.name);
+                
+                // --- ส่วนที่เพิ่มเข้ามา: เก็บสิทธิ์การเข้าถึงวิดีโอ (accessibleCategory) ---
+                localStorage.setItem('userAccess', result.accessibleCategory || ""); 
+                
+                Swal.fire({
+                    icon: 'success',
+                    title: 'เข้าสู่ระบบสำเร็จ',
+                    text: 'ยินดีต้อนรับคุณ ' + result.name,
+                    timer: 2000,
+                    showConfirmButton: false
+                }).then(() => {
+                    window.location.href = "classroom.html"; 
+                });
+            } else {
+                showError("Username หรือ Password ไม่ถูกต้อง");
+            }
+        } catch (error) {
+            console.error(error);
+            showError("ไม่สามารถเชื่อมต่อฐานข้อมูลได้ กรุณาลองใหม่ภายหลัง");
+        }
+    }
+
+    // ฟังก์ชันเปลี่ยนรหัสผ่านถาวร
+    async function forgotPassword() {
+        const { value: username } = await Swal.fire({
+            title: 'เปลี่ยนรหัสผ่านถาวร',
+            input: 'text',
+            inputLabel: 'ระบุ Username ของท่าน',
+            inputPlaceholder: 'เช่น student001',
+            showCancelButton: true,
+            confirmButtonColor: '#764ba2'
+        });
+
+        if (username) {
+            const { value: newPassword } = await Swal.fire({
+                title: 'ตั้งรหัสผ่านใหม่',
+                input: 'password',
+                inputLabel: 'ระบุรหัสผ่านใหม่ที่ต้องการ',
+                inputPlaceholder: 'รหัสผ่านใหม่',
+                showCancelButton: true,
+                confirmButtonColor: '#764ba2'
+            });
+
+            if (newPassword) {
+                Swal.fire({
+                    title: 'กำลังบันทึกข้อมูล...',
+                    allowOutsideClick: false,
+                    didOpen: () => { Swal.showLoading(); }
+                });
+
+                try {
+                    const response = await fetch(SCRIPT_URL, {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: "changePass",
+                            username: username,
+                            newPassword: newPassword
+                        })
+                    });
+
+                    const result = await response.json();
+
+                    if (result.status === "success") {
+                        Swal.fire('สำเร็จ!', 'เปลี่ยนรหัสผ่านถาวรเรียบร้อยแล้ว', 'success');
+                    } else {
+                        Swal.fire('ผิดพลาด', 'ไม่พบ Username นี้ในระบบ', 'error');
+                    }
+                } catch (error) {
+                    showError("เกิดข้อผิดพลาดในการเชื่อมต่อ");
+                }
+            }
+        }
+    }
+
+    function showError(msg) {
+        Swal.fire({
+            icon: 'error',
+            title: 'ผิดพลาด',
+            text: msg,
+            confirmButtonColor: '#764ba2'
+        });
+    }
+
+    // กด Enter เพื่อ Login
+    document.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') handleLogin();
+    });
+</script>
+
+</body>
+</html>
