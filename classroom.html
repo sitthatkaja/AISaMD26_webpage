@@ -242,14 +242,61 @@
 
 <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwo27kml5torCJMlyNOqcpJ0aFZq9sDo0zDln483IS8csyiIHbsJZ53qQMdIWfAoK_k/exec";
+    let userAccess = "";
+            function sanitize(str) {
+                const div = document.createElement('div');
+                div.innerText = str;
+                return div.innerHTML;
+            }        
     let allCourses = [];
     let currentTrack = 'all', currentCat = 'all', activeIdx = -1;
 
-    document.addEventListener("DOMContentLoaded", () => {
-        const name = localStorage.getItem('userDisplayName');
-        if (!name) window.location.href = "login.html";
-        document.getElementById('welcomeName').innerText = name;
-        fetchData();
+    document.addEventListener("DOMContentLoaded", async () => {
+        const token = localStorage.getItem('userToken');
+        
+        // ✅ ไม่มี token เลยให้ไป login ทันที
+        if (!token) {
+            window.location.href = "login.html";
+            return;
+        }
+
+        // ✅ ส่ง token ไปตรวจกับ server
+        try {
+            const response = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: "verifyToken",
+                    token: token
+                })
+            });
+
+            const result = await response.json();
+
+            // ✅ token ไม่ผ่านให้ล้าง localStorage แล้วไป login
+            if (result.status === "expired") {
+                // ✅ token หมดอายุ แจ้งเตือนก่อน redirect
+                localStorage.clear();
+                alert("หมดเวลาการใช้งาน กรุณา Login ใหม่อีกครั้ง");
+                window.location.href = "login.html";
+                return;
+            }
+
+            if (result.status !== "success") {
+                localStorage.clear();
+                window.location.href = "login.html";
+                return;
+            }
+
+            // ✅ token ผ่าน อัปเดตข้อมูลจาก server แทนที่จะเชื่อ localStorage
+            localStorage.setItem('userDisplayName', result.name);
+            userAccess = result.accessibleCategory || "";
+            document.getElementById('welcomeName').innerText = result.name;
+            fetchData();
+
+        } catch (error) {
+            console.error(error);
+            window.location.href = "login.html";
+        }
     });
 
     async function fetchData() {
@@ -290,7 +337,6 @@
         const grid = document.getElementById('courseGrid');
         const sidebar = document.getElementById('sidebarList');
         
-        const userAccess = localStorage.getItem('userAccess') || "";
         const allowedVideoIds = userAccess.split(',').map(s => s.trim());
 
         const filtered = allCourses.filter(c => {
@@ -311,7 +357,7 @@
                     <div class="thumb-box"><img src="https://img.youtube.com/vi/${getYTId(c.videoUrl)}/mqdefault.jpg"></div>
                     <div class="p-2">
                         <div class="mb-2 d-flex flex-wrap">${renderBadges(c.category, c.track)}</div>
-                        <div class="fw-bold small text-dark">${c.title}</div>
+                        <div class="fw-bold small text-dark">${sanitize(c.title)}</div>
                     </div>
                 </div>
             </div>`;
@@ -324,7 +370,7 @@
             <div class="sidebar-item ${isActive ? 'active' : ''}" onclick="openVideo(${oriIdx})">
                 <div class="sidebar-thumb"><img src="https://img.youtube.com/vi/${getYTId(c.videoUrl)}/mqdefault.jpg"></div>
                 <div class="sidebar-info">
-                    <div class="small fw-bold text-dark">${c.title} ${isActive ? '<span class="now-playing">(กำลังเล่น)</span>' : ''}</div>
+                    <div class="small fw-bold text-dark">${sanitize(c.title)} ${isActive ? '<span class="now-playing">(กำลังเล่น)</span>' : ''}</div>
                     <div class="mt-2 d-flex flex-wrap">${renderBadges(c.category, c.track)}</div>
                 </div>
             </div>`;

@@ -172,7 +172,7 @@
         </div>
 
         <div class="d-flex justify-content-end align-items-center mb-4">
-            <a href="#" onclick="forgotPassword()" class="text-muted" style="font-size: 0.85rem; text-decoration: none;">ลืมรหัสผ่าน</a>
+            <a href="#" onclick="forgotPassword()" class="text-muted" style="font-size: 0.85rem; text-decoration: none;">เปลี่ยนรหัสผ่าน</a>
         </div>
 
         <button type="button" onclick="handleLogin()" class="btn btn-login">LOGIN</button>
@@ -200,7 +200,7 @@
 
 <script>
     // อัปเดต URL ใหม่เรียบร้อยแล้วครับ
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzxLTjMGcETwZP3GdaRCFE5XQV2TDjFhRajzD15uowY1SLVyOFAq3WRFboEx-J1q_Y-sw/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxP5zdPNgkuSMbI2OEeAzgTH24zPHvoRXo9JI8RCydzjG2PNnsriydI5jZ1w7pzno4jxg/exec";
 
     // ฟังก์ชันเข้าสู่ระบบ
     async function handleLogin() {
@@ -230,12 +230,10 @@
             const result = await response.json();
 
             if (result.status === "success") {
-                // เก็บชื่อลง localStorage
                 localStorage.setItem('userDisplayName', result.name);
-                
-                // --- ส่วนที่เพิ่มเข้ามา: เก็บสิทธิ์การเข้าถึงวิดีโอ (accessibleCategory) ---
-                localStorage.setItem('userAccess', result.accessibleCategory || ""); 
-                
+                localStorage.setItem('userAccess', result.accessibleCategory || "");
+                localStorage.setItem('userToken', result.token);
+
                 Swal.fire({
                     icon: 'success',
                     title: 'เข้าสู่ระบบสำเร็จ',
@@ -243,10 +241,21 @@
                     timer: 2000,
                     showConfirmButton: false
                 }).then(() => {
-                    window.location.href = "classroom.html"; 
+                    window.location.href = "classroom.html";
                 });
+
+            } else if (result.status === "locked") {
+                // ✅ บัญชีถูกล็อค
+                showError("บัญชีถูกล็อคเนื่องจาก login ผิดเกิน 5 ครั้ง กรุณาติดต่อผู้ดูแลระบบ");
+
             } else {
-                showError("Username หรือ Password ไม่ถูกต้อง");
+                // ✅ แสดงจำนวนครั้งที่เหลือ
+                const left = result.attemptsLeft;
+                if (left !== undefined && left > 0) {
+                    showError(`Username หรือ Password ไม่ถูกต้อง (เหลืออีก ${left} ครั้ง)`);
+                } else {
+                    showError("Username หรือ Password ไม่ถูกต้อง");
+                }
             }
         } catch (error) {
             console.error(error);
@@ -265,44 +274,59 @@
             confirmButtonColor: '#764ba2'
         });
 
-        if (username) {
-            const { value: newPassword } = await Swal.fire({
-                title: 'ตั้งรหัสผ่านใหม่',
-                input: 'password',
-                inputLabel: 'ระบุรหัสผ่านใหม่ที่ต้องการ',
-                inputPlaceholder: 'รหัสผ่านใหม่',
-                showCancelButton: true,
-                confirmButtonColor: '#764ba2'
+        if (!username) return;
+
+        // ✅ เพิ่ม: ขอรหัสผ่านปัจจุบันก่อน
+        const { value: currentPassword } = await Swal.fire({
+            title: 'ยืนยันตัวตน',
+            input: 'password',
+            inputLabel: 'ระบุรหัสผ่านปัจจุบัน',
+            inputPlaceholder: 'รหัสผ่านปัจจุบัน',
+            showCancelButton: true,
+            confirmButtonColor: '#764ba2'
+        });
+
+        if (!currentPassword) return;
+
+        const { value: newPassword } = await Swal.fire({
+            title: 'ตั้งรหัสผ่านใหม่',
+            input: 'password',
+            inputLabel: 'ระบุรหัสผ่านใหม่ที่ต้องการ',
+            inputPlaceholder: 'รหัสผ่านใหม่',
+            showCancelButton: true,
+            confirmButtonColor: '#764ba2'
+        });
+
+        if (!newPassword) return;
+
+        Swal.fire({
+            title: 'กำลังบันทึกข้อมูล...',
+            allowOutsideClick: false,
+            didOpen: () => { Swal.showLoading(); }
+        });
+
+        try {
+            const response = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: "changePass",
+                    username: username,
+                    currentPassword: currentPassword,  // ✅ เพิ่ม: ส่งรหัสเดิมไปตรวจด้วย
+                    newPassword: newPassword
+                })
             });
 
-            if (newPassword) {
-                Swal.fire({
-                    title: 'กำลังบันทึกข้อมูล...',
-                    allowOutsideClick: false,
-                    didOpen: () => { Swal.showLoading(); }
-                });
+            const result = await response.json();
 
-                try {
-                    const response = await fetch(SCRIPT_URL, {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            action: "changePass",
-                            username: username,
-                            newPassword: newPassword
-                        })
-                    });
-
-                    const result = await response.json();
-
-                    if (result.status === "success") {
-                        Swal.fire('สำเร็จ!', 'เปลี่ยนรหัสผ่านถาวรเรียบร้อยแล้ว', 'success');
-                    } else {
-                        Swal.fire('ผิดพลาด', 'ไม่พบ Username นี้ในระบบ', 'error');
-                    }
-                } catch (error) {
-                    showError("เกิดข้อผิดพลาดในการเชื่อมต่อ");
-                }
+            if (result.status === "success") {
+                Swal.fire('สำเร็จ!', 'เปลี่ยนรหัสผ่านถาวรเรียบร้อยแล้ว', 'success');
+            } else if (result.status === "wrong_password") {      // ✅ เพิ่ม: แยก error
+                Swal.fire('ผิดพลาด', 'รหัสผ่านปัจจุบันไม่ถูกต้อง', 'error');
+            } else {
+                Swal.fire('ผิดพลาด', 'ไม่พบ Username นี้ในระบบ', 'error');
             }
+        } catch (error) {
+            showError("เกิดข้อผิดพลาดในการเชื่อมต่อ");
         }
     }
 
