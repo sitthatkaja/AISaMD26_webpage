@@ -242,7 +242,7 @@
 
 <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxP5zdPNgkuSMbI2OEeAzgTH24zPHvoRXo9JI8RCydzjG2PNnsriydI5jZ1w7pzno4jxg/exec";      // สำหรับ login/token
-    const COURSES_URL = "https://script.google.com/macros/s/AKfycbwo27kml5torCJMlyNOqcpJ0aFZq9sDo0zDln483IS8csyiIHbsJZ53qQMdIWfAoK_k/exec";   // สำหรับดึงวิดีโอ
+    const COURSES_URL = "https://script.google.com/macros/s/AKfycbwhfDPH8Voq9H89JSWBG-jiTf7x7Xes8QPV3eefgf7EktU0P_EwyJ7rrCcYzYRkXaN1/exec";   // สำหรับดึงวิดีโอ
     let userAccess = "";
             function sanitize(str) {
                 const div = document.createElement('div');
@@ -302,8 +302,15 @@
 
     async function fetchData() {
         try {
-            const res = await fetch(COURSES_URL);
-            allCourses = await res.json();
+            const token = localStorage.getItem('userToken');
+            const res = await fetch(COURSES_URL + '?token=' + token);
+            const data = await res.json();
+            if (data.status === "unauthorized") {
+                localStorage.clear();
+                window.location.href = "login.html";
+                return;
+            }
+            allCourses = data;
             renderUI();
         } catch (e) { console.error(e); }
     }
