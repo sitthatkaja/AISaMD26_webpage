@@ -241,7 +241,7 @@
 </div>
 
 <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxP5zdPNgkuSMbI2OEeAzgTH24zPHvoRXo9JI8RCydzjG2PNnsriydI5jZ1w7pzno4jxg/exec";      // สำหรับ login/token
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzmw0b6euZy8b_Q0Bvc0hPANvYqHHJOOnSs_b54Qz9WePUZFwerY42hvHSqx4X1PiqU3Q/exec";      // สำหรับ login/token
     const COURSES_URL = "https://script.google.com/macros/s/AKfycbx744kkFh_R1RxZsZ0g4E2pNSVar4NPrYeB_6buXazOzARORewYLmZASYiXACSYcqIM/exec";   // สำหรับดึงวิดีโอ
     let userAccess = "";
             function sanitize(str) {
@@ -388,14 +388,52 @@
         }).join('');
     }
 
-    function openVideo(index) {
-        activeIdx = index;
-        const c = allCourses[index];
-        const vid = getYTId(c.videoUrl);
-        document.getElementById('home-view').style.display = 'none';
-        document.getElementById('watch-view').style.display = 'block';
-        window.scrollTo(0,0);
-        document.getElementById('mainPlayer').src = `https://www.youtube.com/embed/${vid}?autoplay=1&rel=0`;
+// ✅ ตัวแปรจับเวลา
+let watchStartTime = null;
+let watchingCourse = null;
+
+// ✅ ฟังก์ชันส่ง log เวลาดูวิดีโอ
+async function sendWatchLog() {
+    if (!watchStartTime || !watchingCourse) return;
+    const seconds = Math.floor((new Date().getTime() - watchStartTime) / 1000);
+    if (seconds < 5) return; // ไม่นับถ้าดูน้อยกว่า 5 วินาที
+    
+    const token = localStorage.getItem('userToken');
+    const username = localStorage.getItem('userDisplayName');
+    
+    try {
+        await fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: JSON.stringify({
+                action: "logWatch",
+                token: token,
+                username: username,
+                videoId: watchingCourse.id.toString(),
+                videoTitle: watchingCourse.title,
+                seconds: seconds
+            })
+        });
+    } catch (e) { console.error(e); }
+    
+    watchStartTime = null;
+    watchingCourse = null;
+}
+
+        function openVideo(index) {
+            // ✅ ส่ง log วิดีโอก่อนหน้าก่อนเปลี่ยน
+            sendWatchLog();
+
+            activeIdx = index;
+            const c = allCourses[index];
+            const vid = getYTId(c.videoUrl);
+            document.getElementById('home-view').style.display = 'none';
+            document.getElementById('watch-view').style.display = 'block';
+            window.scrollTo(0,0);
+            document.getElementById('mainPlayer').src = `https://www.youtube.com/embed/${vid}?autoplay=1&rel=0`;
+
+            // ✅ เริ่มจับเวลา
+            watchStartTime = new Date().getTime();
+            watchingCourse = c;
         document.getElementById('mainTitle').innerText = c.title;
         document.getElementById('mainDesc').innerText = c.description;
         document.getElementById('mainBadges').innerHTML = renderBadges(c.category, c.track);
@@ -429,8 +467,25 @@
         document.getElementById('mainPlayer').src = `${currentSrc}&start=${s}`;
     }
 
-    function goHome() { activeIdx = -1; document.getElementById('home-view').style.display = 'block'; document.getElementById('watch-view').style.display = 'none'; document.getElementById('mainPlayer').src = ""; renderUI(); }
-    function logout() { localStorage.clear(); window.location.href = "login.html"; }
+    function goHome() { 
+        sendWatchLog(); // ✅ ส่ง log ก่อนกลับหน้าหลัก
+        activeIdx = -1; 
+        document.getElementById('home-view').style.display = 'block'; 
+        document.getElementById('watch-view').style.display = 'none'; 
+        document.getElementById('mainPlayer').src = ""; 
+        renderUI(); 
+    }
+
+    function logout() { 
+        sendWatchLog(); // ✅ ส่ง log ก่อน logout
+        localStorage.clear(); 
+        window.location.href = "login.html"; 
+    }
+
+    window.addEventListener('beforeunload', function() {
+    sendWatchLog();
+});
+
 </script>
 </body>
 </html>
