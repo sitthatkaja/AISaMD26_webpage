@@ -241,54 +241,47 @@
 </div>
 
 <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxTX6EjDShmM9HigNAgJBgiU-VZqRkiMIugadeorc3Yr4oVwrZu3YhWNAMjJdwbZ8gMmQ/exec";      // สำหรับ login/token
-    const COURSES_URL = "https://script.google.com/macros/s/AKfycbx744kkFh_R1RxZsZ0g4E2pNSVar4NPrYeB_6buXazOzARORewYLmZASYiXACSYcqIM/exec";   // สำหรับดึงวิดีโอ
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwN_yT_fHc3vQxtTWWMZ04TlSy5-8hxd18cAwNwdHmONKqN5ndBTyexw4rO2Hwh1jY65Q/exec";
+    const COURSES_URL = "https://script.google.com/macros/s/AKfycbx744kkFh_R1RxZsZ0g4E2pNSVar4NPrYeB_6buXazOzARORewYLmZASYiXACSYcqIM/exec";
     let userAccess = "";
-            function sanitize(str) {
-                const div = document.createElement('div');
-                div.innerText = str;
-                return div.innerHTML;
-            }        
+
+    function sanitize(str) {
+        const div = document.createElement('div');
+        div.innerText = str;
+        return div.innerHTML;
+    }
+
     let allCourses = [];
     let currentTrack = 'all', currentCat = 'all', activeIdx = -1;
 
+    // ✅ ตัวแปรจับเวลา
+    let watchStartTime = null;
+    let watchingCourse = null;
+    let isNewView = false; // ✅ เพิ่ม
+
     document.addEventListener("DOMContentLoaded", async () => {
         const token = localStorage.getItem('userToken');
-        
-        // ✅ ไม่มี token เลยให้ไป login ทันที
-        if (!token) {
-            window.location.href = "login.html";
-            return;
-        }
+        if (!token) { window.location.href = "login.html"; return; }
 
-        // ✅ ส่ง token ไปตรวจกับ server
         try {
             const response = await fetch(SCRIPT_URL, {
                 method: 'POST',
-                body: JSON.stringify({
-                    action: "verifyToken",
-                    token: token
-                })
+                body: JSON.stringify({ action: "verifyToken", token: token })
             });
-
             const result = await response.json();
 
-            // ✅ token ไม่ผ่านให้ล้าง localStorage แล้วไป login
             if (result.status === "expired") {
-                // ✅ token หมดอายุ แจ้งเตือนก่อน redirect
                 localStorage.clear();
                 alert("หมดเวลาการใช้งาน กรุณา Login ใหม่อีกครั้ง");
                 window.location.href = "login.html";
                 return;
             }
-
             if (result.status !== "success") {
                 localStorage.clear();
                 window.location.href = "login.html";
                 return;
             }
 
-            // ✅ token ผ่าน อัปเดตข้อมูลจาก server แทนที่จะเชื่อ localStorage
             localStorage.setItem('userDisplayName', result.name);
             userAccess = result.accessibleCategory || "";
             document.getElementById('welcomeName').innerText = result.name;
@@ -322,7 +315,6 @@
         const allMatchingBtns = document.querySelectorAll(`button[onclick^="filterData('${val}', '${type}'"]`);
         document.querySelectorAll(`.btn-filter-${type}`).forEach(b => b.classList.remove('active'));
         allMatchingBtns.forEach(b => b.classList.add('active'));
-
         if (type === 'track') currentTrack = val;
         if (type === 'cat') currentCat = val;
         renderUI();
@@ -343,20 +335,15 @@
         return html;
     }
 
-    // --- ส่วนที่แก้ไข: เปลี่ยนมาเช็คสิทธิ์ด้วย ID วิดีโอ ---
     function renderUI() {
         const grid = document.getElementById('courseGrid');
         const sidebar = document.getElementById('sidebarList');
-        
         const allowedVideoIds = userAccess.split(',').map(s => s.trim());
 
         const filtered = allCourses.filter(c => {
             const tMatch = currentTrack === 'all' || (c.track && c.track.toUpperCase().includes(currentTrack.toUpperCase()));
             const cMatch = currentCat === 'all' || c.category === currentCat;
-            
-            // เปลี่ยนจาก allowedCats.includes(c.category) เป็นการเช็ค ID แทน
             const hasPermission = userAccess === 'ทั้งหมด' || allowedVideoIds.includes(c.id.toString());
-            
             return tMatch && cMatch && c.status === 'show' && hasPermission;
         });
 
@@ -388,56 +375,82 @@
         }).join('');
     }
 
-// ✅ ตัวแปรจับเวลา
-let watchStartTime = null;
-let watchingCourse = null;
+    // ✅ ฟังก์ชันส่ง log เวลาดูวิดีโอ
+    async function sendWatchLog(isNew = false) {
+        if (!watchStartTime || !watchingCourse) return;
+        const seconds = Math.floor((new Date().getTime() - watchStartTime) / 1000);
+        if (seconds < 5) return;
 
-// ✅ ฟังก์ชันส่ง log เวลาดูวิดีโอ
-async function sendWatchLog() {
-    if (!watchStartTime || !watchingCourse) return;
-    const seconds = Math.floor((new Date().getTime() - watchStartTime) / 1000);
-    if (seconds < 5) return; // ไม่นับถ้าดูน้อยกว่า 5 วินาที
-    
-    const token = localStorage.getItem('userToken');
-    const username = localStorage.getItem('userDisplayName');
-    
-    try {
-        await fetch(SCRIPT_URL, {
-            method: 'POST',
-            body: JSON.stringify({
-                action: "logWatch",
-                token: token,
-                username: username,
-                videoId: watchingCourse.id.toString(),
-                videoTitle: watchingCourse.title,
-                seconds: seconds
-            })
-        });
-    } catch (e) { console.error(e); }
-    
-    watchStartTime = null;
-    watchingCourse = null;
-}
+        const token = localStorage.getItem('userToken');
+        const username = localStorage.getItem('userDisplayName');
 
-        function openVideo(index) {
-            // ✅ ส่ง log วิดีโอก่อนหน้าก่อนเปลี่ยน
-            sendWatchLog();
+        try {
+            await fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: "logWatch",
+                    token: token,
+                    username: username,
+                    videoId: watchingCourse.id.toString(),
+                    videoTitle: watchingCourse.title,
+                    seconds: seconds,
+                    isNewView: isNew // ✅ ส่งไปด้วย
+                })
+            });
+        } catch (e) { console.error(e); }
 
-            activeIdx = index;
-            const c = allCourses[index];
-            const vid = getYTId(c.videoUrl);
-            document.getElementById('home-view').style.display = 'none';
-            document.getElementById('watch-view').style.display = 'block';
-            window.scrollTo(0,0);
-            document.getElementById('mainPlayer').src = `https://www.youtube.com/embed/${vid}?autoplay=1&rel=0`;
+        watchStartTime = null;
+        watchingCourse = null;
+        isNewView = false;
+    }
 
-            // ✅ เริ่มจับเวลา
-            watchStartTime = new Date().getTime();
-            watchingCourse = c;
+    // ✅ Heartbeat ทุก 30 วินาที
+    setInterval(async function() {
+        if (!watchStartTime || !watchingCourse) return;
+        const seconds = Math.floor((new Date().getTime() - watchStartTime) / 1000);
+        if (seconds < 10) return;
+
+        const token = localStorage.getItem('userToken');
+        const username = localStorage.getItem('userDisplayName');
+
+        try {
+            await fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: "logWatch",
+                    token: token,
+                    username: username,
+                    videoId: watchingCourse.id.toString(),
+                    videoTitle: watchingCourse.title,
+                    seconds: seconds,
+                    isNewView: false // ✅ Heartbeat ไม่นับครั้ง
+                })
+            });
+            watchStartTime = new Date().getTime(); // ✅ reset timer
+        } catch (e) { console.error(e); }
+
+    }, 30 * 1000); // ✅ ทุก 30 วินาที
+
+    function openVideo(index) {
+        sendWatchLog(false); // ✅ ส่ง log วิดีโอก่อนหน้า ไม่นับครั้งใหม่
+
+        activeIdx = index;
+        const c = allCourses[index];
+        const vid = getYTId(c.videoUrl);
+        document.getElementById('home-view').style.display = 'none';
+        document.getElementById('watch-view').style.display = 'block';
+        window.scrollTo(0, 0);
+        document.getElementById('mainPlayer').src = `https://www.youtube.com/embed/${vid}?autoplay=1&rel=0`;
+
+        // ✅ เริ่มจับเวลาใหม่ และนับเป็นการดูครั้งใหม่
+        watchStartTime = new Date().getTime();
+        watchingCourse = c;
+        isNewView = true; // ✅ เปิดวิดีโอใหม่ = นับครั้ง
+
         document.getElementById('mainTitle').innerText = c.title;
         document.getElementById('mainDesc').innerText = c.description;
         document.getElementById('mainBadges').innerHTML = renderBadges(c.category, c.track);
-        
+
         const pdfBtn = document.getElementById('mainPdf');
         if (!c.pdfUrl || c.pdfUrl.trim() === "" || c.pdfUrl === "ไม่มี") {
             pdfBtn.href = "javascript:void(0)";
@@ -462,29 +475,29 @@ async function sendWatchLog() {
 
     function seek(time) {
         const t = time.split(':');
-        let s = t.length === 3 ? (+t[0])*3600 + (+t[1])*60 + (+t[2]) : (+t[0])*60 + (+t[1]);
+        let s = t.length === 3 ? (+t[0]) * 3600 + (+t[1]) * 60 + (+t[2]) : (+t[0]) * 60 + (+t[1]);
         const currentSrc = document.getElementById('mainPlayer').src.split('&start=')[0];
         document.getElementById('mainPlayer').src = `${currentSrc}&start=${s}`;
     }
 
-    function goHome() { 
-        sendWatchLog(); // ✅ ส่ง log ก่อนกลับหน้าหลัก
-        activeIdx = -1; 
-        document.getElementById('home-view').style.display = 'block'; 
-        document.getElementById('watch-view').style.display = 'none'; 
-        document.getElementById('mainPlayer').src = ""; 
-        renderUI(); 
+    function goHome() {
+        sendWatchLog(false); // ✅ ส่ง log ก่อนกลับ ไม่นับครั้ง
+        activeIdx = -1;
+        document.getElementById('home-view').style.display = 'block';
+        document.getElementById('watch-view').style.display = 'none';
+        document.getElementById('mainPlayer').src = "";
+        renderUI();
     }
 
-    function logout() { 
-        sendWatchLog(); // ✅ ส่ง log ก่อน logout
-        localStorage.clear(); 
-        window.location.href = "login.html"; 
+    function logout() {
+        sendWatchLog(false); // ✅ ส่ง log ก่อน logout ไม่นับครั้ง
+        localStorage.clear();
+        window.location.href = "login.html";
     }
 
     window.addEventListener('beforeunload', function() {
-    sendWatchLog();
-});
+        sendWatchLog(false); // ✅ ส่ง log ตอนปิด ไม่นับครั้ง
+    });
 
 </script>
 </body>
