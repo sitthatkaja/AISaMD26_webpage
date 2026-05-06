@@ -432,7 +432,8 @@
     }, 30 * 1000); // ✅ ทุก 30 วินาที
 
     function openVideo(index) {
-        sendWatchLog(true); // ✅ ส่ง true เพื่อนับครั้งของวิดีโอก่อนหน้าด้วย
+        isNewView = true; // ✅ เซ็ตก่อนส่ง log เสมอ
+        sendWatchLog(true); // ✅ ส่ง log วิดีโอก่อนหน้าพร้อมนับครั้ง
 
         activeIdx = index;
         const c = allCourses[index];
@@ -442,7 +443,7 @@
         window.scrollTo(0, 0);
         document.getElementById('mainPlayer').src = `https://www.youtube.com/embed/${vid}?autoplay=1&rel=0`;
 
-        // ✅ เริ่มจับเวลาใหม่ และนับเป็นการดูครั้งใหม่
+        // ✅ เริ่มจับเวลาใหม่
         watchStartTime = new Date().getTime();
         watchingCourse = c;
         isNewView = true; // ✅ เปิดวิดีโอใหม่ = นับครั้ง
