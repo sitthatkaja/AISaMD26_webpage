@@ -432,8 +432,9 @@
     }, 30 * 1000); // ✅ ทุก 30 วินาที
 
     function openVideo(index) {
-        isNewView = true; // ✅ เซ็ตก่อนส่ง log เสมอ
-        sendWatchLog(true); // ✅ ส่ง log วิดีโอก่อนหน้าพร้อมนับครั้ง
+        // ✅ ส่ง log วิดีโอก่อนหน้าก่อน (ถ้ามี)
+        isNewView = true;
+        sendWatchLog(true);
 
         activeIdx = index;
         const c = allCourses[index];
@@ -446,7 +447,23 @@
         // ✅ เริ่มจับเวลาใหม่
         watchStartTime = new Date().getTime();
         watchingCourse = c;
-        isNewView = true; // ✅ เปิดวิดีโอใหม่ = นับครั้ง
+        isNewView = true;
+
+        // ✅ นับครั้งทันทีตอนเปิดวิดีโอเลย ไม่ต้องรอปิด
+        const token = localStorage.getItem('userToken');
+        const username = localStorage.getItem('userDisplayName');
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: JSON.stringify({
+                action: "logWatch",
+                token: token,
+                username: username,
+                videoId: c.id.toString(),
+                videoTitle: c.title,
+                seconds: 0,
+                isNewView: true
+            })
+        }).catch(e => console.error(e));
 
         document.getElementById('mainTitle').innerText = c.title;
         document.getElementById('mainDesc').innerText = c.description;
