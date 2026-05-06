@@ -432,7 +432,7 @@
     }, 30 * 1000); // ✅ ทุก 30 วินาที
 
     function openVideo(index) {
-        sendWatchLog(false); // ✅ ส่ง log วิดีโอก่อนหน้า ไม่นับครั้งใหม่
+        sendWatchLog(true); // ✅ ส่ง true เพื่อนับครั้งของวิดีโอก่อนหน้าด้วย
 
         activeIdx = index;
         const c = allCourses[index];
