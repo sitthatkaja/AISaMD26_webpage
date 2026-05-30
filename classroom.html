@@ -9,9 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">    
     <style>
-        * {
-            font-family: 'Noto Sans Thai', 'Sarabun', sans-serif !important;
-        }
+        * { font-family: 'Noto Sans Thai', 'Sarabun', sans-serif !important; }
         :root { --track-purple: #0ea5e9; --cat-green: #06b6d4; }
         body { 
             font-family: 'Noto Sans Thai', 'Sarabun', sans-serif; 
@@ -19,14 +17,12 @@
             min-height: 100vh;
             color: #e2e8f0; 
         }        
-
         .navbar { 
             background: rgba(10, 22, 40, 0.85);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(56,189,248,0.2);
             box-shadow: 0 2px 20px rgba(0,0,0,0.3); 
         }        
-        
         .welcome-section { 
             background: rgba(13, 42, 74, 0.60);
             backdrop-filter: blur(12px);
@@ -35,25 +31,20 @@
             border: 1px solid rgba(56,189,248,0.2);
             position: relative; 
         }    
-
         .welcome-section h3 { color: white; }
         .welcome-section p { color: rgba(255,255,255,0.55); }
-
         .btn-logout-welcome { position: absolute; top: 20px; right: 20px; }
-
         .filter-label { 
             font-size: 0.85rem; font-weight: 700; 
             color: rgba(255,255,255,0.6); 
             text-transform: uppercase; margin-right: 15px; min-width: 140px; 
         }
-
         .btn-filter-track { 
             border-radius: 20px; padding: 4px 15px; 
             font-size: 0.85rem; font-weight: 600; 
             border: 2px solid #0ea5e9; 
             background: transparent; color: #0ea5e9; margin: 3px; 
         }
-
         .btn-filter-track.active { background: #0ea5e9; color: #fff; }
         .btn-filter-cat { 
             border-radius: 20px; padding: 4px 15px; 
@@ -62,13 +53,11 @@
             background: transparent; color: #06b6d4; margin: 3px; 
         }        
         .btn-filter-cat.active { background: #06b6d4; color: #fff; }
-
         .bg-white { 
             background: rgba(13, 42, 74, 0.60) !important;
             backdrop-filter: blur(12px);
             border: 1px solid rgba(56,189,248,0.2) !important;
         }
-
         .badge-cat { 
             border: 1px solid #06b6d4; color: #06b6d4; 
             background: rgba(6,182,212,0.12); 
@@ -79,7 +68,6 @@
             background: rgba(14,165,233,0.12); 
             font-weight: normal; font-size: 0.75rem; border-radius: 6px; 
         }
-
         .video-card { 
             background: rgba(13, 42, 74, 0.70);
             backdrop-filter: blur(8px);
@@ -87,17 +75,14 @@
             transition: 0.3s; height: 100%; 
             border: 1px solid rgba(56,189,248,0.2) !important; 
         }
-
         .video-card:hover { 
             transform: translateY(-4px); 
             box-shadow: 0 10px 30px rgba(14,165,233,0.25);
             border-color: rgba(56,189,248,0.5) !important;
         }
         .video-card .fw-bold { color: white !important; }
-        
         .thumb-box { position: relative; padding-top: 56.25%; background: #000; }
         .thumb-box img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
-
         #watch-view { display: none; }
         .sidebar-container { 
             background: rgba(13, 42, 74, 0.75); 
@@ -106,7 +91,6 @@
             border-radius: 12px; 
             overflow: hidden; max-height: 85vh;  
             display: flex; flex-direction: column; }
-
         .sidebar-item { 
             display: flex; gap: 12px; padding: 12px; cursor: pointer; 
             border-bottom: 1px solid rgba(56,189,248,0.1); transition: 0.2s; 
@@ -117,11 +101,9 @@
             border-left: 5px solid #0ea5e9; 
         }
         .sidebar-item .fw-bold { color: white !important; }
-
         .sidebar-thumb { width: 110px; min-width: 110px; height: 62px; border-radius: 6px; overflow: hidden; }
         .sidebar-thumb img { width: 100%; height: 100%; object-fit: cover; }
         .now-playing { font-size: 0.75rem; color: #38bdf8; font-weight: normal; margin-left: 5px; }
-
         .border { border-color: rgba(56,189,248,0.2) !important; }
         .shadow-sm { box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important; }
         .bg-light { background: rgba(10,22,40,0.8) !important; }
@@ -129,28 +111,23 @@
         .text-muted { color: rgba(255,255,255,0.45) !important; }
         .text-dark { color: white !important; }
         .text-primary { color: #38bdf8 !important; }
-
         #mainTitle { color: white; }
-
         .btn-light { 
             background: rgba(56,189,248,0.12); 
             border-color: rgba(56,189,248,0.3); 
             color: #38bdf8; 
         }
         .btn-light:hover { background: rgba(56,189,248,0.25); color: #7dd3fc; }
-
         .btn-outline-secondary { 
             border-color: rgba(56,189,248,0.4); 
             color: #38bdf8; 
         }
         .btn-outline-secondary:hover { background: rgba(56,189,248,0.15); color: #7dd3fc; }
-
         .btn-outline-danger { 
             border-color: rgba(248,113,113,0.5); 
             color: #f87171; 
         }
         .btn-outline-danger:hover { background: rgba(248,113,113,0.15); }
-
         h6.fw-bold { color: white; }
         .sidebar-filter-row { display: flex; flex-wrap: wrap; gap: 2px; }
     </style>
@@ -212,7 +189,10 @@
                         <div id="mainTimestamps" class="mt-2"></div>
                         <p id="mainDesc" class="mt-3 text-muted small"></p>
                     </div>
-                    <div class="col-md-4"><a id="mainPdf" href="#" target="_blank" class="btn btn-danger w-100 py-3 rounded-3 shadow-sm"><i class="fas fa-file-pdf me-2"></i>PDF สไลด์</a></div>
+                    <!-- ✅ เปลี่ยนจาก <a id="mainPdf"> เป็น div container -->
+                    <div class="col-md-4">
+                        <div id="mainPdfContainer" class="d-flex flex-column gap-2"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -254,10 +234,9 @@
     let allCourses = [];
     let currentTrack = 'all', currentCat = 'all', activeIdx = -1;
 
-    // ✅ ตัวแปรจับเวลา
     let watchStartTime = null;
     let watchingCourse = null;
-    let isNewView = false; // ✅ เพิ่ม
+    let isNewView = false;
 
     document.addEventListener("DOMContentLoaded", async () => {
         const token = localStorage.getItem('userToken');
@@ -375,7 +354,6 @@
         }).join('');
     }
 
-    // ✅ ฟังก์ชันส่ง log เวลาดูวิดีโอ
     async function sendWatchLog(isNew = false) {
         if (!watchStartTime || !watchingCourse) return;
         const seconds = Math.floor((new Date().getTime() - watchStartTime) / 1000);
@@ -394,7 +372,7 @@
                     videoId: watchingCourse.id.toString(),
                     videoTitle: watchingCourse.title,
                     seconds: seconds,
-                    isNewView: isNew // ✅ ส่งไปด้วย
+                    isNewView: isNew
                 })
             });
         } catch (e) { console.error(e); }
@@ -404,7 +382,6 @@
         isNewView = false;
     }
 
-    // ✅ Heartbeat ทุก 30 วินาที
     setInterval(async function() {
         if (!watchStartTime || !watchingCourse) return;
         const seconds = Math.floor((new Date().getTime() - watchStartTime) / 1000);
@@ -423,16 +400,15 @@
                     videoId: watchingCourse.id.toString(),
                     videoTitle: watchingCourse.title,
                     seconds: seconds,
-                    isNewView: false // ✅ Heartbeat ไม่นับครั้ง
+                    isNewView: false
                 })
             });
-            watchStartTime = new Date().getTime(); // ✅ reset timer
+            watchStartTime = new Date().getTime();
         } catch (e) { console.error(e); }
 
-    }, 30 * 1000); // ✅ ทุก 30 วินาที
+    }, 30 * 1000);
 
     function openVideo(index) {
-        // ✅ ส่ง log วิดีโอก่อนหน้าก่อน (ถ้ามี)
         isNewView = true;
         sendWatchLog(true);
 
@@ -444,12 +420,10 @@
         window.scrollTo(0, 0);
         document.getElementById('mainPlayer').src = `https://www.youtube.com/embed/${vid}?autoplay=1&rel=0`;
 
-        // ✅ เริ่มจับเวลาใหม่
         watchStartTime = new Date().getTime();
         watchingCourse = c;
         isNewView = true;
 
-        // ✅ นับครั้งทันทีตอนเปิดวิดีโอเลย ไม่ต้องรอปิด
         const token = localStorage.getItem('userToken');
         const username = localStorage.getItem('userDisplayName');
         fetch(SCRIPT_URL, {
@@ -469,17 +443,17 @@
         document.getElementById('mainDesc').innerText = c.description;
         document.getElementById('mainBadges').innerHTML = renderBadges(c.category, c.track);
 
-        const pdfBtn = document.getElementById('mainPdf');
-        if (!c.pdfUrl || c.pdfUrl.trim() === "" || c.pdfUrl === "ไม่มี") {
-            pdfBtn.href = "javascript:void(0)";
-            pdfBtn.innerHTML = `<i class="fas fa-file-alt me-2"></i>ไม่มีไฟล์ PDF`;
-            pdfBtn.className = "btn btn-secondary w-100 py-3 rounded-3 shadow-sm disabled";
-            pdfBtn.style.opacity = "0.7";
+        // ✅ แสดง PDF หลายลิงก์ คั่นด้วย ,
+        const pdfContainer = document.getElementById('mainPdfContainer');
+        const hasNoPdf = !c.pdfUrl || c.pdfUrl.trim() === "" || c.pdfUrl.trim() === "ไม่มี";
+        if (hasNoPdf) {
+            pdfContainer.innerHTML = `<a href="javascript:void(0)" class="btn btn-secondary w-100 py-3 rounded-3 shadow-sm disabled" style="opacity:0.7"><i class="fas fa-file-alt me-2"></i>ไม่มีไฟล์ PDF</a>`;
         } else {
-            pdfBtn.href = c.pdfUrl;
-            pdfBtn.innerHTML = `<i class="fas fa-file-pdf me-2"></i>PDF สไลด์`;
-            pdfBtn.className = "btn btn-danger w-100 py-3 rounded-3 shadow-sm";
-            pdfBtn.style.opacity = "1";
+            const urls = c.pdfUrl.split(',').map(u => u.trim()).filter(u => u && u !== "ไม่มี");
+            pdfContainer.innerHTML = urls.map((url, i) => {
+                const label = urls.length === 1 ? 'PDF สไลด์' : `PDF สไลด์ ไฟล์ที่ ${i + 1}`;
+                return `<a href="${url}" target="_blank" class="btn btn-danger w-100 py-3 rounded-3 shadow-sm"><i class="fas fa-file-pdf me-2"></i>${label}</a>`;
+            }).join('');
         }
 
         if (c.timestamps) {
@@ -499,7 +473,7 @@
     }
 
     function goHome() {
-        sendWatchLog(false); // ✅ ส่ง log ก่อนกลับ ไม่นับครั้ง
+        sendWatchLog(false);
         activeIdx = -1;
         document.getElementById('home-view').style.display = 'block';
         document.getElementById('watch-view').style.display = 'none';
@@ -508,13 +482,13 @@
     }
 
     function logout() {
-        sendWatchLog(false); // ✅ ส่ง log ก่อน logout ไม่นับครั้ง
+        sendWatchLog(false);
         localStorage.clear();
         window.location.href = "login.html";
     }
 
     window.addEventListener('beforeunload', function() {
-        sendWatchLog(false); // ✅ ส่ง log ตอนปิด ไม่นับครั้ง
+        sendWatchLog(false);
     });
 
 </script>
