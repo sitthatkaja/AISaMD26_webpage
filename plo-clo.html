@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="th">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Program Learning Outcomes (PLO) และ Course Learning Outcomes (CLO) หลักสูตร AISaMD-WDP 2026">
+        <title>PLO / CLO - AISaMD Workforce Development Program</title>
+        <link rel="icon" type="image/png" href="images/logo.png" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-icons.css" rel="stylesheet">
+        <link href="css/templatemo-leadership-event.css" rel="stylesheet">
+
+        <style>
+        * {
+            font-family: 'Noto Sans Thai', 'Sarabun', sans-serif !important;
+        }
+
+        /* ── NAVBAR (เหมือนกับ index.html ทุกประการ) ── */
+        .navbar {
+            padding: 10px 0 !important;
+            background: rgba(10, 22, 40, 0.95) !important;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(56,189,248,0.2);
+            transition: all 0.3s ease;
+        }
+        .brand-logo {
+            height: 60px !important;
+            width: auto !important;
+        }
+        .navbar::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #38bdf8, #0ea5e9, transparent);
+        }
+        .nav-link { color: rgba(255,255,255,0.80) !important; }
+        .nav-link:hover, .nav-link.active { color: #38bdf8 !important; }
+
+        /* ── Page hero ── */
+        .plo-hero {
+            background: linear-gradient(135deg, #0a1628 0%, #14335c 55%, #0ea5e9 130%);
+            padding: 60px 0 60px;
+            color: #ffffff;
+        }
+        .plo-hero h1 {
+            color: #ffffff;
+            font-size: 2.6rem;
+            letter-spacing: -1px;
+        }
+        .plo-hero p {
+            color: rgba(255,255,255,0.75);
+            font-size: 1.05rem;
+            max-width: 760px;
+        }
+        .plo-hero .badge-track {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            margin-right: 10px;
+            margin-bottom: 12px;
+        }
+        .badge-qara { background: rgba(56,189,248,0.15); color: #38bdf8; border: 1px solid rgba(56,189,248,0.4); }
+        .badge-bd   { background: rgba(168,85,247,0.15); color: #c084fc; border: 1px solid rgba(168,85,247,0.4); }
+
+        /* ── Section wrapper ── */
+        .plo-section { padding: 90px 0; }
+        .section-heading { text-align: center; margin-bottom: 45px; }
+        .section-heading h2 { font-size: 2rem; }
+        .section-heading p { color: var(--p-color); }
+
+        /* PLO section: dark gradient + background image, matching index.html section_2 */
+        .plo-section-dark {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a1628 0%, #0d2137 60%, #0a3d5c 100%);
+        }
+        .plo-section-dark::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                linear-gradient(135deg, rgba(10,22,40,0.30) 0%, rgba(13,33,55,0.25) 60%, rgba(10,61,92,0.20) 100%),
+                url('images/bg_01.png') center center / cover no-repeat;
+            pointer-events: none;
+        }
+        .plo-section-dark .container { position: relative; z-index: 1; }
+        .plo-section-dark .section-heading h2 { color: #ffffff; }
+        .plo-section-dark .section-heading p { color: rgba(255,255,255,0.65); }
+
+        /* CLO section: soft tinted background + faint image, instead of flat white/light blue */
+        .plo-section-alt {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, #eef6fc 0%, #f4f9fd 100%);
+        }
+        .plo-section-alt::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('images/bg_02.png') center center / cover no-repeat;
+            opacity: 0.06;
+            pointer-events: none;
+        }
+        .plo-section-alt .container { position: relative; z-index: 1; }
+
+        /* ── PLO cards ── */
+        .plo-card {
+            border-radius: 20px;
+            padding: 36px 32px;
+            height: 100%;
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+        .plo-card.qara {
+            background: linear-gradient(160deg, #0a1628 0%, #123a63 100%);
+            border: 1px solid rgba(56,189,248,0.3);
+            box-shadow: 0 20px 45px rgba(14,116,144,0.18);
+        }
+        .plo-card.bd {
+            background: linear-gradient(160deg, #1e1035 0%, #3b1a63 100%);
+            border: 1px solid rgba(168,85,247,0.3);
+            box-shadow: 0 20px 45px rgba(88,28,135,0.18);
+        }
+        .plo-card .track-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border-radius: 30px;
+            margin-bottom: 18px;
+        }
+        .plo-card.qara .track-tag { background: rgba(56,189,248,0.15); color: #7dd3fc; }
+        .plo-card.bd .track-tag { background: rgba(192,132,252,0.15); color: #d8b4fe; }
+        .plo-card h3 { color: #ffffff; font-size: 1.3rem; margin-bottom: 8px; }
+        .plo-card .track-sub { color: rgba(255,255,255,0.55); font-size: 0.85rem; margin-bottom: 22px; }
+        .plo-card ul { list-style: none; padding-left: 0; margin-bottom: 0; }
+        .plo-card ul li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 16px;
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.85);
+        }
+        .plo-card ul li:before {
+            content: "\f26b";
+            font-family: "bootstrap-icons" !important;
+            position: absolute;
+            left: 0; top: 2px;
+            font-size: 1rem;
+        }
+        .plo-card.qara ul li:before { color: #38bdf8; }
+        .plo-card.bd ul li:before { color: #c084fc; }
+
+        /* ── CLO track tabs ── */
+        .clo-tab-switch {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 36px;
+            flex-wrap: wrap;
+        }
+        .clo-tab-btn {
+            border: 2px solid transparent;
+            background: #ffffff;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.03em;
+            color: var(--p-color);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+        .clo-tab-btn.active.tab-qara {
+            background: #0a1628; color: #ffffff; border-color: #38bdf8;
+            box-shadow: 0 6px 20px rgba(14,165,233,0.35);
+        }
+        .clo-tab-btn.active.tab-bd {
+            background: #1e1035; color: #ffffff; border-color: #c084fc;
+            box-shadow: 0 6px 20px rgba(168,85,247,0.35);
+        }
+        .clo-tab-btn i { margin-right: 6px; }
+
+        .clo-group { display: none; }
+        .clo-group.active { display: block; }
+
+        /* ── CLO chip buttons ── */
+        .clo-chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+        .clo-chip {
+            border: 2px solid #e2e8f0;
+            background: linear-gradient(165deg, #ffffff 0%, #f7fafc 100%);
+            color: #33404f;
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            box-shadow: 0 3px 10px rgba(10,22,40,0.05);
+        }
+        .clo-group.qara .clo-chip:hover { border-color: #38bdf8; color: #0284c7; }
+        .clo-group.bd .clo-chip:hover { border-color: #c084fc; color: #7e22ce; }
+
+        .clo-group.qara .clo-chip.active {
+            background: #0a1628; border-color: #0a1628; color: #ffffff;
+            box-shadow: 0 6px 18px rgba(14,165,233,0.3);
+        }
+        .clo-group.bd .clo-chip.active {
+            background: #1e1035; border-color: #1e1035; color: #ffffff;
+            box-shadow: 0 6px 18px rgba(168,85,247,0.3);
+        }
+
+        /* ── CLO detail panel ── */
+        .clo-panel {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(165deg, #ffffff 0%, #f7fafc 100%);
+            border-radius: 20px;
+            padding: 40px 42px;
+            box-shadow: 0 10px 40px rgba(10,22,40,0.10);
+            min-height: 340px;
+            animation: fadeInPanel 0.25s ease;
+            border: 1px solid rgba(10,22,40,0.06);
+        }
+        .clo-panel::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+        }
+        .clo-group.qara .clo-panel::before { background: linear-gradient(90deg, #0a1628, #38bdf8, #0a1628); }
+        .clo-group.bd .clo-panel::before { background: linear-gradient(90deg, #1e1035, #c084fc, #1e1035); }
+        .clo-panel::after {
+            content: "";
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 220px; height: 220px;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .clo-group.qara .clo-panel::after { background: radial-gradient(circle, rgba(56,189,248,0.10) 0%, rgba(56,189,248,0) 70%); }
+        .clo-group.bd .clo-panel::after { background: radial-gradient(circle, rgba(192,132,252,0.12) 0%, rgba(192,132,252,0) 70%); }
+        .clo-panel > * { position: relative; z-index: 1; }
+        @keyframes fadeInPanel {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .clo-panel .clo-panel-code {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            padding: 5px 14px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+        }
+        .clo-group.qara .clo-panel .clo-panel-code { background: rgba(56,189,248,0.15); color: #0284c7; }
+        .clo-group.bd .clo-panel .clo-panel-code { background: rgba(168,85,247,0.15); color: #7e22ce; }
+
+        .clo-panel h3 {
+            font-size: 1.25rem;
+            color: #0a1628;
+            margin-bottom: 22px;
+            line-height: 1.4;
+        }
+        .clo-panel ul { padding-left: 0; list-style: none; margin-bottom: 0; }
+        .clo-panel ul li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 14px;
+            line-height: 1.75;
+            color: #33404f;
+            font-size: 0.95rem;
+        }
+        .clo-panel ul li:before {
+            content: "";
+            position: absolute;
+            left: 0; top: 8px;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+        }
+        .clo-group.qara .clo-panel ul li:before { background: #0ea5e9; }
+        .clo-group.bd .clo-panel ul li:before { background: #a855f7; }
+
+        @media (max-width: 767px) {
+            .plo-hero { padding: 50px 0 40px; }
+            .plo-hero h1 { font-size: 1.9rem; }
+            .clo-panel { padding: 28px 24px; }
+        }
+        </style>
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <a href="index.html" class="navbar-brand mx-auto mx-lg-0">
+                    <img src="images/Logo_wh.png" class="brand-logo img-fluid">
+                </a>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#section_1">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#section_2">Overview</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#section_3">Timeline</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="plo-clo.html">PLO / CLO</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html#section_4">Contact us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Profile.html">find AISaMD Specialists</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">Login</a>
+                        </li>
+                    </ul>
+                <div>
+
+            </div>
+        </nav>
+
+        <!-- ============ HERO ============ -->
+        <section class="plo-hero">
+            <div class="container">
+                <span class="badge-track badge-qara"><i class="bi bi-shield-check"></i> QA-RA</span>
+                <span class="badge-track badge-bd"><i class="bi bi-graph-up-arrow"></i> Business Development</span>
+                <h1>Program &amp; Course Learning Outcomes</h1>
+                <p>ผลลัพธ์การเรียนรู้ระดับหลักสูตร (PLO) และผลลัพธ์การเรียนรู้ระดับรายวิชา (CLO)
+                    ของหลักสูตร AISaMD Workforce Development Program ปี 2026 แบ่งตาม 2 สายการอบรม
+                    คือ Regulatory Affairs &amp; Quality Assurance (QA-RA) และ Business Development (BD)</p>
+            </div>
+        </section>
+
+        <!-- ============ PLO SECTION ============ -->
+        <section class="plo-section plo-section-dark" id="plo">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Program Learning Outcomes (PLO)</h2>
+                    <p>เมื่อสำเร็จการอบรมในแต่ละสาย ผู้เรียนจะสามารถบรรลุผลลัพธ์การเรียนรู้ระดับหลักสูตรดังนี้</p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="plo-card qara">
+                            <span class="track-tag"><i class="bi bi-shield-check"></i> QA-RA</span>
+                            <h3>Regulatory Affairs &amp; Quality Assurance</h3>
+                            <p class="track-sub">เมื่อสำเร็จการอบรมสาย QA-RA แล้ว ผู้เรียนสามารถ:</p>
+                            <ul>
+                                <li>อธิบายและปฏิบัติตามกรอบกฎหมาย มาตรฐานสากล และวงจรชีวิตของซอฟต์แวร์ทางการแพทย์ที่ขับเคลื่อนด้วย AI (AI SaMD) ได้อย่างถูกต้อง ตั้งแต่การระบุตัวตนผลิตภัณฑ์จนถึงการควบคุมหลังออกสู่ตลาด</li>
+                                <li>วางแผน ประสานงาน และดำเนินการทดสอบ Verification และ Validation ของซอฟต์แวร์ทางการแพทย์ ให้สอดคล้องกับมาตรฐานความปลอดภัยและคุณภาพระดับสากล (IEC 62304, IEC 62366-1, ISO 14971, ISO 13485)</li>
+                                <li>จัดเตรียมเอกสารทางเทคนิคและเอกสารขึ้นทะเบียน (CSDT, e-Submission) และบริหารจัดการผลิตภัณฑ์ตลอดวงจรชีวิต ตั้งแต่ก่อนออกสู่ตลาดจนถึงการเฝ้าระวังหลังออกสู่ตลาด (Post-Market Surveillance)</li>
+                                <li>ประเมินและแปลผลประสิทธิภาพของโมเดล AI ทางการแพทย์ตามหลักสถิติและมาตรฐานสากล พร้อมประยุกต์ใช้เทคโนโลยี AI เพื่อสนับสนุนงานจัดทำเอกสารมาตรฐานได้อย่างปลอดภัยและมีประสิทธิภาพ</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="plo-card bd">
+                            <span class="track-tag"><i class="bi bi-graph-up-arrow"></i> BD</span>
+                            <h3>Business Development</h3>
+                            <p class="track-sub">เมื่อสำเร็จการอบรมสาย BD แล้ว ผู้เรียนสามารถ:</p>
+                            <ul>
+                                <li>วิเคราะห์โอกาสทางธุรกิจและออกแบบกลยุทธ์การตลาดสำหรับผลิตภัณฑ์ AI ทางการแพทย์ ที่ตอบโจทย์ทั้งมิติคลินิก การปฏิบัติงาน กฎระเบียบ และการเงินไปพร้อมกัน</li>
+                                <li>เข้าใจโครงสร้างระบบการเงินการคลังสุขภาพและกลไกการจัดซื้อของประเทศไทย เพื่อวางแผนนำผลิตภัณฑ์ HealthTech เข้าสู่ตลาดทั้งภาคเอกชนและภาครัฐ</li>
+                                <li>ประยุกต์ใช้ความรู้ด้านทรัพย์สินทางปัญญาและกฎหมายที่เกี่ยวข้อง (พ.ร.บ. TRIUP Act) เพื่อคุ้มครองนวัตกรรมและสร้างมูลค่าทางธุรกิจ</li>
+                                <li>วางแผนกลยุทธ์การเข้าถึงตลาดแบบคู่ขนานและระดมทุน โดยใช้ข้อมูลทางการเงินและความเข้าใจมุมมองของนักลงทุนประกอบการตัดสินใจ</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ CLO SECTION ============ -->
+        <section class="plo-section plo-section-alt" id="clo">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Course Learning Outcomes (CLO)</h2>
+                    <p>เลือกสายการอบรม แล้วกดปุ่ม CLO แต่ละหัวข้อเพื่อดูรายละเอียดในกรอบด้านล่าง</p>
+                </div>
+
+                <!-- Track switch -->
+                <div class="clo-tab-switch">
+                    <button type="button" class="clo-tab-btn active tab-qara" onclick="switchCloTrack('qara', this)">
+                        <i class="bi bi-shield-check"></i>QA-RA
+                    </button>
+                    <button type="button" class="clo-tab-btn tab-bd" onclick="switchCloTrack('bd', this)">
+                        <i class="bi bi-graph-up-arrow"></i>Business Development
+                    </button>
+                </div>
+
+                <!-- QA-RA group -->
+                <div class="clo-group qara active" id="clo-qara">
+                    <div class="clo-chip-row" id="chips-qara"></div>
+                    <div class="clo-panel" id="panel-qara"></div>
+                </div>
+
+                <!-- BD group -->
+                <div class="clo-group bd" id="clo-bd">
+                    <div class="clo-chip-row" id="chips-bd"></div>
+                    <div class="clo-panel" id="panel-bd"></div>
+                </div>
+
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12 col-12 ms-lg-auto">
+                        <div class="copyright-text-wrap d-flex align-items-center">
+                            <p class="copyright-text ms-lg-auto me-4 mb-0">Copyright © 2026 AISaMD Workforce Development.
+                            All Rights Reserved.
+                            <br><br>Design: <a title="CSS Templates" rel="sponsored" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+                            <a href="#" class="bi-arrow-up arrow-icon custom-link"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.sticky.js"></script>
+        <script src="js/click-scroll.js"></script>
+        <script src="js/custom.js"></script>
+
+        <script>
+        // ===================== CLO DATA =====================
+        var cloData = {
+            qara: [
+                {
+                    code: "CLO 3.1.2",
+                    title: "Module 1: พื้นฐานกฎหมายและวงจรชีวิตของเครื่องมือแพทย์ (Regulatory Overview &amp; Life Cycle)",
+                    items: [
+                        "อธิบายการเปลี่ยนบทบาทของ RA จาก \"ผู้คุมกฎ\" (Gatekeeper) เป็น \"ผู้นำทาง\" (Navigator) ที่วางกลยุทธ์ด้านกฎระเบียบตั้งแต่ขั้นตอนออกแบบผลิตภัณฑ์",
+                        "ระบุตัวตนของซอฟต์แวร์ทางการแพทย์ (SaMD) ได้อย่างถูกต้องโดยพิจารณาจากวัตถุประสงค์การใช้งาน (Intended Use) และแยกแยะกรณีที่ไม่เข้าข่ายเครื่องมือแพทย์ (เช่น การจัดการข้อมูลทั่วไป หรือการคำนวณค่าดัชนีมวลกาย)",
+                        "เลือกใช้ถ้อยคำในการสื่อสารคุณสมบัติผลิตภัณฑ์อย่างเหมาะสม โดยหลีกเลี่ยงคำว่า \"วินิจฉัยอัตโนมัติโดยไม่มีแพทย์ควบคุม\" และใช้คำว่า \"ช่วยคัดกรอง/สนับสนุนการตัดสินใจทางคลินิก (CDSS)\" แทน",
+                        "อธิบาย 7 ขั้นตอนของวงจรชีวิตนวัตกรรมเครื่องมือแพทย์ได้ครบถ้วน ได้แก่ (1) การวางรากฐาน (2) การจัดการความเสี่ยง (3) การทวนสอบ (Verification) (4) การพิสูจน์คุณค่า (Validation) (5) การขออนุญาต (6) การผลิต และ (7) การควบคุมหลังเข้าสู่ตลาด",
+                        "จำแนกระดับความเสี่ยงของซอฟต์แวร์ AI (Safety Classification Class A/B/C) และอธิบายข้อกำหนดที่เกี่ยวข้อง เช่น ข้อห้ามการเรียนรู้แบบต่อเนื่องแบบเรียลไทม์ (Continuous Learning) และหลักการ Human-in-the-loop"
+                    ]
+                },
+                {
+                    code: "CLO 3.2.1",
+                    title: "Module 2 (Part 1): โครงสร้างมาตรฐานผลิตภัณฑ์ (Medical Device Standards) และการวางแผน Verification for AI SaMD",
+                    items: [
+                        "แยกความแตกต่างระหว่างซอฟต์แวร์ทางการแพทย์แบบ Standalone (AI SaMD) และซอฟต์แวร์ที่ฝังอยู่ในฮาร์ดแวร์ (AI SiMD) ได้",
+                        "จำแนกระดับความเสี่ยงของเครื่องมือแพทย์ตามเกณฑ์ของสำนักงานคณะกรรมการอาหารและยา (อย.) ทั้ง 4 ระดับ (Class 1 จดแจ้ง ถึง Class 4 ต้องมีใบอนุญาต)",
+                        "อธิบายโครงสร้างลำดับชั้นของมาตรฐาน (Hierarchy of Standards) 3 ระดับ ได้แก่ Horizontal Standards (เช่น ISO 13485, ISO 14971), Semi-Horizontal Standards (เช่น IEC 62304, IEC 62366-1, ISO 81001-5-1) และ Vertical Standards (เช่น IEC 60601-2-xx เฉพาะผลิตภัณฑ์)",
+                        "อธิบายหลักการของระบบบริหารคุณภาพตามมาตรฐาน ISO 13485:2016 โดยใช้หลักการ PDCA (Plan-Do-Check-Act) รวมถึงประมาณการต้นทุนด้านที่ปรึกษาและการตรวจประเมิน (ประมาณ 150,000-300,000 บาท)",
+                        "อธิบายหลักการบริหารความเสี่ยงตามมาตรฐาน ISO 14971:2019 โดยคำนวณความเสี่ยงจากความน่าจะเป็น (Probability) คูณความรุนแรง (Severity) และประยุกต์ใช้เกณฑ์การยอมรับความเสี่ยง NACC/ALARP/ACC"
+                    ]
+                },
+                {
+                    code: "CLO 3.2.2",
+                    title: "Module 2 (Part 2): โครงสร้างมาตรฐานผลิตภัณฑ์และการวางแผน Verification for AI SaMD (ต่อ)",
+                    items: [
+                        "ปฏิบัติหน้าที่เป็นผู้ประสานงาน (Coordinator) ในกระบวนการส่งทดสอบซอฟต์แวร์ทางการแพทย์ตามมาตรฐานสากล",
+                        "ระบุมาตรฐานหลักและเอกสารผลลัพธ์สำคัญ (Key Outputs) ที่ต้องเตรียมของแต่ละมาตรฐาน ได้แก่ IEC 62304 (ระบุ Safety Class), IEC 62366-1 (จัดทำ Usability Engineering File: UEF), IEC 60601-1/-1-2 (ระบุ Critical Component List: CCL), ETSI EN 303 645 (จัดทำ Vulnerability Report) และมาตรฐาน AI สากล ISO/IEC (จัดทำเอกสาร Dataset)",
+                        "วางแผนกระบวนการส่งทดสอบ 5 ขั้นตอน โดยประมาณระยะเวลา 60-90 วัน และประมาณค่าใช้จ่ายด้านซอฟต์แวร์และความปลอดภัยไซเบอร์ (85,000-210,000 บาท)",
+                        "ประยุกต์ใช้หลัก 3 Golden Rules ในการทำงานร่วมกับห้องปฏิบัติการทดสอบ ได้แก่ การจัดเตรียมเอกสารให้ครบถ้วนถูกต้อง การเข้าใจบทบาทของผู้เกี่ยวข้องแต่ละฝ่าย และการสร้างความสัมพันธ์อันดีกับห้องปฏิบัติการ",
+                        "อธิบายรายละเอียดเชิงลึกของมาตรฐาน IEC 62304 (Class A/B/C, Clause 4-9), มาตรฐาน IEC 62366-1 (Use Specification → Hazard Analysis → Use Scenarios → Formative/Summative Evaluation), มาตรฐาน ETSI EN 303 645 (No Default Password, Coordinated Vulnerability Disclosure) และมาตรฐาน AI สากล (ISO/IEC TS 25058, TR 29119-11, TS 4213 และมอก. 3645)",
+                        "ตรวจสอบความน่าเชื่อถือทางสถิติของผลทดสอบ โดยกำหนดให้มีช่วงความเชื่อมั่น 95% (95% CI) และค่า p&lt;0.05"
+                    ]
+                },
+                {
+                    code: "CLO 3.2.3",
+                    title: "Module 3 (Part 1): การตรวจสอบความใช้ได้ของการออกแบบสำหรับนวัตกรรม AI (Design Validation for AI SaMD)",
+                    items: [
+                        "อธิบายว่าวัตถุประสงค์การใช้งาน (Intended Use) เป็นหัวใจสำคัญที่กำหนดระดับความเสี่ยงและมาตรฐานทั้งหมดที่ต้องนำมาใช้กับผลิตภัณฑ์",
+                        "อธิบายเส้นทางมาตรฐาน (Roadmap) ที่ต้องปฏิบัติตามลำดับ ตั้งแต่ ISO 13485 → ISO 14971 → IEC 62304 → IEC 62366 → มาตรฐานความปลอดภัยไซเบอร์",
+                        "แยกความแตกต่างระหว่าง Verification (ตรวจสอบว่าผลิตภัณฑ์ตรงตามข้อกำหนดที่ออกแบบไว้) และ Validation (ตรวจสอบว่าผลิตภัณฑ์ตอบโจทย์การใช้งานจริงของผู้ใช้)",
+                        "อธิบายหลักการและเงื่อนไขของมาตรา 27 (Investigational Device Exemption: IDE) ซึ่งเป็น \"ใบเบิกทางชั่วคราว\" สำหรับการทดสอบทางคลินิก การให้ผู้เชี่ยวชาญตรวจสอบ หรือการจัดแสดงนิทรรศการ โดยห้ามใช้เพื่อจำหน่ายเชิงพาณิชย์",
+                        "จัดเตรียมเอกสารสำหรับการยื่นแบบอิเล็กทรอนิกส์ (e-Submission) แบ่งเป็น 3 หมวดหลัก ได้แก่ ข้อมูลบริษัท ข้อมูลผลิตภัณฑ์ และแผนการวิจัย (Protocol, Investigator's Brochure, เอกสาร IRB/EC)",
+                        "หลีกเลี่ยงข้อผิดพลาดที่พบบ่อย (Pitfalls) ในการยื่นเอกสาร เช่น การใช้ Screenshot แทนฉลากผลิตภัณฑ์ การไม่จำเป็นต้องส่ง Source Code ฉบับเต็ม และการขอใบอนุญาตให้ตรงตามจำนวนที่ระบุไว้ในแผนการวิจัยจริง"
+                    ]
+                },
+                {
+                    code: "CLO 3.2.4",
+                    title: "Module 3 (Part 2): การตรวจสอบความใช้ได้ของการออกแบบสำหรับนวัตกรรม AI (ต่อ)",
+                    items: [
+                        "อธิบาย 3 เสาหลักของหลักฐานทางคลินิก (Clinical Evidence) ได้แก่ Valid Clinical Association, Analytical Validation และ Clinical Validation",
+                        "จำแนกระดับความเสี่ยงของผลิตภัณฑ์ตามเกณฑ์ อย. ไทย 3 ระดับ ได้แก่ ระดับ 1 (จดแจ้ง) ระดับ 2 (แจ้งรายละเอียด) และระดับ 3 (แจ้งรายละเอียดแบบเข้มข้นสุด)",
+                        "อธิบายขั้นตอนการยื่นขออนุญาตตามมาตรา 27(5) แบบคู่ขนานกับการขอรับรองจริยธรรมการวิจัยในคน (IRB/EC) เพื่อลดระยะเวลาดำเนินการ",
+                        "ประยุกต์ใช้หลักการวิจัยทางคลินิกที่ดี (Good Clinical Practice: GCP) ตามมาตรฐาน ISO 14155 พร้อมแยกความแตกต่างระหว่าง Adverse Event และ Device Deficiency รวมถึงบทบาทของ Sponsor และ Principal Investigator (PI)",
+                        "จัดเตรียมเอกสารหลัก 3 ฉบับ (Core Triad) ได้แก่ Clinical Investigation Plan (CIP), Investigator's Brochure (IB) และ Case Report Form (CRF)"
+                    ]
+                },
+                {
+                    code: "CLO 3.2.5",
+                    title: "Module 4-5: การจัดเตรียมเอกสารขึ้นทะเบียน และบทบาทหลังการออกสู่ตลาด (Establishment, Submission &amp; Post-Market)",
+                    items: [
+                        "อธิบายสถานะทางกฎหมายของบริษัทในฐานะ \"สถานที่ผลิตเครื่องมือแพทย์\" และข้อกำหนดที่เกี่ยวข้อง เช่น การจัดทำผังพื้นที่ (Floor Plan) การกำหนดสีตามโซนการทำงาน และคุณสมบัติของผู้ควบคุมการผลิต",
+                        "จัดเตรียมแฟ้มข้อมูลทางเทคนิค (CSDT) ให้ครบทั้ง 13 องค์ประกอบบังคับ ได้แก่ คู่มือการใช้งาน (IFU) สถาปัตยกรรมระบบ เอกสารตามมาตรฐาน ISO 14971 เอกสาร Verification/Validation และ Essential Principles",
+                        "ปฏิบัติตามข้อกำหนดด้านการโฆษณาเครื่องมือแพทย์ (ใบอนุญาตโฆษณา \"ฆพ.\") โดยต้องขอใบอนุญาตก่อนเผยแพร่ ห้ามใช้ถ้อยคำโอ้อวดเกินจริง และต้องมีคำเตือนที่เหมาะสม",
+                        "บริหารจัดการการเฝ้าระวังหลังออกสู่ตลาด (Post-Market Surveillance) โดยรายงานเหตุการณ์ไม่พึงประสงค์ตามกรอบเวลาที่กฎหมายกำหนด (ภัยร้ายแรง 48 ชั่วโมง / เสียชีวิต 10 วัน)",
+                        "แยกแยะประเภทของการเปลี่ยนแปลงผลิตภัณฑ์ (Change Management) ระหว่าง Major Change และ Minor Change",
+                        "อธิบายหลักความรับผิดชอบต่อผลิตภัณฑ์ (Product Liability) แบบ Strict Liability และวิธีป้องกันความเสี่ยงทางกฎหมายผ่านคู่มือการใช้งาน (IFU)"
+                    ]
+                },
+                {
+                    code: "CLO 3.2.6",
+                    title: "ISO Documentation Masterclass: ทางลัดการจัดทำเอกสารมาตรฐานด้วยพลัง AI",
+                    items: [
+                        "เลือกใช้เครื่องมือ AI (Large Language Model) ที่เหมาะสมกับงานจัดทำเอกสารมาตรฐาน โดยพิจารณาความยาวบริบท (Context Length) และความสามารถด้านภาษาไทย",
+                        "ออกแบบคำสั่ง (Prompt) ที่มีประสิทธิภาพ โดยระบุมาตรฐานที่ต้องการอ้างอิง ประเภทและขนาดขององค์กร รูปแบบผลลัพธ์ที่ต้องการ และข้อจำกัดที่เกี่ยวข้อง",
+                        "ปฏิบัติตามหลักการ \"1 บทสนทนา ต่อ 1 หัวข้อ\" เพื่อป้องกันปัญหาการหลงลืมบริบทของ AI ระหว่างการทำงาน",
+                        "ประยุกต์ใช้ AI ในกรณีการใช้งานจริง เช่น การร่าง QMS/SOP การวิเคราะห์ช่องว่าง (Gap Analysis) การออกแบบ SDLC และการจำลองบทบาทผู้ตรวจประเมิน (Auditor)",
+                        "ปฏิบัติตามหลักความปลอดภัยและการตรวจสอบผลลัพธ์ โดยห้ามป้อนข้อมูลลับเข้าสู่ระบบ AI ระวังปรากฏการณ์ Hallucination และให้บุคลากรตรวจทานผลลัพธ์ทุกครั้งก่อนนำไปใช้จริง"
+                    ]
+                },
+                {
+                    code: "CLO 3.2.7",
+                    title: "การวัดประสิทธิภาพ AI (AI Performance)",
+                    items: [
+                        "อธิบายข้อจำกัดของค่า Accuracy เมื่อใช้กับชุดข้อมูลที่ไม่สมดุล (Imbalanced Data) ซึ่งอาจทำให้ค่า Accuracy สูงเกินจริง",
+                        "ปรับค่าขีดแบ่ง (Threshold) ให้เหมาะสมกับบริบททางคลินิก เช่น ลด Threshold ในห้องฉุกเฉินเพื่อเพิ่ม Sensitivity หรือเพิ่ม Threshold ในพื้นที่ชนบทเพื่อลด False Alarm",
+                        "แบ่งชุดข้อมูล Train/Validation/Test อย่างเหมาะสม และป้องกันการรั่วไหลของข้อมูลผู้ป่วยข้ามชุดข้อมูล (Patient Leakage)",
+                        "เลือกใช้ตัวชี้วัดประสิทธิภาพที่เหมาะสมกับประเภทงาน ได้แก่ Binary Classification (Sensitivity, Specificity, AUPRC), Multi-class (Per-class metrics, Macro-F1), Multi-label (AUROC per class, Exact-match) รวมถึง Latency และ Throughput",
+                        "ประยุกต์ใช้วิธีการทางสถิติที่เหมาะสม เช่น McNemar's test และการรายงานช่วงความเชื่อมั่น 95% (95% CI) กำกับตัวชี้วัดหลักทุกตัว",
+                        "ตรวจจับสัญญาณเตือน (Red Flags) ของรายงานผลการทดสอบที่ขาดความน่าเชื่อถือ เช่น รายงาน Accuracy เพียงค่าเดียว รายงาน Sensitivity โดยไม่มี Specificity หรือไม่ระบุค่า Threshold ที่ใช้"
+                    ]
+                }
+            ],
+            bd: [
+                {
+                    code: "CLO 3.1.1",
+                    title: "การทำเงินด้วยกลยุทธ์การตลาด Business Development (BD)",
+                    items: [
+                        "ปรับกรอบความคิด (Mindset) จากการนำเสนอ \"เทคโนโลยี\" ไปสู่การนำเสนอ \"มูลค่าทางธุรกิจ\" โดยเข้าใจว่า Accuracy ทำให้แพทย์สนใจ แต่ ROI เป็นสิ่งที่ทำให้ผู้บริหารตัดสินใจจ่ายเงิน",
+                        "เลือกปัญหาที่มีมูลค่าการลงทุนที่แท้จริง (Investable Pain Points) เช่น การลดภาระงานของแพทย์ AI ด้านรังสีวิทยา AI ด้านการคัดกรอง และ AI ด้านภาวะฉุกเฉิน/โรคหลอดเลือดสมอง",
+                        "ประยุกต์ใช้กรอบแนวคิด 4 เสาหลักในการปิดดีลกับโรงพยาบาล ได้แก่ Clinical Value, Workflow Value, Regulatory Value และ Financial Value",
+                        "วางแผนการสร้างหลักฐานเชิงประจักษ์ตามแนวคิด Staircase of Evidence โดยเข้าใจว่าโรงพยาบาลจะตัดสินใจซื้อเมื่อพิสูจน์ได้ว่า \"ใช้งานได้จริงและคุ้มค่า\"",
+                        "เลือกใช้โมเดลธุรกิจ/รายได้ที่เหมาะสมกับงบประมาณของลูกค้า ได้แก่ Subscription, Per Case และ Revenue Sharing",
+                        "หลีกเลี่ยง \"กับดักการทดลองใช้ไม่รู้จบ\" (Endless Pilot Trap) โดยจัดทำข้อตกลงทางการค้า (Commercial Agreement) ที่ระบุเงื่อนไขการจัดซื้อไว้ล่วงหน้าอย่างชัดเจน"
+                    ]
+                },
+                {
+                    code: "CLO 3.2.8",
+                    title: "Market Research &amp; Healthcare Opportunity Analysis",
+                    items: [
+                        "อธิบายโครงสร้างระบบการเงินการคลังสุขภาพหลักของไทย 3 ระบบ ได้แก่ CSMBS, SSO และหลักประกันสุขภาพถ้วนหน้า/บัตรทอง (UC ครอบคลุมประชากรประมาณร้อยละ 75)",
+                        "ระบุช่องทางการเสนอสิทธิประโยชน์ (UCBP) ที่เหมาะสมกับผลิตภัณฑ์ HealthTech เช่น ยา วัคซีน และหัตถการ/เครื่องมือแพทย์ ผ่านสำนักงานหลักประกันสุขภาพแห่งชาติ (สปสช.)",
+                        "ประยุกต์ใช้เกณฑ์การพิจารณาคัดเลือกผลิตภัณฑ์เข้าสิทธิประโยชน์ 6 ด้าน ได้แก่ จำนวนผู้ได้รับผลกระทบ ความรุนแรงของโรค ประสิทธิผลของผลิตภัณฑ์ ความแตกต่างจากแนวปฏิบัติเดิม ผลกระทบต่อภาระค่าใช้จ่ายครัวเรือน และความเป็นธรรมทางสังคม",
+                        "อธิบายข้อกำหนดของการประเมินเทคโนโลยีด้านสุขภาพ (HTA) ซึ่งกำหนดให้ผลิตภัณฑ์ต้องมี Technology Readiness Level (TRL) ตั้งแต่ระดับ 6 ขึ้นไป"
+                    ]
+                },
+                {
+                    code: "CLO 3.2.9",
+                    title: "การคุ้มครองนวัตกรรมด้วยสิทธิบัตร",
+                    items: [
+                        "จำแนกประเภทของทรัพย์สินทางปัญญาที่เกี่ยวข้องกับผลิตภัณฑ์ AI ทางการแพทย์ ได้แก่ ลิขสิทธิ์ สิทธิบัตรการประดิษฐ์และอนุสิทธิบัตร และเครื่องหมายการค้า",
+                        "ดำเนินการสืบค้นสิทธิบัตร (Patent Search) ก่อนยื่นจดทะเบียน โดยใช้ฐานข้อมูล ipthailand.go.th, Espacenet, Lens.org และ Google Patents",
+                        "ปฏิบัติตามขั้นตอนการยื่นจดทะเบียนทรัพย์สินทางปัญญาทั้ง 6 ขั้นตอน",
+                        "อธิบายสาระสำคัญของ TRIUP Act พ.ศ. 2564 ซึ่งปลดล็อกความเป็นเจ้าของผลงานวิจัยที่ได้รับทุนภาครัฐ กำหนดให้นำไปใช้ประโยชน์เชิงพาณิชย์ภายใน 2 ปี และแบ่งปันรายได้คืนแก่นักวิจัย"
+                    ]
+                },
+                {
+                    code: "CLO 3.2.10",
+                    title: "Healthcare Business Model Design",
+                    items: [
+                        "ประยุกต์ใช้กรอบแนวคิด 3C Framework ของสมาคม THTA ได้แก่ Connection, Capital และ Contribute",
+                        "เปรียบเทียบขนาดตลาด Medical AI ระดับโลกและในประเทศไทย ซึ่งมีมูลค่าแตกต่างกันประมาณ 10 เท่า",
+                        "เลือกรูปแบบโมเดลธุรกิจที่เหมาะสมกับผลิตภัณฑ์ HealthTech เช่น B2B, B2C, B2G, B2B2C, PPP, Marketplace และแพลตฟอร์ม/API",
+                        "ออกแบบโมเดลรายได้ที่หลากหลาย เช่น Transaction Fee, Pay-per-use, License Fee, Implementation Fee, Maintenance Fee, Revenue Sharing, Outcome-based Payment และ CSR"
+                    ]
+                },
+                {
+                    code: "CLO 3.2.11",
+                    title: "From Prototype to Procurement",
+                    items: [
+                        "วิเคราะห์ 5 สาเหตุหลักที่ทำให้นวัตกรรมทางการแพทย์ไม่ประสบความสำเร็จเชิงพาณิชย์ ได้แก่ ไม่มีปัญหาที่แท้จริงรองรับ ไม่ถูกนำไปใช้จริง ไม่มีหลักฐานสนับสนุน ไม่มีโมเดลธุรกิจที่ชัดเจน และไม่มีเส้นทางการจัดซื้อที่รองรับ",
+                        "ประยุกต์ใช้กรอบแนวคิด 4P Framework ในการวิเคราะห์ผู้มีส่วนได้ส่วนเสียในโรงพยาบาล ได้แก่ Patient, Provider, Process และ Payer",
+                        "ระบุหน่วยงานและขั้นตอนการอนุมัติภายในโรงพยาบาลที่มักเป็นอุปสรรคต่อการปิดดีล (\"The Secret Room\") ได้แก่ ฝ่าย IT ฝ่ายการเงิน ฝ่ายจัดซื้อ และคณะกรรมการบริหาร รวมถึง 5 Gates of Approval",
+                        "แยกแยะความเข้าใจผิด (Myths) ที่พบบ่อย เช่น การทดลองใช้สำเร็จเท่ากับขายได้ เทคโนโลยีที่ดีกว่าเท่ากับชนะการประมูล และราคาที่ถูกกว่าเท่ากับขายได้ (ต้องพิจารณา Total Cost of Ownership: TCO ประกอบ)"
+                    ]
+                },
+                {
+                    code: "CLO 3.2.12",
+                    title: "HealthTech Investment Readiness &amp; Venture Valuation",
+                    items: [
+                        "คำนวณและวิเคราะห์ตัวชี้วัดทางการเงินของสตาร์ทอัพ ได้แก่ Burn Rate, Runway และ Driver-Based Forecast พร้อมวางแผน Scenario Planning ทั้งกรณีฐาน กรณีดีกว่าคาด และกรณีแย่กว่าคาด",
+                        "จำแนกกลุ่มธุรกิจ HealthTech ตามมุมมองของนักลงทุน 3 กลุ่ม ได้แก่ Medical AI, เครื่องมือแพทย์ และวิทยาศาสตร์ชีวภาพ",
+                        "วางกลยุทธ์การระดมทุนโดยพิจารณาความสัมพันธ์เชิงสามเหลี่ยมระหว่าง User, Buyer และ Beneficiary และวางแผนการใช้เงินทุน (Use of Funds) ให้เชื่อมโยงกับ Execution Map to Next Milestone",
+                        "อธิบายวิธีการประเมินมูลค่ากิจการเบื้องต้น (Valuation Methods) พร้อมยกตัวอย่างกรณีศึกษาประกอบ"
+                    ]
+                },
+                {
+                    code: "CLO 3.2.13",
+                    title: "Market Access Strategy",
+                    items: [
+                        "วางแผนกลยุทธ์เข้าถึงตลาดแบบคู่ขนาน 4 เส้นทาง (4-Track Parallel Strategy) ไปพร้อมกัน",
+                        "<strong>เส้นทางที่ 1 (TFDA):</strong> วางแผนขึ้นทะเบียนกับ อย. ระบุ 7 กับดักที่มักเสียเวลา และเลือกใช้ Full Pathway, Abridged Pathway หรือ Reliance Pathway (เริ่มใช้พฤษภาคม 2569)",
+                        "<strong>เส้นทางที่ 2 (โรงพยาบาลเอกชน):</strong> วางกลยุทธ์เจาะตลาดโรงพยาบาลเอกชนกว่า 349 แห่ง ด้วยกลยุทธ์ 4-Tier (เริ่มจาก Tier 3 สร้าง Reference Site ก่อนขยายสู่ Tier 1 และ Tier 2)",
+                        "<strong>เส้นทางที่ 3 (จัดซื้อภาครัฐ):</strong> วางแผนเข้าสู่กระบวนการจัดซื้อของโรงพยาบาลรัฐกว่า 927 แห่ง (วงจร 12-18 เดือน ต้องเริ่มล่วงหน้าอย่างน้อย 6 เดือน) และพิจารณาช่องทางลัดผ่านบัญชีนวัตกรรมไทย",
+                        "<strong>เส้นทางที่ 4 (แหล่งเงินทุนภาครัฐ):</strong> ระบุและวางแผนขอรับการสนับสนุนแบบ Stacking รวมมูลค่าสูงถึง 70 ล้านบาทขึ้นไปโดยไม่เสียสัดส่วนหุ้น เช่น BOI, NIA และ BOI Matching Fund"
+                    ]
+                }
+            ]
+        };
+
+        // ===================== RENDER LOGIC =====================
+        function renderChips(track) {
+            var row = document.getElementById('chips-' + track);
+            row.innerHTML = '';
+            cloData[track].forEach(function(clo, idx) {
+                var btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'clo-chip' + (idx === 0 ? ' active' : '');
+                btn.textContent = clo.code;
+                btn.onclick = function () { selectClo(track, idx, btn); };
+                row.appendChild(btn);
+            });
+        }
+
+        function renderPanel(track, idx) {
+            var clo = cloData[track][idx];
+            var panel = document.getElementById('panel-' + track);
+            var html = '<span class="clo-panel-code">' + clo.code + '</span>';
+            html += '<h3>' + clo.title + '</h3>';
+            html += '<p class="mb-3" style="color:#33404f;font-weight:600;">ผู้เรียนสามารถ:</p>';
+            html += '<ul>';
+            clo.items.forEach(function (li) {
+                html += '<li>' + li + '</li>';
+            });
+            html += '</ul>';
+            panel.innerHTML = html;
+        }
+
+        function selectClo(track, idx, btnEl) {
+            document.querySelectorAll('#chips-' + track + ' .clo-chip').forEach(function (el) {
+                el.classList.remove('active');
+            });
+            btnEl.classList.add('active');
+            renderPanel(track, idx);
+        }
+
+        function switchCloTrack(track, btn) {
+            document.querySelectorAll('.clo-group').forEach(function (el) {
+                el.classList.remove('active');
+            });
+            document.getElementById('clo-' + track).classList.add('active');
+
+            document.querySelectorAll('.clo-tab-btn').forEach(function (el) {
+                el.classList.remove('active');
+            });
+            btn.classList.add('active');
+        }
+
+        // Init
+        ['qara', 'bd'].forEach(function (track) {
+            renderChips(track);
+            renderPanel(track, 0);
+        });
+        </script>
+
+    </body>
+</html>

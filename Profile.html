@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>โปรไฟล์ผู้เข้าร่วม - AISaMD-WDP</title>
+    <title>Find AISaMD Specialists - AISaMD-WDP</title>
     <link rel="icon" type="image/png" href="images/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
         * {
@@ -21,16 +23,10 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
             padding: 40px 16px;
         }
 
-        .page-wrap {
-            width: 100%;
-            max-width: 760px;
-        }
+        .page-wrap { width: 100%; max-width: 980px; margin: 0 auto; }
 
         .top-bar {
             display: flex;
@@ -56,11 +52,7 @@
             cursor: pointer;
             transition: background-color 0.2s, transform 0.2s;
         }
-        .nav-btn:hover {
-            background: rgba(56,189,248,0.25);
-            color: #ffffff;
-            transform: translateY(-1px);
-        }
+        .nav-btn:hover { background: rgba(56,189,248,0.25); color: #ffffff; transform: translateY(-1px); }
 
         .glass-card {
             background: rgba(13, 42, 74, 0.70);
@@ -68,176 +60,13 @@
             border: 1px solid rgba(56,189,248,0.25);
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(56,189,248,0.08);
-            padding: 48px 40px;
+            padding: 40px 36px;
         }
 
-        .paper-card {
-            background: #ffffff;
-            border-radius: 6px;
-            box-shadow: 0 10px 40px rgba(15,23,42,0.25), 0 2px 8px rgba(15,23,42,0.1);
-            padding: 52px 48px;
-        }
-
-        .cv-header {
-            text-align: center;
-            margin-bottom: 22px;
-        }
-
-        .cv-logo {
-            max-width: 100px;
-            height: auto;
-            display: block;
-            margin: 0 auto 16px;
-        }
-
-        .cv-name {
-            font-size: 1.9rem;
-            font-weight: 700;
-            color: #0f172a;
-            margin: 0 0 4px;
-        }
-
-        .cv-subtitle {
-            font-size: 0.9rem;
-            color: #64748b;
-            margin: 0;
-        }
-
-        .cv-divider {
-            border: none;
-            border-top: 2px solid #0f172a;
-            margin: 24px 0 28px;
-        }
-
-        .cv-main-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            line-height: 1.5;
-            color: #0f172a;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .skill-block {
-            margin-bottom: 26px;
-        }
-        .skill-block:last-child { margin-bottom: 0; }
-
-        .skill-block-title {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #0ea5e9;
-            margin-bottom: 8px;
-        }
-
-        .skill-block-desc {
-            font-size: 1.02rem;
-            font-weight: 700;
-            font-style: normal;
-            color: #0f172a;
-            margin-bottom: 14px;
-            line-height: 1.7;
-        }
-
-        .skill-sub-label {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #64748b;
-            margin-bottom: 6px;
-        }
-
-        .skill-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .skill-list li {
-            position: relative;
-            padding: 6px 0 6px 24px;
-            font-size: 1.02rem;
-            line-height: 1.8;
-            color: #1e293b;
-        }
-
-        .skill-list li::before {
-            content: "•";
-            position: absolute;
-            left: 4px;
-            color: #0ea5e9;
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .cv-section-title {
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #0f172a;
-            margin-bottom: 14px;
-        }
-
-        .achievement-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .achievement-list li {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 0;
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #1e293b;
-        }
-
-        .ach-icon { font-size: 1.05rem; }
-
-        .state-box {
-            text-align: center;
-            padding: 20px 10px;
-            color: rgba(255,255,255,0.65);
-        }
-
-        .state-box .spinner-border {
-            color: #38bdf8;
-            margin-bottom: 16px;
-        }
-
-        .state-icon {
-            font-size: 2.4rem;
-            margin-bottom: 14px;
-            display: block;
-        }
-
-        .search-header {
-            text-align: center;
-            margin-bottom: 26px;
-        }
-
-        .search-header img {
-            max-width: 130px;
-            display: block;
-            margin: 0 auto 18px;
-            filter: drop-shadow(0 0 14px rgba(56,189,248,0.35));
-        }
-
-        .search-header h2 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 4px;
-        }
-
-        .search-header p {
-            color: rgba(255,255,255,0.5);
-            font-size: 0.85rem;
-        }
-
-        .search-box { position: relative; }
+        .search-header { text-align: center; margin-bottom: 26px; }
+        .search-header img { max-width: 110px; display: block; margin: 0 auto 14px; filter: drop-shadow(0 0 14px rgba(56,189,248,0.35)); }
+        .search-header h2 { font-size: 1.4rem; font-weight: 700; color: #ffffff; margin-bottom: 4px; }
+        .search-header p { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
 
         .search-input {
             width: 100%;
@@ -247,46 +76,176 @@
             font-size: 0.95rem;
             color: white;
             background: rgba(255,255,255,0.07);
+            margin-bottom: 16px;
         }
-
         .search-input::placeholder { color: rgba(255,255,255,0.4); }
-
         .search-input:focus {
-            outline: none;
-            border-color: #38bdf8;
+            outline: none; border-color: #38bdf8;
             box-shadow: 0 0 0 3px rgba(56,189,248,0.15);
             background: rgba(255,255,255,0.10);
         }
 
-        .search-results {
-            margin-top: 8px;
-            max-height: 260px;
-            overflow-y: auto;
-            border-radius: 10px;
-            background: rgba(10,22,40,0.92);
-            border: 1px solid rgba(56,189,248,0.2);
-            display: none;
-        }
-
-        .search-results.show { display: block; }
-
-        .search-result-item {
-            padding: 12px 16px;
-            color: #e2e8f0;
-            cursor: pointer;
-            font-size: 0.9rem;
-            border-bottom: 1px solid rgba(56,189,248,0.08);
-        }
-
-        .search-result-item:last-child { border-bottom: none; }
-        .search-result-item:hover { background: rgba(56,189,248,0.15); }
-
-        .search-empty {
-            padding: 14px 16px;
-            color: rgba(255,255,255,0.4);
+        .filter-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 22px; justify-content: center; }
+        .filter-btn {
+            border: 1px solid rgba(56,189,248,0.3);
+            background: rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.75);
+            padding: 8px 20px;
+            border-radius: 30px;
             font-size: 0.85rem;
-            text-align: center;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
+        .filter-btn.active { background: #38bdf8; color: #0a1628; border-color: #38bdf8; }
+
+        .people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+
+        .person-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(56,189,248,0.2);
+            border-radius: 14px;
+            padding: 18px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .person-card:hover { background: rgba(56,189,248,0.12); border-color: #38bdf8; transform: translateY(-2px); }
+        .person-card .p-name { color: #ffffff; font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+        .person-card .p-occ { color: rgba(255,255,255,0.6); font-size: 0.82rem; margin-bottom: 2px; }
+        .person-card .p-com { color: rgba(255,255,255,0.4); font-size: 0.78rem; margin-bottom: 10px; }
+
+        .badge-working { background: rgba(16,185,129,0.18); color: #34d399; }
+        .badge-unemployed { background: rgba(148,163,184,0.18); color: #cbd5e1; }
+        .badge-unset { background: rgba(148,163,184,0.12); color: #94a3b8; }
+        .status-pill { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; }
+
+        .state-box { text-align: center; padding: 30px 10px; color: rgba(255,255,255,0.65); }
+        .state-box .spinner-border { color: #38bdf8; margin-bottom: 16px; }
+        .state-icon { font-size: 2.4rem; margin-bottom: 14px; display: block; }
+
+        /* ── Detail (CV) view ── */
+        .contact-topbar {
+            background: rgba(13, 42, 74, 0.75);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(56,189,248,0.3);
+            border-radius: 18px;
+            padding: 18px 26px;
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .contact-topbar .ct-info { display: flex; flex-direction: column; gap: 4px; }
+        .contact-topbar .ct-name { color: #ffffff; font-weight: 700; font-size: 1.15rem; }
+        .contact-topbar .ct-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .contact-topbar .ct-occ { color: rgba(255,255,255,0.65); font-size: 0.85rem; }
+        .contact-btn-top {
+            background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+            border: none;
+            color: #0a1628;
+            font-weight: 700;
+            padding: 12px 26px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            box-shadow: 0 8px 20px rgba(56,189,248,0.35);
+            transition: transform 0.2s ease;
+            white-space: nowrap;
+        }
+        .contact-btn-top:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(56,189,248,0.45); }
+
+        .paper-card {
+            background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+            border-radius: 14px;
+            box-shadow: 0 25px 60px rgba(15,23,42,0.35), 0 4px 14px rgba(15,23,42,0.12);
+            padding: 52px 50px;
+            border: 1px solid rgba(15,23,42,0.06);
+            position: relative;
+            overflow: hidden;
+        }
+        .paper-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #0a1628, #0ea5e9, #38bdf8, #0a1628);
+        }
+        .cv-header { text-align: center; margin-bottom: 8px; }
+        .cv-logo { max-width: 74px; height: auto; display: block; margin: 0 auto 12px; }
+        .cv-name { font-size: 1.7rem; font-weight: 700; color: #0f172a; margin: 0 0 4px; letter-spacing: -0.5px; }
+        .cv-subtitle { font-size: 0.85rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+
+        .cv-workinfo {
+            margin-top: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: #f8fbfd;
+            border: 1px solid #e8eef2;
+            border-radius: 30px;
+            padding: 8px 20px;
+        }
+        .cv-workinfo .cv-occ { font-size: 0.88rem; font-weight: 600; color: #334155; }
+        .cv-workinfo .cv-com { font-size: 0.85rem; color: #64748b; }
+        .cv-workinfo .status-pill { transform: scale(0.92); }
+        .cv-workinfo .badge-working { background: rgba(16,185,129,0.14); color: #059669; }
+        .cv-workinfo .badge-unemployed { background: rgba(100,116,139,0.14); color: #475569; }
+        .cv-workinfo .badge-unset { background: rgba(100,116,139,0.10); color: #64748b; }
+
+        .cv-divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #cbd5e1, transparent);
+            margin: 26px 0 30px;
+        }
+
+        .cv-main-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            line-height: 1.6;
+            color: #0f172a;
+            text-align: center;
+            margin: 0 auto 36px;
+            max-width: 640px;
+        }
+
+        .skill-block { margin-bottom: 34px; padding: 26px 28px; border-radius: 14px; background: #f8fbfd; border: 1px solid #eef4f8; }
+        .skill-block:last-child { margin-bottom: 0; }
+        .skill-block-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 12px;
+            display: inline-block;
+            padding: 5px 16px;
+            border-radius: 20px;
+        }
+        .skill-block.qara .skill-block-title { background: #0a1628; }
+        .skill-block.bd .skill-block-title { background: #4c1d95; }
+        .skill-block.workshop .skill-block-title { background: #b45309; }
+
+        .skill-block-desc { font-size: 0.92rem; color: #475569; line-height: 1.75; margin-bottom: 18px; }
+
+        .clo-cv-list { list-style: none; padding: 0; margin: 0; }
+        .clo-cv-list li {
+            position: relative;
+            padding: 9px 0 9px 24px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #1e293b;
+            border-bottom: 1px solid #e8eef2;
+        }
+        .clo-cv-list li:last-child { border-bottom: none; }
+        .clo-cv-list li::before { content: "▸"; position: absolute; left: 0; font-weight: 700; }
+        .skill-block.qara .clo-cv-list li::before { color: #0ea5e9; }
+        .skill-block.bd .clo-cv-list li::before { color: #a855f7; }
+        .skill-block.workshop .clo-cv-list li::before { color: #f59e0b; }
+
+        .empty-clo { color: #94a3b8; font-size: 0.85rem; padding: 6px 0; }
+        .cv-footer-mark { text-align: center; margin-top: 34px; font-size: 0.72rem; color: #cbd5e1; letter-spacing: 0.08em; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -295,274 +254,435 @@
 
     <div class="top-bar">
         <a href="index.html" class="nav-btn">← กลับหน้าหลัก</a>
-        <a href="#" id="searchOtherBtn" class="nav-btn" onclick="goToSearch(); return false;" style="display:none;">ค้นหาคนอื่น →</a>
+        <a href="#" id="backToGridBtn" class="nav-btn" onclick="showGrid(); return false;" style="display:none;">← กลับไปหน้ารายชื่อ</a>
     </div>
 
     <div id="cardWrap" class="glass-card">
 
-        <div id="loadingState" class="state-box">
-            <div class="spinner-border" role="status"></div>
-            <p>กำลังโหลดข้อมูล...</p>
-        </div>
-
-        <div id="searchState" style="display:none;">
+        <!-- ============ GRID STATE ============ -->
+        <div id="gridState">
             <div class="search-header">
                 <img src="images/Logo_wh.png" alt="AISaMD-WDP Logo">
                 <h2>Find AISaMD Specialists</h2>
-                <p>ค้นหาชื่อเพื่อดูประวัติและความเชี่ยวชาญ</p>
+                <p>ค้นหาและติดต่อผู้เชี่ยวชาญจากโครงการ AISaMD-WDP 2026</p>
             </div>
-            <div class="search-box">
-                <input type="text" id="searchInput" class="search-input" placeholder="พิมพ์ชื่อของท่าน...">
-                <div id="searchResults" class="search-results"></div>
+
+            <input type="text" id="searchInput" class="search-input" placeholder="ค้นหาด้วยชื่อ...">
+
+            <div class="filter-row">
+                <button class="filter-btn active" data-value="ทั้งหมด" onclick="setFilter(this)">ทั้งหมด</button>
+                <button class="filter-btn" data-value="กำลังทำงาน" onclick="setFilter(this)">กำลังทำงาน</button>
+                <button class="filter-btn" data-value="ว่างงาน" onclick="setFilter(this)">ว่างงาน</button>
             </div>
+
+            <div id="loadingGrid" class="state-box">
+                <div class="spinner-border" role="status"></div>
+                <p>กำลังโหลดข้อมูล...</p>
+            </div>
+
+            <div id="emptyGrid" class="state-box" style="display:none;">
+                <span class="state-icon">🔍</span>
+                <p>ไม่พบข้อมูลที่ตรงกับเงื่อนไข</p>
+            </div>
+
+            <div id="errorGrid" class="state-box" style="display:none;">
+                <span class="state-icon">⚠️</span>
+                <p>ไม่สามารถโหลดข้อมูลได้ กรุณาลองใหม่ภายหลัง</p>
+            </div>
+
+            <div id="peopleGrid" class="people-grid"></div>
         </div>
 
-        <div id="notFoundState" class="state-box" style="display:none;">
-            <span class="state-icon">❌</span>
-            <p>ไม่พบข้อมูลผู้เข้าร่วมนี้</p>
-            <p style="font-size:0.8rem; opacity:0.7;">กรุณาตรวจสอบลิงก์อีกครั้ง หรือติดต่อผู้ดูแลระบบ</p>
-        </div>
-
-        <div id="errorState" class="state-box" style="display:none;">
-            <span class="state-icon">⚠️</span>
-            <p>ไม่สามารถโหลดข้อมูลได้</p>
-            <p style="font-size:0.8rem; opacity:0.7;">กรุณาลองใหม่ภายหลัง</p>
-        </div>
-
-        <div id="profileContent" style="display:none;">
-            <div class="cv-header">
-                <img src="images/logo.png" alt="AISaMD-WDP Logo" class="cv-logo">
-                <h1 class="cv-name" id="profileName">-</h1>
-                <p class="cv-subtitle">ผู้เข้าร่วมโครงการ AISaMD-WDP 2026</p>
+        <!-- ============ DETAIL STATE ============ -->
+        <div id="detailState" style="display:none;">
+            <div id="loadingDetail" class="state-box">
+                <div class="spinner-border" role="status"></div>
+                <p>กำลังโหลดโปรไฟล์...</p>
             </div>
 
-            <hr class="cv-divider">
+            <div id="detailContent" style="display:none;">
+                <div class="contact-topbar">
+                    <div class="ct-info">
+                        <div class="ct-name" id="ctName">-</div>
+                        <div class="ct-meta">
+                            <span class="ct-occ" id="ctOccupation"></span>
+                            <span id="ctStatusBadge"></span>
+                        </div>
+                    </div>
+                    <button class="contact-btn-top" data-bs-toggle="modal" data-bs-target="#contactModal">
+                        ✉️ ติดต่อคนนี้
+                    </button>
+                </div>
 
-            <div class="cv-main-title">ความสามารถเกี่ยวกับ Regulatory Affairs &amp; Quality Assurance (QA-RA) และ Business Development (BD)</div>
+                <div class="paper-card">
+                    <div class="cv-header">
+                        <img src="images/logo.png" alt="AISaMD-WDP Logo" class="cv-logo">
+                        <h1 class="cv-name" id="profileName">-</h1>
+                        <div class="cv-subtitle">ผู้เข้าร่วมโครงการ AISaMD-WDP 2026</div>
+                        <div class="cv-workinfo">
+                            <span class="cv-occ" id="cvOccupation"></span>
+                            <span class="cv-com" id="cvCompany"></span>
+                            <span id="cvStatusBadge"></span>
+                        </div>
+                    </div>
 
-            <div class="skill-block" id="qaraBlock" style="display:none;">
-                <div class="skill-block-title">Regulatory Affairs &amp; Quality Assurance (QA-RA)</div>
-                <div class="skill-block-desc" id="qaraDesc"></div>
-                <div class="skill-sub-label">ทักษะที่ได้รับ</div>
-                <ul class="skill-list" id="qaraList"></ul>
+                    <hr class="cv-divider">
+
+                    <div class="cv-main-title">ความสามารถเกี่ยวกับ Regulatory Affairs &amp; Quality Assurance (QA-RA) และ Business Development (BD)</div>
+
+                    <div class="skill-block qara" id="qaraBlock" style="display:none;">
+                        <div class="skill-block-title">QA-RA</div>
+                        <div class="skill-block-desc">ต่อยอดจากความรู้พื้นฐาน เข้าร่วมอบรมเชิงลึกด้านมาตรฐานสากลและกระบวนการทดสอบสำหรับซอฟต์แวร์เครื่องมือแพทย์ AI ครอบคลุมตั้งแต่การจำแนกประเภทผลิตภัณฑ์ไปจนถึงการวิเคราะห์ผลการทดสอบเชิงสถิติ</div>
+                        <ul class="clo-cv-list" id="qaraCloList"></ul>
+                    </div>
+
+                    <div class="skill-block bd" id="bdBlock" style="display:none;">
+                        <div class="skill-block-title">BD</div>
+                        <div class="skill-block-desc">ต่อยอดจากความรู้พื้นฐาน เข้าร่วมอบรมเชิงลึกด้านการวางกลยุทธ์เข้าถึงตลาดสาธารณสุขไทย การบริหารทรัพย์สินทางปัญญา และความพร้อมด้านการลงทุนสำหรับธุรกิจ HealthTech</div>
+                        <ul class="clo-cv-list" id="bdCloList"></ul>
+                    </div>
+
+                    <div class="skill-block workshop" id="workshopBlock" style="display:none;">
+                        <div class="skill-block-title">Workshop</div>
+                        <div class="skill-block-desc">เข้าร่วมกิจกรรม Workshop เชิงปฏิบัติการเพิ่มเติมจากโครงการ AISaMD-WDP 2026</div>
+                        <ul class="clo-cv-list" id="workshopCloList"></ul>
+                    </div>
+
+                    <div id="emptyCloMsg" class="empty-clo text-center" style="display:none;">ยังไม่มีข้อมูลการอบรมสำหรับผู้ใช้นี้</div>
+
+                    <div class="cv-footer-mark">AISaMD-WDP · 2026</div>
+                </div>
             </div>
-
-            <div class="skill-block" id="bdBlock" style="display:none;">
-                <div class="skill-block-title">Business Development (BD)</div>
-                <div class="skill-block-desc" id="bdDesc"></div>
-                <div class="skill-sub-label">ทักษะที่ได้รับ</div>
-                <ul class="skill-list" id="bdList"></ul>
-            </div>
-
-            <div class="skill-block" id="ojtBlock" style="display:none;">
-                <div class="skill-block-title">On-the-Job Training (OJT)</div>
-                <div class="skill-block-desc" id="ojtDesc"></div>
-                <div class="skill-sub-label">ทักษะที่ได้รับ</div>
-                <ul class="skill-list" id="ojtList"></ul>
-            </div>
-
-            <hr class="cv-divider">
-
-            <div class="cv-section-title">Achievements</div>
-            <ul class="achievement-list" id="achievementList"></ul>
         </div>
 
     </div>
 </div>
 
+<!-- ============ CONTACT MODAL ============ -->
+<div class="modal fade" id="contactModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">ติดต่อ <span id="contactTargetName"></span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label fw-semibold small">ชื่อ-สกุล <span class="text-danger">*</span></label>
+                    <input type="text" id="contactName" class="form-control" maxlength="100" placeholder="ชื่อ-นามสกุลของคุณ">
+                </div>
+                <div class="mb-2">
+                    <label class="form-label fw-semibold small">อีเมลติดต่อกลับ <span class="text-danger">*</span></label>
+                    <input type="email" id="contactEmail" class="form-control" maxlength="150" placeholder="you@example.com">
+                </div>
+                <p class="small text-muted mb-0">ข้อมูลของคุณจะถูกส่งให้ทีมงาน AISaMD-WDP เพื่อประสานงานติดต่อ</p>
+                <div id="contactError" class="text-danger small mt-2" style="display:none;"></div>
+                <div id="contactSuccess" class="text-success small mt-2" style="display:none;">ส่งคำขอติดต่อเรียบร้อยแล้ว ทีมงานจะติดต่อกลับโดยเร็วที่สุด</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light rounded-pill" data-bs-dismiss="modal">ปิด</button>
+                <button type="button" class="btn btn-primary rounded-pill" onclick="submitContact()">
+                    <span id="contactSpinner" class="spinner-border spinner-border-sm me-1" style="display:none;"></span>
+                    ส่งคำขอติดต่อ
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwL28VmoCf7uwFJRxNhMbVD-S-68brAaxHEEdf0bWmci5pa-Oojfp_I78nQZyAGL_eYtQ/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzcWeMif9wRqmX6L2cgbFtJ0bqKmsFKNJRg3ntIstYvt17kpYkdP9sfxJmRvGude4hJDw/exec";
 
     let allPeople = [];
-
-    function getUidFromUrl() {
-        const params = new URLSearchParams(window.location.search);
-        return params.get('uid');
-    }
+    let currentFilter = "ทั้งหมด";
+    let currentDetailUid = null;
+    let currentDetailName = "";
 
     function sanitize(str) {
         const div = document.createElement('div');
-        div.textContent = str;
+        div.textContent = str || '';
         return div.innerHTML;
     }
 
-    function achievementLine(name, status) {
-        const s = (status || '').toString().trim();
-        const n = (name || '').toString().trim();
+    // ===================== GRID =====================
+    async function loadPeople() {
+        document.getElementById('loadingGrid').style.display = 'block';
+        document.getElementById('emptyGrid').style.display = 'none';
+        document.getElementById('errorGrid').style.display = 'none';
+        document.getElementById('peopleGrid').innerHTML = '';
 
-        if (s === 'ไม่ผ่าน') return null;
-
-        if (n === 'อบรมเบื้องต้น (Basic Course)') {
-            if (s === 'ผ่าน') return { icon: '✅', text: 'ผ่านการอบรมเบื้องต้น (Basic Course) จากโครงการ AISaMD-WDP 2026' };
-            if (s === 'กำลังดำเนินการ') return { icon: '⏳', text: 'กำลังดำเนินการอบรมเบื้องต้น (Basic Course) จากโครงการ AISaMD-WDP 2026' };
-        }
-
-        if (n === 'อบรมเข้มข้น (Intensive Course)') {
-            if (s === 'ผ่าน') return { icon: '✅', text: 'ผ่านการอบรมเข้มข้น (Intensive) จากโครงการ AISaMD-WDP 2026' };
-            if (s === 'กำลังดำเนินการ') return { icon: '⏳', text: 'กำลังดำเนินการอบรมเข้มข้น (Intensive) จากโครงการ AISaMD-WDP 2026' };
-        }
-
-        if (n === 'On-Job-Training') {
-            if (s === 'ผ่าน') return { icon: '✅', text: 'ผ่านการเข้าร่วมกิจกรรม On-Job-Training จากโครงการ AISaMD-WDP 2026' };
-            if (s === 'กำลังดำเนินการ') return { icon: '⏳', text: 'กำลังดำเนินเข้าร่วมกิจกรรม On-Job-Training จากโครงการ AISaMD-WDP 2026' };
-        }
-
-        return null;
-    }
-
-    function showState(id) {
-        ['loadingState', 'searchState', 'notFoundState', 'errorState', 'profileContent'].forEach(s => {
-            document.getElementById(s).style.display = (s === id) ? 'block' : 'none';
-        });
-
-        const cardWrap = document.getElementById('cardWrap');
-        const searchOtherBtn = document.getElementById('searchOtherBtn');
-
-        if (id === 'profileContent') {
-            cardWrap.classList.remove('glass-card');
-            cardWrap.classList.add('paper-card');
-            searchOtherBtn.style.display = 'inline-flex';
-        } else {
-            cardWrap.classList.remove('paper-card');
-            cardWrap.classList.add('glass-card');
-            searchOtherBtn.style.display = 'none';
-        }
-    }
-
-    function goToSearch() {
-        history.replaceState(null, '', window.location.pathname);
-        showState('searchState');
-        document.getElementById('searchInput').value = '';
-        document.getElementById('searchResults').classList.remove('show');
-    }
-
-    async function loadPeopleList() {
         try {
             const response = await fetch(SCRIPT_URL, {
                 method: 'POST',
-                body: JSON.stringify({ action: "listNames" })
+                body: JSON.stringify({ action: "listPeople" })
             });
             const result = await response.json();
-            if (result.status === "success") {
-                allPeople = result.people;
+
+            document.getElementById('loadingGrid').style.display = 'none';
+
+            if (result.status !== "success") {
+                document.getElementById('errorGrid').style.display = 'block';
+                return;
             }
-        } catch (error) {
-            console.error(error);
+
+            allPeople = result.people || [];
+            renderGrid();
+
+        } catch (err) {
+            document.getElementById('loadingGrid').style.display = 'none';
+            document.getElementById('errorGrid').style.display = 'block';
         }
     }
 
-    function renderSearchResults(query) {
-        const resultsBox = document.getElementById('searchResults');
-        const q = query.trim().toLowerCase();
+    function setFilter(btn) {
+        currentFilter = btn.dataset.value;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderGrid();
+    }
 
-        if (!q) {
-            resultsBox.classList.remove('show');
-            resultsBox.innerHTML = '';
-            return;
+    function statusBadgeHtml(status) {
+        if (status === 'กำลังทำงาน') return '<span class="status-pill badge-working">กำลังทำงาน</span>';
+        if (status === 'ว่างงาน') return '<span class="status-pill badge-unemployed">ว่างงาน</span>';
+        return '<span class="status-pill badge-unset">ไม่ระบุสถานะ</span>';
+    }
+
+    function renderGrid() {
+        const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+        const grid = document.getElementById('peopleGrid');
+        grid.innerHTML = '';
+
+        const filtered = allPeople.filter(p => {
+            const matchStatus = (currentFilter === 'ทั้งหมด') || (p.workStatus === currentFilter);
+            const matchKeyword = !keyword || (p.name || '').toLowerCase().includes(keyword);
+            return matchStatus && matchKeyword;
+        });
+
+        document.getElementById('emptyGrid').style.display = filtered.length === 0 ? 'block' : 'none';
+
+        filtered.forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'person-card';
+            card.onclick = () => openDetail(p.uid, p.name);
+            card.innerHTML = `
+                <div class="p-name">${sanitize(p.name)}</div>
+                <div class="p-occ">${sanitize(p.occupation) || 'ยังไม่ระบุอาชีพ'}</div>
+                <div class="p-com">${sanitize(p.company)}</div>
+                ${statusBadgeHtml(p.workStatus)}
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    document.getElementById('searchInput').addEventListener('input', renderGrid);
+
+    function showGrid(skipPushState) {
+        document.getElementById('gridState').style.display = 'block';
+        document.getElementById('detailState').style.display = 'none';
+        document.getElementById('backToGridBtn').style.display = 'none';
+
+        if (!skipPushState) {
+            history.pushState({}, '', window.location.pathname);
         }
+    }
 
-        const matches = allPeople.filter(p => p.name.toLowerCase().includes(q)).slice(0, 15);
-
-        if (matches.length === 0) {
-            resultsBox.innerHTML = `<div class="search-empty">ไม่พบชื่อที่ค้นหา</div>`;
+    window.addEventListener('popstate', function (e) {
+        const uid = (e.state && e.state.uid) || getUidFromUrl();
+        if (uid) {
+            document.getElementById('backToGridBtn').style.display = 'inline-flex';
+            document.getElementById('backToGridBtn').innerText = '← ดูรายชื่อทั้งหมด';
+            openDetail(uid, '', true);
         } else {
-            resultsBox.innerHTML = matches.map(p => `
-                <div class="search-result-item" onclick="selectPerson('${p.uid}')">${sanitize(p.name)}</div>
-            `).join('');
+            showGrid(true);
         }
-        resultsBox.classList.add('show');
-    }
+    });
 
-    function selectPerson(uid) {
-        history.replaceState(null, '', '?uid=' + encodeURIComponent(uid));
-        loadProfileByUid(uid);
-    }
+    // ===================== DETAIL =====================
+    const QARA_ORDER = ["3.1.2", "3.2.1", "3.2.2", "3.2.3", "3.2.4", "3.2.5", "3.2.6", "3.2.7"];
+    const BD_ORDER = ["3.1.1", "3.2.8", "3.2.9", "3.2.10", "3.2.11", "3.2.12", "3.2.13"];
+    const WORKSHOP_ORDER = ["W1", "W2", "W3", "W4", "W5"];
 
-    function renderSkillList(elementId, skills) {
-        const el = document.getElementById(elementId);
-        el.innerHTML = skills.map(s => `<li>${sanitize(s)}</li>`).join('');
-    }
+    async function openDetail(uid, name, skipPushState) {
+        currentDetailUid = uid;
+        currentDetailName = name;
 
-    async function loadProfileByUid(uid) {
-        showState('loadingState');
+        if (!skipPushState) {
+            const newUrl = window.location.pathname + '?uid=' + encodeURIComponent(uid);
+            history.pushState({ uid: uid }, '', newUrl);
+        }
+
+        document.getElementById('gridState').style.display = 'none';
+        document.getElementById('detailState').style.display = 'block';
+        document.getElementById('backToGridBtn').style.display = 'inline-flex';
+
+        document.getElementById('loadingDetail').style.display = 'block';
+        document.getElementById('detailContent').style.display = 'none';
+
         try {
             const response = await fetch(SCRIPT_URL, {
                 method: 'POST',
                 body: JSON.stringify({ action: "getProfile", uid: uid })
             });
-
             const result = await response.json();
 
-            if (result.status === "success") {
-                document.getElementById('profileName').textContent = result.name;
+            document.getElementById('loadingDetail').style.display = 'none';
 
-                if (result.qaraDesc || (result.qaraBullets && result.qaraBullets.length > 0)) {
-                    document.getElementById('qaraDesc').textContent = result.qaraDesc || '';
-                    renderSkillList('qaraList', result.qaraBullets || []);
-                    document.getElementById('qaraBlock').style.display = 'block';
-                } else {
-                    document.getElementById('qaraBlock').style.display = 'none';
-                }
-
-                if (result.bdDesc || (result.bdBullets && result.bdBullets.length > 0)) {
-                    document.getElementById('bdDesc').textContent = result.bdDesc || '';
-                    renderSkillList('bdList', result.bdBullets || []);
-                    document.getElementById('bdBlock').style.display = 'block';
-                } else {
-                    document.getElementById('bdBlock').style.display = 'none';
-                }
-
-                if (result.ojtDesc || (result.ojtBullets && result.ojtBullets.length > 0)) {
-                    document.getElementById('ojtDesc').textContent = result.ojtDesc || '';
-                    renderSkillList('ojtList', result.ojtBullets || []);
-                    document.getElementById('ojtBlock').style.display = 'block';
-                } else {
-                    document.getElementById('ojtBlock').style.display = 'none';
-                }
-
-                const achList = document.getElementById('achievementList');
-                if (result.training && result.training.length > 0) {
-                    const lines = result.training
-                        .map(t => achievementLine(t.name, t.status))
-                        .filter(a => a !== null);
-
-                    achList.innerHTML = lines.map(a => `
-                        <li><span class="ach-icon">${a.icon}</span><span>${sanitize(a.text)}</span></li>
-                    `).join('');
-                } else {
-                    achList.innerHTML = '';
-                }
-
-                showState('profileContent');
-            } else if (result.status === "not_found") {
-                showState('notFoundState');
-            } else {
-                showState('errorState');
+            if (result.status !== "success") {
+                document.getElementById('detailState').innerHTML = `
+                    <div class="state-box">
+                        <span class="state-icon">❌</span>
+                        <p>ไม่พบข้อมูลโปรไฟล์นี้</p>
+                    </div>`;
+                return;
             }
-        } catch (error) {
-            console.error(error);
-            showState('errorState');
+
+            document.getElementById('detailContent').style.display = 'block';
+
+            // top bar
+            document.getElementById('ctName').innerText = result.name || '-';
+            document.getElementById('ctOccupation').innerText = [result.occupation, result.company].filter(Boolean).join(' — ') || 'ยังไม่ระบุอาชีพ';
+            document.getElementById('ctStatusBadge').innerHTML = statusBadgeHtml(result.workStatus);
+
+            // paper header
+            document.getElementById('profileName').innerText = result.name || '-';
+            document.getElementById('cvOccupation').innerText = result.occupation || 'ยังไม่ระบุอาชีพ';
+            document.getElementById('cvCompany').innerText = result.company ? '— ' + result.company : '';
+            document.getElementById('cvStatusBadge').innerHTML = statusBadgeHtml(result.workStatus);
+
+            const bullets = result.cloBullets || [];
+            const byCode = {};
+            bullets.forEach(b => { byCode[b.code] = b.text; });
+
+            const qaraList = document.getElementById('qaraCloList');
+            const bdList = document.getElementById('bdCloList');
+            const workshopList = document.getElementById('workshopCloList');
+            qaraList.innerHTML = '';
+            bdList.innerHTML = '';
+            workshopList.innerHTML = '';
+
+            let qaraCount = 0, bdCount = 0, workshopCount = 0;
+
+            QARA_ORDER.forEach(code => {
+                if (byCode[code]) {
+                    const li = document.createElement('li');
+                    li.innerText = byCode[code];
+                    qaraList.appendChild(li);
+                    qaraCount++;
+                }
+            });
+
+            BD_ORDER.forEach(code => {
+                if (byCode[code]) {
+                    const li = document.createElement('li');
+                    li.innerText = byCode[code];
+                    bdList.appendChild(li);
+                    bdCount++;
+                }
+            });
+
+            WORKSHOP_ORDER.forEach(code => {
+                if (byCode[code]) {
+                    const li = document.createElement('li');
+                    li.innerText = byCode[code];
+                    workshopList.appendChild(li);
+                    workshopCount++;
+                }
+            });
+
+            document.getElementById('qaraBlock').style.display = qaraCount > 0 ? 'block' : 'none';
+            document.getElementById('bdBlock').style.display = bdCount > 0 ? 'block' : 'none';
+            document.getElementById('workshopBlock').style.display = workshopCount > 0 ? 'block' : 'none';
+            document.getElementById('emptyCloMsg').style.display = (qaraCount === 0 && bdCount === 0 && workshopCount === 0) ? 'block' : 'none';
+
+            document.getElementById('contactTargetName').innerText = result.name || '';
+
+        } catch (err) {
+            document.getElementById('loadingDetail').style.display = 'none';
+            document.getElementById('detailState').innerHTML = `
+                <div class="state-box">
+                    <span class="state-icon">⚠️</span>
+                    <p>ไม่สามารถโหลดข้อมูลได้ กรุณาลองใหม่ภายหลัง</p>
+                </div>`;
         }
     }
 
-    async function init() {
-        const uid = getUidFromUrl();
+    // ===================== CONTACT MODAL =====================
+    async function submitContact() {
+        const name = document.getElementById('contactName').value.trim();
+        const email = document.getElementById('contactEmail').value.trim();
+        const errorEl = document.getElementById('contactError');
+        const successEl = document.getElementById('contactSuccess');
+        const spinner = document.getElementById('contactSpinner');
 
-        if (uid) {
-            loadProfileByUid(uid);
-            loadPeopleList();
+        errorEl.style.display = 'none';
+        successEl.style.display = 'none';
+
+        if (!name || !email) {
+            errorEl.innerText = 'กรุณากรอกชื่อ-สกุลและอีเมลให้ครบ';
+            errorEl.style.display = 'block';
+            return;
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            errorEl.innerText = 'รูปแบบอีเมลไม่ถูกต้อง';
+            errorEl.style.display = 'block';
+            return;
+        }
+        if (!currentDetailUid) {
+            errorEl.innerText = 'ไม่พบข้อมูลผู้ที่ต้องการติดต่อ';
+            errorEl.style.display = 'block';
             return;
         }
 
-        await loadPeopleList();
-        showState('searchState');
+        spinner.style.display = 'inline-block';
 
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            renderSearchResults(e.target.value);
-        });
+        try {
+            const response = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: "requestContact",
+                    requesterName: name,
+                    requesterEmail: email,
+                    targetUid: currentDetailUid
+                })
+            });
+            const result = await response.json();
+            spinner.style.display = 'none';
+
+            if (result.status === "success") {
+                successEl.style.display = 'block';
+                document.getElementById('contactName').value = '';
+                document.getElementById('contactEmail').value = '';
+            } else {
+                errorEl.innerText = result.message || 'ส่งคำขอไม่สำเร็จ กรุณาลองใหม่';
+                errorEl.style.display = 'block';
+            }
+        } catch (err) {
+            spinner.style.display = 'none';
+            errorEl.innerText = 'เกิดข้อผิดพลาด กรุณาลองใหม่';
+            errorEl.style.display = 'block';
+        }
     }
 
-    init();
+    // ===================== INIT =====================
+    function getUidFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('uid');
+    }
+
+    const qrUid = getUidFromUrl();
+    if (qrUid) {
+        // เข้าผ่านลิงก์ QR code เฉพาะคน -> เปิด detail ตรง ไม่ผ่านหน้า grid
+        document.getElementById('gridState').style.display = 'none';
+        document.getElementById('detailState').style.display = 'block';
+        document.getElementById('backToGridBtn').style.display = 'inline-flex';
+        document.getElementById('backToGridBtn').innerText = '← ดูรายชื่อทั้งหมด';
+        openDetail(qrUid, '', true); // skipPushState: URL มี ?uid= อยู่แล้วตั้งแต่แรก ไม่ต้อง push ซ้ำ
+        // โหลดรายชื่อทั้งหมดไว้เบื้องหลังเผื่อกด "ดูรายชื่อทั้งหมด" ทีหลัง
+        loadPeople();
+    } else {
+        loadPeople();
+    }
 </script>
 
 </body>

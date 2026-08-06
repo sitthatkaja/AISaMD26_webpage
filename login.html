@@ -200,7 +200,7 @@
 
 <script>
     // อัปเดต URL ใหม่เรียบร้อยแล้วครับ
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwN_yT_fHc3vQxtTWWMZ04TlSy5-8hxd18cAwNwdHmONKqN5ndBTyexw4rO2Hwh1jY65Q/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyjCqa1iBJBnNZQLOnHH80y15e-tpU4J97y3l3wGakJAADOzwOq8OOHot5WTgoOaxWi/exec";
 
     // ฟังก์ชันเข้าสู่ระบบ
     async function handleLogin() {
@@ -233,6 +233,11 @@
                 localStorage.setItem('userDisplayName', result.name);
                 localStorage.setItem('userAccess', result.accessibleCategory || "");
                 localStorage.setItem('userToken', result.token);
+                localStorage.setItem('username', userVal);
+                localStorage.setItem('publicUID', result.publicUID || "");
+                localStorage.setItem('occupation', result.occupation || "");
+                localStorage.setItem('company', result.company || "");
+                localStorage.setItem('workStatus', result.workStatus || "");
 
                 Swal.fire({
                     icon: 'success',
