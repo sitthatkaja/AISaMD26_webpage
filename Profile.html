@@ -114,10 +114,17 @@
         .person-card .p-occ { color: rgba(255,255,255,0.6); font-size: 0.82rem; margin-bottom: 2px; }
         .person-card .p-com { color: rgba(255,255,255,0.4); font-size: 0.78rem; margin-bottom: 10px; }
 
-        .badge-working { background: rgba(16,185,129,0.18); color: #34d399; }
-        .badge-unemployed { background: rgba(148,163,184,0.18); color: #cbd5e1; }
-        .badge-unset { background: rgba(148,163,184,0.12); color: #94a3b8; }
+        .badge-working { background: rgba(239,68,68,0.18); color: #f87171; }
+        .badge-unemployed { background: rgba(16,185,129,0.18); color: #34d399; }
+        .badge-unset { background: rgba(148,163,184,0.18); color: #cbd5e1; }
         .status-pill { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; }
+
+        .filter-btn.filter-working { border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+        .filter-btn.filter-working.active { background: #ef4444; color: #ffffff; border-color: #ef4444; }
+        .filter-btn.filter-unemployed { border-color: rgba(16,185,129,0.4); color: #6ee7b7; }
+        .filter-btn.filter-unemployed.active { background: #10b981; color: #ffffff; border-color: #10b981; }
+        .filter-btn.filter-unset { border-color: rgba(148,163,184,0.4); color: #cbd5e1; }
+        .filter-btn.filter-unset.active { background: #94a3b8; color: #0a1628; border-color: #94a3b8; }
 
         .state-box { text-align: center; padding: 30px 10px; color: rgba(255,255,255,0.65); }
         .state-box .spinner-border { color: #38bdf8; margin-bottom: 16px; }
@@ -191,8 +198,8 @@
         .cv-workinfo .cv-occ { font-size: 0.88rem; font-weight: 600; color: #334155; }
         .cv-workinfo .cv-com { font-size: 0.85rem; color: #64748b; }
         .cv-workinfo .status-pill { transform: scale(0.92); }
-        .cv-workinfo .badge-working { background: rgba(16,185,129,0.14); color: #059669; }
-        .cv-workinfo .badge-unemployed { background: rgba(100,116,139,0.14); color: #475569; }
+        .cv-workinfo .badge-working { background: rgba(239,68,68,0.14); color: #dc2626; }
+        .cv-workinfo .badge-unemployed { background: rgba(16,185,129,0.14); color: #059669; }
         .cv-workinfo .badge-unset { background: rgba(100,116,139,0.10); color: #64748b; }
 
         .cv-divider {
@@ -271,8 +278,9 @@
 
             <div class="filter-row">
                 <button class="filter-btn active" data-value="ทั้งหมด" onclick="setFilter(this)">ทั้งหมด</button>
-                <button class="filter-btn" data-value="กำลังทำงาน" onclick="setFilter(this)">กำลังทำงาน</button>
-                <button class="filter-btn" data-value="ว่างงาน" onclick="setFilter(this)">ว่างงาน</button>
+                <button class="filter-btn filter-working" data-value="กำลังทำงาน" onclick="setFilter(this)">กำลังทำงาน</button>
+                <button class="filter-btn filter-unemployed" data-value="ว่างงาน" onclick="setFilter(this)">ว่างงาน</button>
+                <button class="filter-btn filter-unset" data-value="ไม่ระบุสถานะ" onclick="setFilter(this)">ไม่ระบุสถานะ</button>
             </div>
 
             <div id="loadingGrid" class="state-box">
@@ -332,19 +340,19 @@
 
                     <div class="skill-block qara" id="qaraBlock" style="display:none;">
                         <div class="skill-block-title">QA-RA</div>
-                        <div class="skill-block-desc">มีความรู้ความเข้าใจด้านมาตรฐานสากลและกระบวนการทดสอบสำหรับซอฟต์แวร์เครื่องมือแพทย์ AI โดยมีรายละเอียดดังนี้</div>
+                        <div class="skill-block-desc">ต่อยอดจากความรู้พื้นฐาน เข้าร่วมอบรมเชิงลึกด้านมาตรฐานสากลและกระบวนการทดสอบสำหรับซอฟต์แวร์เครื่องมือแพทย์ AI ครอบคลุมตั้งแต่การจำแนกประเภทผลิตภัณฑ์ไปจนถึงการวิเคราะห์ผลการทดสอบเชิงสถิติ</div>
                         <ul class="clo-cv-list" id="qaraCloList"></ul>
                     </div>
 
                     <div class="skill-block bd" id="bdBlock" style="display:none;">
                         <div class="skill-block-title">BD</div>
-                        <div class="skill-block-desc">มีความรู้ความเข้าใจด้านการวางกลยุทธ์เข้าถึงตลาดสาธารณสุขไทยและ HealthTech ในประเทศไทย โดยมีรายละเอียดดังนี้</div>
+                        <div class="skill-block-desc">ต่อยอดจากความรู้พื้นฐาน เข้าร่วมอบรมเชิงลึกด้านการวางกลยุทธ์เข้าถึงตลาดสาธารณสุขไทย การบริหารทรัพย์สินทางปัญญา และความพร้อมด้านการลงทุนสำหรับธุรกิจ HealthTech</div>
                         <ul class="clo-cv-list" id="bdCloList"></ul>
                     </div>
 
                     <div class="skill-block workshop" id="workshopBlock" style="display:none;">
                         <div class="skill-block-title">Workshop</div>
-                        <div class="skill-block-desc">มีทักษะการจัดทำและจัดเตรียมเอกสารเกี่ยวกับ AISaMD โดยมีรายละเอียดดังนี้</div>
+                        <div class="skill-block-desc">ได้รับทักษะการทำจำเอกสารเกี่ยวกับ AISaMD โดยมีรายละเอียดดังนี้</div>
                         <ul class="clo-cv-list" id="workshopCloList"></ul>
                     </div>
 
@@ -453,7 +461,12 @@
         grid.innerHTML = '';
 
         const filtered = allPeople.filter(p => {
-            const matchStatus = (currentFilter === 'ทั้งหมด') || (p.workStatus === currentFilter);
+            const validStatuses = ['กำลังทำงาน', 'ว่างงาน'];
+            const isUnset = !p.workStatus || !validStatuses.includes(p.workStatus);
+            const matchStatus =
+                (currentFilter === 'ทั้งหมด') ||
+                (currentFilter === 'ไม่ระบุสถานะ' && isUnset) ||
+                (p.workStatus === currentFilter);
             const matchKeyword = !keyword || (p.name || '').toLowerCase().includes(keyword);
             return matchStatus && matchKeyword;
         });

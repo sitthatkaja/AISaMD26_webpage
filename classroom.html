@@ -67,8 +67,8 @@
         }
         #viewOccupation { color: #ffffff; font-size: 1.05rem; font-weight: 700; }
         #viewCompany { color: #93c5fd; font-size: 0.9rem; }
-        .badge-working { background: rgba(16,185,129,0.25); color: #6ee7b7; font-weight: 700; }
-        .badge-unemployed { background: rgba(148,163,184,0.25); color: #e2e8f0; font-weight: 700; }
+        .badge-working { background: rgba(239,68,68,0.25); color: #fca5a5; font-weight: 700; }
+        .badge-unemployed { background: rgba(16,185,129,0.25); color: #6ee7b7; font-weight: 700; }
         .badge-unset { background: rgba(148,163,184,0.18); color: #cbd5e1; font-weight: 700; }
         .btn-edit-profile {
             background: linear-gradient(135deg, #0ea5e9, #38bdf8);
@@ -127,6 +127,16 @@
             border: 1px solid #0ea5e9; color: #0ea5e9; 
             background: rgba(14,165,233,0.12); 
             font-weight: normal; font-size: 0.75rem; border-radius: 6px; 
+        }
+        .badge-track-qara {
+            border: 1px solid #ef4444; color: #f87171;
+            background: rgba(239,68,68,0.12);
+            font-weight: normal; font-size: 0.75rem; border-radius: 6px;
+        }
+        .badge-track-bd {
+            border: 1px solid #10b981; color: #34d399;
+            background: rgba(16,185,129,0.12);
+            font-weight: normal; font-size: 0.75rem; border-radius: 6px;
         }
         .video-card { 
             background: rgba(13, 42, 74, 0.70);
@@ -189,6 +199,47 @@
         }
         .btn-outline-danger:hover { background: rgba(248,113,113,0.15); }
         h6.fw-bold { color: white; }
+        .btn-filter-workshop {
+            border: 2px solid #f59e0b !important;
+            color: #f59e0b !important;
+        }
+        .btn-filter-workshop.active { background: #f59e0b !important; color: #0a1628 !important; }
+        .workshop-section {
+            background: rgba(13, 42, 74, 0.60);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(245,158,11,0.25);
+            border-left: 6px solid #f59e0b;
+        }
+        .workshop-section h4 { color: #ffffff; }
+        .workshop-item {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(245,158,11,0.18);
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-bottom: 14px;
+        }
+        .workshop-item:last-child { margin-bottom: 0; }
+        .workshop-item-title { color: #ffffff; font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+        .workshop-item-desc { color: rgba(255,255,255,0.55); font-size: 0.85rem; margin-bottom: 14px; }
+        .workshop-file-group { margin-bottom: 10px; }
+        .workshop-file-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 6px; }
+        .workshop-file-row { display: flex; flex-wrap: wrap; gap: 8px; }
+        .btn-workshop-doc, .btn-workshop-answer {
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+        .btn-workshop-doc { background: rgba(245,158,11,0.15); border: 1.5px solid #f59e0b; color: #fbbf24; }
+        .btn-workshop-doc:hover { background: #f59e0b; color: #0a1628; }
+        .btn-workshop-answer { background: rgba(14,165,233,0.15); border: 1.5px solid #0ea5e9; color: #7dd3fc; }
+        .btn-workshop-answer:hover { background: #0ea5e9; color: #0a1628; }
+        .workshop-no-file { color: rgba(255,255,255,0.35); font-size: 0.82rem; }
         .sidebar-filter-row { display: flex; flex-wrap: wrap; gap: 2px; }
     </style>
 </head>
@@ -243,11 +294,19 @@
                 <button class="btn btn-filter-cat" onclick="filterData('อบรมเบื้องต้น', 'cat', this)">อบรมเบื้องต้น</button>
                 <button class="btn btn-filter-cat" onclick="filterData('Intensive-QA-RA', 'cat', this)">Intensive-QA-RA</button>
                 <button class="btn btn-filter-cat" onclick="filterData('Intensive-BD', 'cat', this)">Intensive-BD</button>
+                <button class="btn btn-filter-cat" onclick="filterData('Workshop', 'cat', this)">Workshop</button>
             </div>
         </div>
     </div>
 
     <div id="courseGrid" class="row g-3"></div>
+
+    <!-- ============ WORKSHOP SECTION (แยกจากวิดีโอ) ============ -->
+    <div id="workshopSection" class="workshop-section p-4 mt-4 rounded-4 shadow-sm" style="display:none;">
+        <h4 class="fw-bold mb-1"><span style="font-size:1.3rem;">🧩</span> กิจกรรม Workshop</h4>
+        <p class="text-muted small mb-4">เอกสารและเฉลยกิจกรรม Workshop ของโครงการ AISaMD-WDP</p>
+        <div id="workshopList"></div>
+    </div>
 </div>
 
 <!-- Modal แก้ไข อาชีพ/บริษัท/สถานะการทำงาน -->
@@ -329,6 +388,7 @@
                         <button class="btn btn-filter-cat btn-sm" onclick="filterData('อบรมเบื้องต้น', 'cat', this)">อบรมเบื้องต้น</button>
                         <button class="btn btn-filter-cat btn-sm" onclick="filterData('Intensive-QA-RA', 'cat', this)">Intensive-QA-RA</button>
                         <button class="btn btn-filter-cat btn-sm" onclick="filterData('Intensive-BD', 'cat', this)">Intensive-BD</button>
+                        <button class="btn btn-filter-cat btn-sm" onclick="filterData('Workshop', 'cat', this)">Workshop</button>
                     </div>
                 </div>
                 <div id="sidebarList" style="overflow-y:auto;"></div>
@@ -338,8 +398,8 @@
 </div>
 
 <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyjCqa1iBJBnNZQLOnHH80y15e-tpU4J97y3l3wGakJAADOzwOq8OOHot5WTgoOaxWi/exec";
-    const COURSES_URL = "https://script.google.com/macros/s/AKfycbx744kkFh_R1RxZsZ0g4E2pNSVar4NPrYeB_6buXazOzARORewYLmZASYiXACSYcqIM/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyh2pIGiG5BBXNmbJmZPKuK10I8pJ_CnopOgdpoOpA1NC6kp-m-Td2bs7wSj7DTYkAuZQ/exec";
+    const COURSES_URL = "https://script.google.com/macros/s/AKfycbyBoUM2EjVwKeU6EVHuF7zsNW6-DqsD8SZrX14OYuUMaVp6zfc7t9Vt6KFto9_GFF0R/exec";
     let userAccess = "";
 
     function sanitize(str) {
@@ -349,6 +409,7 @@
     }
 
     let allCourses = [];
+    let allWorkshops = [];
     let currentTrack = 'all', currentCat = 'all', activeIdx = -1;
 
     let watchStartTime = null;
@@ -383,10 +444,12 @@
             localStorage.setItem('occupation', result.occupation || "");
             localStorage.setItem('company', result.company || "");
             localStorage.setItem('workStatus', result.workStatus || "");
+            localStorage.setItem('accessOJT', result.accessOJT || "");
             userAccess = result.accessibleCategory || "";
             document.getElementById('welcomeName').innerText = result.name;
             renderWorkStatusView(result.occupation, result.company, result.workStatus);
             fetchData();
+            fetchWorkshops();
 
         } catch (error) {
             console.error(error);
@@ -412,6 +475,82 @@
         } catch (e) { console.error(e); }
     }
 
+    async function fetchWorkshops() {
+        try {
+            const token = localStorage.getItem('userToken');
+            const res = await fetch(COURSES_URL, {
+                method: 'POST',
+                body: JSON.stringify({ token: token, action: "getWorkshops" })
+            });
+            const data = await res.json();
+            if (data.status === "unauthorized") {
+                localStorage.clear();
+                window.location.href = "login.html";
+                return;
+            }
+            allWorkshops = (data.workshops || []).filter(w => w.status === 'show');
+            renderUI();
+        } catch (e) { console.error(e); }
+    }
+
+    function hasWorkshopAccess(id) {
+        const accessOJT = (localStorage.getItem('accessOJT') || '').trim();
+        if (accessOJT === 'ทั้งหมด') return true;
+        const allowed = accessOJT.split(',').map(s => s.trim());
+        return allowed.includes(id.toString().trim());
+    }
+
+    function renderFileButtons(urlsStr, type) {
+        // type: 'doc' | 'answer'
+        const urls = (urlsStr || '').split(',').map(u => u.trim()).filter(u => u && u !== 'ไม่มี');
+        if (urls.length === 0) {
+            return `<span class="workshop-no-file">ยังไม่มี${type === 'doc' ? 'เอกสาร' : 'เฉลย'}</span>`;
+        }
+        const cls = type === 'doc' ? 'btn-workshop-doc' : 'btn-workshop-answer';
+        const icon = type === 'doc' ? '📄' : '✅';
+        return urls.map((url, i) => {
+            const label = urls.length === 1
+                ? (type === 'doc' ? 'ดาวน์โหลดเอกสาร' : 'ดูเฉลย')
+                : `${type === 'doc' ? 'เอกสาร' : 'เฉลย'} ไฟล์ที่ ${i + 1}`;
+            return `<a href="${url}" target="_blank" class="${cls}">${icon} ${label}</a>`;
+        }).join('');
+    }
+
+    function renderWorkshopSection() {
+        const track = (localStorage.getItem('accessOJT') || '');
+        const filteredWorkshops = allWorkshops.filter(w => {
+            const tMatch = currentTrack === 'all' || (w.track && w.track.toUpperCase().includes(currentTrack.toUpperCase()));
+            const wid = w.id ? w.id.toString().trim() : "";
+            return tMatch && hasWorkshopAccess(wid);
+        });
+
+        const section = document.getElementById('workshopSection');
+        const list = document.getElementById('workshopList');
+
+        if (filteredWorkshops.length === 0) {
+            section.style.display = 'none';
+            list.innerHTML = '';
+            return;
+        }
+
+        section.style.display = 'block';
+        list.innerHTML = filteredWorkshops.map(w => `
+            <div class="workshop-item">
+                <div class="d-flex flex-wrap gap-2 mb-2">${renderBadges(w.category, w.track)}</div>
+                <div class="workshop-item-title">${sanitize(w.title)}</div>
+                ${w.description ? `<div class="workshop-item-desc">${sanitize(w.description)}</div>` : ''}
+                <div class="workshop-file-group">
+                    <div class="workshop-file-label">เอกสาร Workshop</div>
+                    <div class="workshop-file-row">${renderFileButtons(w.pdfUrl, 'doc')}</div>
+                </div>
+                <div class="workshop-file-group mb-0">
+                    <div class="workshop-file-label">เฉลย</div>
+                    <div class="workshop-file-row">${renderFileButtons(w.answerUrl, 'answer')}</div>
+                </div>
+            </div>
+        `).join('');
+    }
+
     function filterData(val, type, btn) {
         const allMatchingBtns = document.querySelectorAll(`button[onclick^="filterData('${val}', '${type}'"]`);
         document.querySelectorAll(`.btn-filter-${type}`).forEach(b => b.classList.remove('active'));
@@ -430,7 +569,11 @@
         let html = `<span class="badge badge-cat px-2 py-1 me-1">${cat}</span>`;
         if (track) {
             track.split(',').forEach(t => {
-                html += `<span class="badge badge-track px-2 py-1 me-1">${t.trim()}</span>`;
+                const tt = t.trim();
+                let cls = 'badge-track';
+                if (tt.toUpperCase().includes('QA-RA')) cls = 'badge-track-qara';
+                else if (tt.toUpperCase().includes('BD')) cls = 'badge-track-bd';
+                html += `<span class="badge ${cls} px-2 py-1 me-1">${tt}</span>`;
             });
         }
         return html;
@@ -474,6 +617,8 @@
                 </div>
             </div>`;
         }).join('');
+
+        renderWorkshopSection();
     }
 
     async function sendWatchLog(isNew = false) {
@@ -569,12 +714,12 @@
         const pdfContainer = document.getElementById('mainPdfContainer');
         const hasNoPdf = !c.pdfUrl || c.pdfUrl.trim() === "" || c.pdfUrl.trim() === "ไม่มี";
         if (hasNoPdf) {
-            pdfContainer.innerHTML = `<a href="javascript:void(0)" class="btn btn-secondary w-100 py-3 rounded-3 shadow-sm disabled" style="opacity:0.7"><i class="fas fa-file-alt me-2"></i>ไม่มีไฟล์ PDF</a>`;
+            pdfContainer.innerHTML = `<a href="javascript:void(0)" class="btn btn-secondary w-100 py-3 rounded-3 shadow-sm disabled" style="opacity:0.7">📄 ไม่มีไฟล์ PDF</a>`;
         } else {
             const urls = c.pdfUrl.split(',').map(u => u.trim()).filter(u => u && u !== "ไม่มี");
             pdfContainer.innerHTML = urls.map((url, i) => {
                 const label = urls.length === 1 ? 'PDF สไลด์' : `PDF สไลด์ ไฟล์ที่ ${i + 1}`;
-                return `<a href="${url}" target="_blank" class="btn btn-danger w-100 py-3 rounded-3 shadow-sm"><i class="fas fa-file-pdf me-2"></i>${label}</a>`;
+                return `<a href="${url}" target="_blank" class="btn btn-danger w-100 py-3 rounded-3 shadow-sm">📄 ${label}</a>`;
             }).join('');
         }
 
