@@ -35,6 +35,11 @@
         .welcome-section h3 { color: white; }
         .welcome-section p { color: rgba(255,255,255,0.55); }
         .btn-logout-welcome { position: absolute; top: 20px; right: 20px; }
+        .poster-tag {
+            display:inline-block; background:rgba(251,191,36,0.15); color:#fbbf24;
+            border:1px solid rgba(251,191,36,0.35); font-size:0.72rem; font-weight:700;
+            padding:2px 10px; border-radius:20px; margin-left:8px; vertical-align:middle;
+        }
         .work-status-box {
             background: linear-gradient(135deg, rgba(14,165,233,0.16) 0%, rgba(56,189,248,0.06) 100%);
             border: 1px solid rgba(56,189,248,0.35);
@@ -251,13 +256,13 @@
 
 <div id="home-view" class="container mt-4 mb-5">
     <div class="welcome-section p-4 mb-4 shadow-sm">
-        <h3 class="fw-bold mb-1 text-dark">ยินดีต้อนรับคุณ <span id="welcomeName" class="text-primary">...</span></h3>
+        <h3 class="fw-bold mb-1 text-dark">ยินดีต้อนรับคุณ <span id="welcomeName" class="text-primary">...</span><span id="posterTag" class="poster-tag" style="display:none;">บุคคลภายนอก</span></h3>
         <p class="text-muted mb-0">โครงการพัฒนาบุคลากรด้าน AI ทางการแพทย์ (AISaMD-WDP)</p>
         <button class="btn btn-outline-danger btn-sm btn-logout-welcome rounded-pill" onclick="logout()">
             ↪ ออกจากระบบ
         </button>
 
-        <div class="work-status-box mt-3 p-3 rounded-3">
+        <div id="workStatusBox" class="work-status-box mt-3 p-3 rounded-3">
             <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
                 <div class="d-flex align-items-center gap-3">
                     <div class="work-status-icon">💼</div>
@@ -294,7 +299,7 @@
                 <button class="btn btn-filter-cat" onclick="filterData('อบรมเบื้องต้น', 'cat', this)">อบรมเบื้องต้น</button>
                 <button class="btn btn-filter-cat" onclick="filterData('Intensive-QA-RA', 'cat', this)">Intensive-QA-RA</button>
                 <button class="btn btn-filter-cat" onclick="filterData('Intensive-BD', 'cat', this)">Intensive-BD</button>
-                <button class="btn btn-filter-cat" onclick="filterData('Workshop', 'cat', this)">Workshop</button>
+                <button class="btn btn-filter-cat workshop-filter-btn" onclick="filterData('Workshop', 'cat', this)">Workshop</button>
             </div>
         </div>
     </div>
@@ -365,7 +370,6 @@
                         <div id="mainTimestamps" class="mt-2"></div>
                         <p id="mainDesc" class="mt-3 text-muted small"></p>
                     </div>
-                    <!-- ✅ เปลี่ยนจาก <a id="mainPdf"> เป็น div container -->
                     <div class="col-md-4">
                         <div id="mainPdfContainer" class="d-flex flex-column gap-2"></div>
                     </div>
@@ -388,7 +392,7 @@
                         <button class="btn btn-filter-cat btn-sm" onclick="filterData('อบรมเบื้องต้น', 'cat', this)">อบรมเบื้องต้น</button>
                         <button class="btn btn-filter-cat btn-sm" onclick="filterData('Intensive-QA-RA', 'cat', this)">Intensive-QA-RA</button>
                         <button class="btn btn-filter-cat btn-sm" onclick="filterData('Intensive-BD', 'cat', this)">Intensive-BD</button>
-                        <button class="btn btn-filter-cat btn-sm" onclick="filterData('Workshop', 'cat', this)">Workshop</button>
+                        <button class="btn btn-filter-cat btn-sm workshop-filter-btn" onclick="filterData('Workshop', 'cat', this)">Workshop</button>
                     </div>
                 </div>
                 <div id="sidebarList" style="overflow-y:auto;"></div>
@@ -398,9 +402,10 @@
 </div>
 
 <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxc5Je2lIH1cTlAhtx6BF65gvWreERyj9fuR3Gwp8IxOux2Sdi1glVjLj-TDze1R1lD2g/exec";
-    const COURSES_URL = "https://script.google.com/macros/s/AKfycbyBoUM2EjVwKeU6EVHuF7zsNW6-DqsD8SZrX14OYuUMaVp6zfc7t9Vt6KFto9_GFF0R/exec";
-    let userAccess = "";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzCV6bIg2ctUqO4nbqQdCmDTU9x1oAAgLJ1-6O1Mi2DnUeJnrkerDpj846bp44gK3SX/exec";
+    const COURSES_URL = "https://script.google.com/macros/s/AKfycbzoL5P6lrGo8Q-ndhv2XMqnQdAWYipZ8sRyN1QMDK72U2Jxg4m_HIgNzcqRRX7Gp0kLlw/exec";
+    let userAccess = ""; 
+    let isPosterAccount = false;
 
     function sanitize(str) {
         const div = document.createElement('div');
@@ -440,14 +445,26 @@
             }
 
             localStorage.setItem('userDisplayName', result.name);
+            localStorage.setItem('accountType', result.accountType || 'member');
             localStorage.setItem('publicUID', result.publicUID || "");
             localStorage.setItem('occupation', result.occupation || "");
             localStorage.setItem('company', result.company || "");
             localStorage.setItem('workStatus', result.workStatus || "");
             localStorage.setItem('accessOJT', result.accessOJT || "");
             userAccess = result.accessibleCategory || "";
+            isPosterAccount = (result.accountType === 'poster');
+
             document.getElementById('welcomeName').innerText = result.name;
-            renderWorkStatusView(result.occupation, result.company, result.workStatus);
+            document.getElementById('posterTag').style.display = isPosterAccount ? 'inline-block' : 'none';
+
+            if (isPosterAccount) {
+                // บุคคลภายนอก: ไม่มีข้อมูลอาชีพ/บริษัท (ไม่โผล่ใน Find Specialist อยู่แล้ว) และไม่มีสิทธิ์ดู Workshop
+                document.getElementById('workStatusBox').style.display = 'none';
+                document.querySelectorAll('.workshop-filter-btn').forEach(btn => btn.style.display = 'none');
+            } else {
+                renderWorkStatusView(result.occupation, result.company, result.workStatus);
+            }
+
             fetchData();
             fetchWorkshops();
 
@@ -476,6 +493,7 @@
     }
 
     async function fetchWorkshops() {
+        if (isPosterAccount) { allWorkshops = []; renderUI(); return; } // บุคคลภายนอกไม่ดึง Workshop เลย
         try {
             const token = localStorage.getItem('userToken');
             const res = await fetch(COURSES_URL, {
@@ -501,7 +519,6 @@
     }
 
     function renderFileButtons(urlsStr, type) {
-        // type: 'doc' | 'answer'
         const urls = (urlsStr || '').split(',').map(u => u.trim()).filter(u => u && u !== 'ไม่มี');
         if (urls.length === 0) {
             return `<span class="workshop-no-file">ยังไม่มี${type === 'doc' ? 'เอกสาร' : 'เฉลย'}</span>`;
@@ -517,11 +534,15 @@
     }
 
     function renderWorkshopSection() {
-        const track = (localStorage.getItem('accessOJT') || '');
+        if (isPosterAccount) {
+            document.getElementById('workshopSection').style.display = 'none';
+            return;
+        }
         const filteredWorkshops = allWorkshops.filter(w => {
             const tMatch = currentTrack === 'all' || (w.track && w.track.toUpperCase().includes(currentTrack.toUpperCase()));
+            const catMatch = currentCat === 'all' || currentCat === 'Workshop';
             const wid = w.id ? w.id.toString().trim() : "";
-            return tMatch && hasWorkshopAccess(wid);
+            return tMatch && catMatch && hasWorkshopAccess(wid);
         });
 
         const section = document.getElementById('workshopSection');
@@ -584,12 +605,14 @@
         const sidebar = document.getElementById('sidebarList');
         const allowedVideoIds = userAccess.split(',').map(s => s.trim());
 
-        const filtered = allCourses.filter(c => {
+        let filtered = allCourses.filter(c => {
             const tMatch = currentTrack === 'all' || (c.track && c.track.toUpperCase().includes(currentTrack.toUpperCase()));
             const cMatch = currentCat === 'all' || c.category === currentCat;
             const hasPermission = userAccess === 'ทั้งหมด' || allowedVideoIds.includes(c.id.toString());
             return tMatch && cMatch && c.status === 'show' && hasPermission;
         });
+
+        if (currentCat === 'Workshop') filtered = []; // หมวด Workshop ไม่มีการ์ดวิดีโอ มีแต่ในกล่อง Workshop ด้านล่าง
 
         grid.innerHTML = filtered.map(c => {
             const oriIdx = allCourses.findIndex(x => x.title === c.title);
@@ -604,6 +627,10 @@
                 </div>
             </div>`;
         }).join('');
+
+        if (filtered.length === 0 && (isPosterAccount ? true : allWorkshops.filter(w => (currentTrack === 'all' || (w.track && w.track.toUpperCase().includes(currentTrack.toUpperCase()))) && (currentCat === 'all' || currentCat === 'Workshop')).length === 0)) {
+            grid.innerHTML = `<div class="col-12 text-center text-muted py-4">ไม่พบบทเรียนที่ตรงกับเงื่อนไขที่เลือก</div>`;
+        }
 
         sidebar.innerHTML = filtered.map(c => {
             const oriIdx = allCourses.findIndex(x => x.title === c.title);
@@ -710,7 +737,6 @@
         document.getElementById('mainDesc').innerText = c.description;
         document.getElementById('mainBadges').innerHTML = renderBadges(c.category, c.track);
 
-        // ✅ แสดง PDF หลายลิงก์ คั่นด้วย ,
         const pdfContainer = document.getElementById('mainPdfContainer');
         const hasNoPdf = !c.pdfUrl || c.pdfUrl.trim() === "" || c.pdfUrl.trim() === "ไม่มี";
         if (hasNoPdf) {
@@ -748,7 +774,7 @@
         renderUI();
     }
 
-    // ===================== ข้อมูลการทำงาน (Occupation/Company/WorkStatus) =====================
+    // ===================== ข้อมูลการทำงาน (Occupation/Company/WorkStatus) — เฉพาะผู้เข้าร่วมโครงการ =====================
     function renderWorkStatusView(occupation, company, workStatus) {
         const occEl = document.getElementById('viewOccupation');
         const comEl = document.getElementById('viewCompany');
@@ -768,7 +794,6 @@
             badgeEl.className = 'badge rounded-pill mt-1 badge-unset';
         }
 
-        // เติมค่าเดิมลงในฟอร์มแก้ไข
         document.getElementById('inputOccupation').value = occupation || '';
         document.getElementById('inputCompany').value = company || '';
         document.getElementById('inputWorkStatus').value = workStatus || '';

@@ -25,6 +25,7 @@
     align-items: center;
     justify-content: center;
     margin: 0;
+    padding: 20px 0;
     }
 
         .login-container {
@@ -151,6 +152,33 @@
             text-decoration: none; 
         }
 
+        .register-toggle-link {
+            display: block;
+            text-align: center;
+            color: #38bdf8;
+            font-size: 0.85rem;
+            text-decoration: underline;
+            cursor: pointer;
+            margin-top: 18px;
+        }
+        .register-toggle-link:hover { color: #7dd3fc; }
+        .register-panel {
+            display: none;
+            margin-top: 22px;
+            padding-top: 22px;
+            border-top: 1px solid rgba(56,189,248,0.18);
+        }
+        .register-panel-title {
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+        .register-panel-sub {
+            color: rgba(255,255,255,0.45);
+            font-size: 0.78rem;
+            margin-bottom: 16px;
+        }
     </style>
 </head>
 <body>
@@ -158,7 +186,7 @@
 <div class="login-container">
     <div class="login-header">
         <img src="images/Logo_wh.png" alt="AISaMD-WDP Logo" class="login-logo">
-        <h2>ยินดีต้อนรับผู้เข้าร่วมโครงการ</h2>
+        <h2>ยินดีต้อนรับสู่</h2>
         <h2>AISaMD-WDP</h2>
         <p class="text-muted">โปรด Login เพื่อเข้าสู่ห้องเรียน</p>
     </div>
@@ -176,11 +204,24 @@
         </div>
 
         <button type="button" onclick="handleLogin()" class="btn btn-login">LOGIN</button>
+
+        <span class="register-toggle-link" onclick="toggleRegisterPanel()">บุคคลภายนอก / ยังไม่มีบัญชี? สมัครสมาชิกที่นี่</span>
+
+        <div id="registerPanel" class="register-panel">
+            <div class="register-panel-title">สมัครสมาชิกบุคคลภายนอก</div>
+            <div class="register-panel-sub">สำหรับผู้ที่ต้องการโพสต์ประกาศงานและดูวิดีโอความรู้ในโครงการ (ไม่รวม Workshop)</div>
+            <input type="text" id="regUsername" class="form-control" placeholder="Username">
+            <input type="password" id="regPassword" class="form-control" placeholder="Password (อย่างน้อย 6 ตัวอักษร)">
+            <input type="text" id="regName" class="form-control" placeholder="ชื่อผู้ติดต่อ">
+            <input type="text" id="regCompany" class="form-control" placeholder="ชื่อบริษัท">
+            <input type="email" id="regEmail" class="form-control" placeholder="อีเมล">
+            <button type="button" onclick="handleRegister()" class="btn btn-login">สมัครสมาชิก</button>
+        </div>
     </div>
 
     <div class="extra-links">
         <div class="mb-4">
-            <span class="text-muted">โปรดจำไว้ว่าโครงการ AISaMD-WDP ให้สิทธิเฉพาะผู้เข้าร่วมโครงการเท่านั้น หากท่านเป็นสมาชิกจากโครงการ AISaMD-WDP แล้วยังไม่ได้ติดต่อโปรดติดต่อที่</span>
+            <span class="text-muted">ระบบนี้สงวนสิทธิ์การเข้าใช้งานเฉพาะผู้เข้าร่วมโครงการ AISaMD-WDP และบุคคลภายนอกที่สมัครสมาชิกแล้วเท่านั้น หากท่านเป็นผู้เข้าร่วมโครงการแต่ยังไม่ได้รับบัญชีผู้ใช้ กรุณาติดต่อทีมงานได้ที่</span>
             <br>
             <div class="mt-2">
                 <a href="https://www.facebook.com/AISaMDwdp/" target="_blank" class="contact-link me-2">
@@ -188,7 +229,7 @@
                 </a> 
                 <span class="text-muted">หรือ</span>
                 <a href="tel:+66982398088" class="contact-link ms-2 fw-bold">
-                    <i class="fas fa-phone-alt me-1"></i> ศูนย์เก้าแปดสองสามเก้า-8088
+                    <i class="fas fa-phone-alt me-1"></i> 098-239-8088
                 </a>
             </div>
         </div>
@@ -199,8 +240,25 @@
 </div>
 
 <script>
-    // อัปเดต URL ใหม่เรียบร้อยแล้วครับ
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxc5Je2lIH1cTlAhtx6BF65gvWreERyj9fuR3Gwp8IxOux2Sdi1glVjLj-TDze1R1lD2g/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzCV6bIg2ctUqO4nbqQdCmDTU9x1oAAgLJ1-6O1Mi2DnUeJnrkerDpj846bp44gK3SX/exec";
+
+    function toggleRegisterPanel() {
+        const el = document.getElementById('registerPanel');
+        el.style.display = el.style.display === 'none' || !el.style.display ? 'block' : 'none';
+    }
+
+    function storeSessionAndGoToClassroom(result, usernameVal) {
+        localStorage.setItem('userDisplayName', result.name);
+        localStorage.setItem('userAccess', result.accessibleCategory || "");
+        localStorage.setItem('userToken', result.token);
+        localStorage.setItem('username', usernameVal);
+        localStorage.setItem('accountType', result.accountType || 'member');
+        localStorage.setItem('publicUID', result.publicUID || "");
+        localStorage.setItem('occupation', result.occupation || "");
+        localStorage.setItem('company', result.company || "");
+        localStorage.setItem('workStatus', result.workStatus || "");
+        localStorage.setItem('email', result.email || "");
+    }
 
     // ฟังก์ชันเข้าสู่ระบบ
     async function handleLogin() {
@@ -230,14 +288,7 @@
             const result = await response.json();
 
             if (result.status === "success") {
-                localStorage.setItem('userDisplayName', result.name);
-                localStorage.setItem('userAccess', result.accessibleCategory || "");
-                localStorage.setItem('userToken', result.token);
-                localStorage.setItem('username', userVal);
-                localStorage.setItem('publicUID', result.publicUID || "");
-                localStorage.setItem('occupation', result.occupation || "");
-                localStorage.setItem('company', result.company || "");
-                localStorage.setItem('workStatus', result.workStatus || "");
+                storeSessionAndGoToClassroom(result, userVal);
 
                 Swal.fire({
                     icon: 'success',
@@ -250,17 +301,63 @@
                 });
 
             } else if (result.status === "locked") {
-                // ✅ บัญชีถูกล็อค
                 showError("บัญชีถูกล็อคเนื่องจาก login ผิดเกิน 5 ครั้ง กรุณาติดต่อผู้ดูแลระบบ");
 
             } else {
-                // ✅ แสดงจำนวนครั้งที่เหลือ
                 const left = result.attemptsLeft;
                 if (left !== undefined && left > 0) {
                     showError(`Username หรือ Password ไม่ถูกต้อง (เหลืออีก ${left} ครั้ง)`);
                 } else {
                     showError("Username หรือ Password ไม่ถูกต้อง");
                 }
+            }
+        } catch (error) {
+            console.error(error);
+            showError("ไม่สามารถเชื่อมต่อฐานข้อมูลได้ กรุณาลองใหม่ภายหลัง");
+        }
+    }
+
+    // ฟังก์ชันสมัครสมาชิกบุคคลภายนอก
+    async function handleRegister() {
+        const payload = {
+            username: document.getElementById('regUsername').value.trim(),
+            password: document.getElementById('regPassword').value.trim(),
+            name: document.getElementById('regName').value.trim(),
+            company: document.getElementById('regCompany').value.trim(),
+            email: document.getElementById('regEmail').value.trim()
+        };
+
+        if (!payload.username || !payload.password || !payload.name || !payload.company || !payload.email) {
+            return showError("กรุณากรอกข้อมูลให้ครบทุกช่อง");
+        }
+
+        Swal.fire({
+            title: 'กำลังสมัครสมาชิก...',
+            allowOutsideClick: false,
+            didOpen: () => { Swal.showLoading(); }
+        });
+
+        try {
+            const response = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify(Object.assign({ action: "registerPoster" }, payload))
+            });
+            const result = await response.json();
+
+            if (result.status === "success") {
+                storeSessionAndGoToClassroom(result, payload.username);
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'สมัครสมาชิกสำเร็จ',
+                    text: 'ยินดีต้อนรับคุณ ' + result.name,
+                    timer: 2000,
+                    showConfirmButton: false
+                }).then(() => {
+                    window.location.href = "classroom.html";
+                });
+            } else {
+                showError(result.message || "สมัครสมาชิกไม่สำเร็จ");
             }
         } catch (error) {
             console.error(error);
@@ -281,7 +378,6 @@
 
         if (!username) return;
 
-        // ✅ เพิ่ม: ขอรหัสผ่านปัจจุบันก่อน
         const { value: currentPassword } = await Swal.fire({
             title: 'ยืนยันตัวตน',
             input: 'password',
@@ -316,7 +412,7 @@
                 body: JSON.stringify({
                     action: "changePass",
                     username: username,
-                    currentPassword: currentPassword,  // ✅ เพิ่ม: ส่งรหัสเดิมไปตรวจด้วย
+                    currentPassword: currentPassword,
                     newPassword: newPassword
                 })
             });
@@ -325,7 +421,7 @@
 
             if (result.status === "success") {
                 Swal.fire('สำเร็จ!', 'เปลี่ยนรหัสผ่านถาวรเรียบร้อยแล้ว', 'success');
-            } else if (result.status === "wrong_password") {      // ✅ เพิ่ม: แยก error
+            } else if (result.status === "wrong_password") {
                 Swal.fire('ผิดพลาด', 'รหัสผ่านปัจจุบันไม่ถูกต้อง', 'error');
             } else {
                 Swal.fire('ผิดพลาด', 'ไม่พบ Username นี้ในระบบ', 'error');

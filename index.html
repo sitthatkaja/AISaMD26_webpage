@@ -35,16 +35,13 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        // ตั้งค่าหลักของ GA4
         gtag('config', 'G-01XMBMPS1N');
 
-        // --- ส่วนที่เพิ่มเข้าไปใหม่เพื่อดักจับ QR Code และ Hash #Register ---
         window.addEventListener('load', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const utmSource = urlParams.get('utm_source');
             const currentHash = window.location.hash;
 
-            // 1. ตรวจจับคนสแกนจาก QR Code (ดูจาก UTM ที่เราตั้งไว้ในลิงก์)
             if (utmSource === 'qrcode') {
             gtag('event', 'qr_scan_entry', {
                 'event_category': 'Engagement',
@@ -52,7 +49,6 @@
             });
             }
 
-            // 2. ถ้าคนเข้ามาแล้วมี #Register อยู่ใน URL ให้ส่งข้อมูลหน้าเว็บแยกออกมา
             if (currentHash === '#Register') {
             gtag('event', 'page_view', {
                 'page_title': 'Registration Section',
@@ -62,7 +58,6 @@
             }
         });
 
-        // 3. กรณีคนกดปุ่มบนหน้าเว็บแล้วเลื่อนไปที่ #Register (โดยไม่รีโหลดหน้า)
         window.addEventListener('hashchange', function() {
             if (window.location.hash === '#Register') {
             gtag('event', 'page_view', {
@@ -82,7 +77,6 @@ https://templatemo.com/tm-575-leadership-event
 -->
 
     <style>
-        /* ── NAVBAR ── */
         .navbar {
             padding: 10px 0 !important;
             background: rgba(10, 22, 40, 0.95) !important;
@@ -91,13 +85,11 @@ https://templatemo.com/tm-575-leadership-event
             transition: all 0.3s ease;
         }
 
-        /* โลโก้เล็กลง */
         .brand-logo {
             height: 60px !important;
             width: auto !important;
         }
 
-        /* เส้นไฟสีฟ้าใต้ navbar */
         .navbar::after {
             content: '';
             position: absolute;
@@ -111,7 +103,6 @@ https://templatemo.com/tm-575-leadership-event
             100% { background-position: 200px 0; }
         }
         
-        /* navbar เล็กลงเมื่อ scroll */
         .navbar.scrolled {
             padding: 6px 0 !important;
             background: rgba(6, 15, 30, 0.98) !important;
@@ -125,7 +116,6 @@ https://templatemo.com/tm-575-leadership-event
         .nav-link { color: rgba(255,255,255,0.80) !important; }
         .nav-link:hover, .nav-link.active { color: #38bdf8 !important; }
 
-        /* ── SPONSORS ── */
         #sponsor {
             background: #ffffff;
             padding: 60px 0;
@@ -158,7 +148,6 @@ https://templatemo.com/tm-575-leadership-event
             from { width: 0; }
             to   { width: 60px; }
         }
-        /* ── PARTNERS ── */
         #partner {
             background: #ffffff;
             padding: 60px 0;
@@ -167,7 +156,6 @@ https://templatemo.com/tm-575-leadership-event
             color: #0a1628 !important;
             -webkit-text-fill-color: #0a1628 !important;
         }
-        /* ── CONTACT ── */
         #section_4 {
             background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%);
             border-top: 1px solid rgba(56,189,248,0.15);
@@ -180,7 +168,6 @@ https://templatemo.com/tm-575-leadership-event
         #section_4 .bi-telephone-fill { color: #38bdf8 !important; }
         #section_4 .badge { background: rgba(255,255,255,0.1) !important; color: white !important; border-color: rgba(255,255,255,0.2) !important; }
 
-        /* ── FOOTER ── */
         .site-footer {
             background: #060f1e !important;
             border-top: 1px solid rgba(56,189,248,0.15);
@@ -190,7 +177,6 @@ https://templatemo.com/tm-575-leadership-event
         .site-footer .border-bottom { border-color: rgba(56,189,248,0.15) !important; }
         .site-footer .bi-arrow-up { color: #38bdf8 !important; }
 
-        /* ── BUTTONS ── */
         .btn-blue-custom {
             background: linear-gradient(135deg, #0ea5e9, #0284c7) !important;
             border: none !important;
@@ -238,20 +224,13 @@ https://templatemo.com/tm-575-leadership-event
                         </li>
                         
                         <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#section_4">Contact us</a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link" href="plo-clo.html"> PLO / CLO</a>
                         </li>
 
-
-                        <!-- <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#sponsor">Sponsor</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#partner">Partner</a>
-                        </li> -->
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_4">Contact us</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="Profile.html">find AISaMD Specialists</a>
                         </li>
@@ -278,23 +257,12 @@ https://templatemo.com/tm-575-leadership-event
                 <div class="container">
                     <div class="row">
                         <div class="col-12 text-center">
-                            <!-- <div class="hero-btn-container">
-                                <a href="#Register" class="btn custom-btn">ลงทะเบียนตอนนี้</a>
-                            </div> -->
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="about section-padding" id="Register" style="
-                background: 
-                linear-gradient(135deg, rgba(10,22,40,0.75) 0%, rgba(13,33,55,0.70) 60%, rgba(10,61,92,0.65) 100%),
-                url('images/bg_02.png') center center / cover no-repeat;
-                padding: 80px 0;
-                position: relative;
-                overflow: hidden;
-            ">
-                <!-- แสงเรืองพื้นหลัง -->
+            <section class="gallery-section" id="Register">
                 <div style="
                     position: absolute; top: 50%; left: 50%;
                     transform: translate(-50%, -50%);
@@ -303,205 +271,210 @@ https://templatemo.com/tm-575-leadership-event
                     pointer-events: none;
                 "></div>
                 <div class="container" style="position: relative;">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8 text-center">
+                    <div class="text-center mb-5">
+                        <div style="
+                            display: inline-block;
+                            background: rgba(56,189,248,0.1);
+                            border: 1px solid rgba(56,189,248,0.3);
+                            border-radius: 100px;
+                            padding: 8px 24px;
+                            font-size: 0.85rem;
+                            color: #38bdf8;
+                            letter-spacing: 0.08em;
+                            text-transform: uppercase;
+                            font-weight: 600;
+                            margin-bottom: 20px;
+                        ">บรรยากาศโครงการ</div>
 
-                            <!-- Badge บน -->
-                            <div style="
-                                display: inline-block;
-                                background: rgba(56,189,248,0.1);
-                                border: 1px solid rgba(56,189,248,0.3);
-                                border-radius: 100px;
-                                padding: 8px 24px;
-                                font-size: 0.85rem;
-                                color: #38bdf8;
-                                letter-spacing: 0.08em;
-                                text-transform: uppercase;
-                                font-weight: 600;
-                                margin-bottom: 28px;
-                            ">ประกาศผล </div>
+                        <h2 style="
+                            font-size: 2.6rem;
+                            font-weight: 700;
+                            background: linear-gradient(135deg, #ffffff, #38bdf8);
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                            background-clip: text;
+                            margin-bottom: 16px;
+                        ">ภาพบรรยากาศกิจกรรม AISaMD-WDP 2026</h2>
 
-                            <!-- หัวข้อหลัก -->
-                            <h2 style="
-                                font-size: 2.8rem;
-                                font-weight: 700;
-                                color: white;
-                                line-height: 1.3;
-                                margin-bottom: 16px;
-                            ">ประกาศผลผู้มีผ่านหลักสูตร <br>
-                            <span style="
-                                background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-                                -webkit-background-clip: text;
-                                -webkit-text-fill-color: transparent;
-                                background-clip: text;
-                            ">อบรมเข้มข้น (Intensive Course) </span> <br>
-                            และผู้มีสิทธิเข้าร่วม <br>
-                            <span style="
-                                background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-                                -webkit-background-clip: text;
-                                -webkit-text-fill-color: transparent;
-                                background-clip: text;
-                            ">กิจกรรม On-Job-Training (OJT) </span>
-                            </h2>
-
-                            <h3 style="
-                                font-size: 1.8rem;
-                                font-weight: 700;
-                                color: white;
-                                margin-bottom: 40px;
-                                letter-spacing: 0.04em;
-                            ">AISaMD-WDP 2026</h3>
-
-                            <!-- กรอบการ์ดเรืองแสง -->
-                            <div style="
-                                background: rgba(13, 42, 74, 0.60);
-                                backdrop-filter: blur(12px);
-                                border: 1px solid rgba(56,189,248,0.25);
-                                border-radius: 20px;
-                                padding: 36px 40px;
-                                box-shadow: 0 0 40px rgba(56,189,248,0.08), 0 20px 60px rgba(0,0,0,0.3);
-                                margin-bottom: 32px;
-                            ">
-                                <p style="color: rgba(255,255,255,0.70); font-size: 1rem; line-height: 1.8; margin-bottom: 28px;">
-                                    ประกาศผลผู้ที่ผ่านหลักสูตรอบรมเข้มข้น Intensive และผู้มีสิทธิได้เข้าร่วมกิจกรรม On-Job-Training <br>
-                                    ในโครงการการพัฒนากําลังคนทักษะสูงด้านปัญญาประดิษฐ์สําหรับอุปกรณ์การแพทย์ขั้นสูง<br>
-                                    (Artificial Intelligence Software as a Medical Device Workforce Development Program)<br>
-                                </p>
-
-                                <!-- ปุ่ม -->
-                                <a href="https://drive.google.com/file/d/1xyA8uQu4h9-V9kUaLe0TmyFqFfjPYJaF/view?usp=sharing"
-                                    class="btn"
-                                    onclick="gtag('event', 'Announcement1', { 'button_name': 'Announcement1', 'type': 'ประกาศครั้งที่1' });"
-                                    style="
-                                        background: linear-gradient(135deg, #0ea5e9, #06b6d4);
-                                        color: white;
-                                        border: none;
-                                        border-radius: 12px;
-                                        padding: 14px 36px;
-                                        font-size: 1rem;
-                                        font-weight: 600;
-                                        letter-spacing: 0.03em;
-                                        box-shadow: 0 4px 20px rgba(14,165,233,0.45);
-                                        transition: transform 0.2s, box-shadow 0.2s;
-                                        text-decoration: none;
-                                    "
-                                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 28px rgba(14,165,233,0.6)'"
-                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(14,165,233,0.45)'"
-                                >
-                                    รายชื่อผู้ผ่านการอบรมเข้มข้น (Intensive Course)
-                                </a>
-                                <br>
-                                <br>
-                                <a href="https://drive.google.com/file/d/1yCVNqPJ97Wvl2sTywkyYGIEMJKN2M-1j/view?usp=sharing"
-                                    class="btn"
-                                    onclick="gtag('event', 'Announcement1', { 'button_name': 'Announcement1', 'type': 'ประกาศครั้งที่1' });"
-                                    style="
-                                        background: linear-gradient(135deg, #0ea5e9, #06b6d4);
-                                        color: white;
-                                        border: none;
-                                        border-radius: 12px;
-                                        padding: 14px 36px;
-                                        font-size: 1rem;
-                                        font-weight: 600;
-                                        letter-spacing: 0.03em;
-                                        box-shadow: 0 4px 20px rgba(14,165,233,0.45);
-                                        transition: transform 0.2s, box-shadow 0.2s;
-                                        text-decoration: none;
-                                    "
-                                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 28px rgba(14,165,233,0.6)'"
-                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(14,165,233,0.45)'"
-                                >
-                                    รายชื่อผู้มีสิทธิได้เข้าร่วมกิจกรรม On-Job-Training
-                                </a>
-                            </div>
-
-                        </div>
+                        <p style="color:rgba(255,255,255,0.60); font-size:1rem; max-width:640px; margin:0 auto;">
+                            ช่วงเวลาแห่งการเรียนรู้และแลกเปลี่ยนประสบการณ์ของผู้เข้าร่วมโครงการตลอดทั้งปี
+                        </p>
                     </div>
+
+                    <div class="gallery-carousel">
+                        <button type="button" class="gallery-nav gallery-prev" id="galleryPrevBtn" aria-label="ภาพก่อนหน้า">‹</button>
+                        <div class="gallery-track" id="galleryTrack"></div>
+                        <button type="button" class="gallery-nav gallery-next" id="galleryNextBtn" aria-label="ภาพถัดไป">›</button>
+                    </div>
+
+                    <div class="gallery-dots" id="galleryDots"></div>
                 </div>
-                                                <!-- ตารางกิจกรรม -->
-                                <div style="margin-top:36px; padding-top:28px; border-top:1px solid rgba(56,189,248,0.15); text-align:center;">
-                                    
-                                    <div style="
-                                        display: inline-block;
-                                        background: rgba(56,189,248,0.1);
-                                        border: 1px solid rgba(56,189,248,0.3);
-                                        border-radius: 100px;
-                                        padding: 8px 24px;
-                                        font-size: 0.85rem;
-                                        color: #38bdf8;
-                                        letter-spacing: 0.08em;
-                                        text-transform: uppercase;
-                                        font-weight: 600;
-                                        margin-bottom: 20px;
-                                    ">ตารางกิจกรรม</div>
-                    
-                                    <h3 style="font-size:1.4rem; font-weight:700; color:white; margin-bottom:24px;">
-                                        ตารางกิจกรรม On-Job-Training (OJT) 
-                                    </h3>    
-                                <a href="https://drive.google.com/file/d/1SJuTPLI932giOpqDp0LxvlYiYoqp9rEt/view?usp=sharing"
-                                    class="btn"
-                                    onclick="gtag('event', 'Announcement1', { 'button_name': 'Announcement1', 'type': 'ประกาศครั้งที่1' });"
-                                    style="
-                                        background: linear-gradient(135deg, #0ea5e9, #06b6d4);
-                                        color: white;
-                                        border: none;
-                                        border-radius: 12px;
-                                        padding: 14px 36px;
-                                        font-size: 1rem;
-                                        font-weight: 600;
-                                        letter-spacing: 0.03em;
-                                        box-shadow: 0 4px 20px rgba(14,165,233,0.45);
-                                        transition: transform 0.2s, box-shadow 0.2s;
-                                        text-decoration: none;
-                                    "
-                                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 28px rgba(14,165,233,0.6)'"
-                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(14,165,233,0.45)'"
-                                >
-                                    ตารางกิจกรรม On-Job-Training แบบเป็นทางการ 
-                                </a>
-                                <br>
-                                <br>
-                                <br>
-                                    <div style="display:flex; gap:16px; flex-wrap:wrap; padding: 0 24px;">
-                                        <div style="flex:1; min-width:200px; text-align:center;">
-                                            <img src="images/OJTaug.png" alt="สิงหาคม"
-                                                style="width:100%; border-radius:10px; border:1px solid rgba(56,189,248,0.25); image-rendering:crisp-edges; filter:contrast(1.05) brightness(1.05);">
-                                            <p style="text-align:center; color:rgba(255,255,255,0.6); font-size:0.8rem; margin-top:8px;">ตารางกิจกรรม สิงหาคม</p>
-                                            <button onclick="openImgModal('images/OJTaug.png')" style="
-                                                margin-top:6px;
-                                                background:rgba(56,189,248,0.15);
-                                                border:1px solid rgba(56,189,248,0.35);
-                                                border-radius:8px; padding:7px 16px;
-                                                color:#38bdf8; font-size:0.8rem;
-                                                font-weight:600; cursor:pointer;
-                                                font-family:inherit;">
-                                                🔍 คลิกเพื่อขยาย
-                                            </button>
-                                        </div>
-                                        <div style="flex:1; min-width:200px; text-align:center;">
-                                            <img src="images/OJTSep2.png" alt="มิถุนายน"
-                                                style="width:100%; border-radius:10px; border:1px solid rgba(56,189,248,0.25); image-rendering:crisp-edges; filter:contrast(1.05) brightness(1.05);">
-                                            <p style="text-align:center; color:rgba(255,255,255,0.6); font-size:0.8rem; margin-top:8px;">ตารางกิจกรรม กันยายน</p>
-                                            <button onclick="openImgModal('images/OJTSep2.png')" style="
-                                                margin-top:6px;
-                                                background:rgba(56,189,248,0.15);
-                                                border:1px solid rgba(56,189,248,0.35);
-                                                border-radius:8px; padding:7px 16px;
-                                                color:#38bdf8; font-size:0.8rem;
-                                                font-weight:600; cursor:pointer;
-                                                font-family:inherit;">
-                                                🔍 คลิกเพื่อขยาย
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>                
             </section>
+
+            <style>
+                .gallery-section {
+                    padding: 90px 0 100px;
+                    position: relative;
+                    overflow: hidden;
+                    background:
+                        linear-gradient(135deg, rgba(10,22,40,0.80) 0%, rgba(13,33,55,0.75) 60%, rgba(10,61,92,0.70) 100%),
+                        url('images/bg_02.png') center center / cover no-repeat;
+                }
+                .gallery-carousel {
+                    position: relative;
+                    max-width: 1100px;
+                    margin: 0 auto;
+                    height: 460px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .gallery-track { position: relative; width: 100%; height: 100%; }
+                .gallery-slide {
+                    position: absolute;
+                    top: 50%; left: 50%;
+                    width: 560px;
+                    max-width: 62vw;
+                    aspect-ratio: 4 / 3;
+                    border-radius: 18px;
+                    overflow: hidden;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+                    border: 1px solid rgba(56,189,248,0.2);
+                    transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
+                    cursor: pointer;
+                }
+                .gallery-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+                .gallery-slide.is-active {
+                    transform: translate(-50%, -50%) scale(1);
+                    opacity: 1; filter: none; z-index: 5; cursor: default;
+                    box-shadow: 0 25px 70px rgba(14,165,233,0.35);
+                }
+                .gallery-slide.is-prev {
+                    transform: translate(-125%, -50%) scale(0.76);
+                    opacity: 0.5; filter: brightness(0.55) blur(1px); z-index: 3;
+                }
+                .gallery-slide.is-next {
+                    transform: translate(25%, -50%) scale(0.76);
+                    opacity: 0.5; filter: brightness(0.55) blur(1px); z-index: 3;
+                }
+                .gallery-slide.is-hidden { opacity: 0; pointer-events: none; z-index: 1; }
+                .gallery-nav {
+                    background: rgba(13,42,74,0.75);
+                    border: 1px solid rgba(56,189,248,0.35);
+                    color: #38bdf8;
+                    width: 52px; height: 52px;
+                    border-radius: 50%;
+                    display: flex; align-items: center; justify-content: center;
+                    font-size: 1.7rem; line-height: 1;
+                    cursor: pointer; z-index: 10; flex-shrink: 0;
+                    transition: background 0.2s, transform 0.2s;
+                    position: absolute; top: 50%; transform: translateY(-50%);
+                }
+                .gallery-nav:hover { background: rgba(56,189,248,0.25); transform: translateY(-50%) scale(1.08); }
+                .gallery-prev { left: 0; }
+                .gallery-next { right: 0; }
+                .gallery-dots { display: flex; justify-content: center; gap: 8px; margin-top: 28px; flex-wrap: wrap; }
+                .gallery-dot {
+                    width: 8px; height: 8px; border-radius: 50%;
+                    background: rgba(255,255,255,0.25);
+                    cursor: pointer; transition: all 0.2s ease;
+                }
+                .gallery-dot.active { background: #38bdf8; width: 26px; border-radius: 5px; }
+
+                @media (max-width: 767px) {
+                    .gallery-carousel { height: 320px; }
+                    .gallery-slide { width: 300px; max-width: 78vw; }
+                    .gallery-slide.is-prev { transform: translate(-135%, -50%) scale(0.7); }
+                    .gallery-slide.is-next { transform: translate(35%, -50%) scale(0.7); }
+                    .gallery-nav { width: 42px; height: 42px; font-size: 1.4rem; }
+                }
+            </style>
+
+            <script>
+            // รายชื่อรูปในคลังบรรยากาศโครงการ — เพิ่มรูปใหม่ในอนาคต แค่เพิ่มบรรทัดต่อท้าย ไม่ต้องแก้อย่างอื่นเลย
+            var galleryImages = [
+                'images/gallery/768039578_122118363921257539_8778093608520268_n.jpg',
+                'images/gallery/768428374_122118531369257539_8238553026905026521_n.jpg',
+                'images/gallery/768965470_122118364407257539_7102845256710299260_n.jpg',
+                'images/gallery/769032938_122118364059257539_7092751666246144159_n.jpg',
+                'images/gallery/769177978_122118363117257539_4392458291654150095_n.jpg',
+                'images/gallery/769294958_122118532281257539_8616399335662503085_n.jpg',
+                'images/gallery/774671643_122119138611257539_2682371759107257956_n.jpg',
+                'images/gallery/774680440_122119137441257539_5734549595015937841_n.jpg',
+                'images/gallery/774727155_122119138773257539_6762748577855497927_n.jpg',
+                'images/gallery/783220604_122119788207257539_4872626138458588801_n.jpg',
+                'images/gallery/784321359_122119787667257539_8302708857710575449_n.jpg',
+                'images/gallery/785993486_122119788081257539_4882853078094518742_n.jpg',
+                'images/gallery/788106955_122120485317257539_296363951870615400_n.jpg',
+                'images/gallery/790226070_122120486187257539_7215641938701086418_n.jpg',
+                'images/gallery/790283630_122120486205257539_7799528041697743015_n.jpg',
+                'images/gallery/790591314_122120485695257539_6639911123576525020_n.jpg'
+            ];
+
+            (function () {
+                var track = document.getElementById('galleryTrack');
+                var dotsWrap = document.getElementById('galleryDots');
+                if (!track || !galleryImages.length) return;
+
+                var current = 0;
+                var autoTimer = null;
+
+                galleryImages.forEach(function (src, i) {
+                    var slide = document.createElement('div');
+                    slide.className = 'gallery-slide';
+                    slide.innerHTML = '<img src="' + src + '" alt="ภาพบรรยากาศโครงการ AISaMD-WDP" loading="lazy">';
+                    slide.addEventListener('click', function () { goTo(i); });
+                    track.appendChild(slide);
+
+                    var dot = document.createElement('span');
+                    dot.className = 'gallery-dot';
+                    dot.addEventListener('click', function () { goTo(i); });
+                    dotsWrap.appendChild(dot);
+                });
+
+                var slides = track.querySelectorAll('.gallery-slide');
+                var dots = dotsWrap.querySelectorAll('.gallery-dot');
+                var total = slides.length;
+
+                function render() {
+                    slides.forEach(function (slide, i) {
+                        slide.classList.remove('is-active', 'is-prev', 'is-next', 'is-hidden');
+                        var diff = (i - current + total) % total;
+                        if (diff === 0) slide.classList.add('is-active');
+                        else if (diff === 1) slide.classList.add('is-next');
+                        else if (diff === total - 1) slide.classList.add('is-prev');
+                        else slide.classList.add('is-hidden');
+                    });
+                    dots.forEach(function (dot, i) {
+                        dot.classList.toggle('active', i === current);
+                    });
+                }
+
+                function goTo(i) {
+                    current = (i + total) % total;
+                    render();
+                    resetAuto();
+                }
+                function next() { goTo(current + 1); }
+                function prev() { goTo(current - 1); }
+
+                function resetAuto() {
+                    clearInterval(autoTimer);
+                    autoTimer = setInterval(next, 4000);
+                }
+
+                document.getElementById('galleryPrevBtn').addEventListener('click', prev);
+                document.getElementById('galleryNextBtn').addEventListener('click', next);
+
+                var carouselEl = document.querySelector('.gallery-carousel');
+                carouselEl.addEventListener('mouseenter', function () { clearInterval(autoTimer); });
+                carouselEl.addEventListener('mouseleave', resetAuto);
+
+                render();
+                resetAuto();
+            })();
+            </script>
+
 
                 
 
@@ -512,7 +485,6 @@ https://templatemo.com/tm-575-leadership-event
                 position: relative;
                 overflow: hidden;
             ">
-                <!-- แสงพื้นหลัง -->
                 <div style="position:absolute;top:0;left:0;right:0;bottom:0;
                     background: 
                     linear-gradient(135deg, rgba(10,22,40,0.25) 0%, rgba(13,33,55,0.20) 60%, rgba(10,61,92,0.15) 100%),                        url('images/bg_01.png') center center / cover no-repeat;
@@ -520,7 +492,6 @@ https://templatemo.com/tm-575-leadership-event
 
                 <div class="container" style="position:relative;">
 
-                    <!-- หัวข้อ -->
                     <div class="text-center mb-5">
                         <div style="
                             display:inline-block;
@@ -558,10 +529,8 @@ https://templatemo.com/tm-575-leadership-event
                         </p>
                     </div>
 
-                    <!-- 2 กล่องสายงาน -->
                     <div class="row g-4 justify-content-center">
 
-                        <!-- QA-RA -->
                         <div class="col-lg-5 col-md-6">
                             <div style="
                                 background: rgba(13,42,74,0.70);
@@ -606,7 +575,6 @@ https://templatemo.com/tm-575-leadership-event
                             </div>
                         </div>
 
-                        <!-- BD -->
                         <div class="col-lg-5 col-md-6">
                             <div style="
                                 background: rgba(13,42,74,0.70);
@@ -661,7 +629,6 @@ https://templatemo.com/tm-575-leadership-event
                 padding: 100px 0;
                 overflow: hidden;
             ">
-                <!--  พื้นหลัง -->
                 <div style="
                     position: absolute;
                     top: 0; left: 0;
@@ -672,7 +639,6 @@ https://templatemo.com/tm-575-leadership-event
                     z-index: 0;
                 "></div>
 
-                <!-- overlay สีเข้มทับ vdo -->
                 <div style="
                     position: absolute;
                     top: 0; left: 0;
@@ -681,11 +647,9 @@ https://templatemo.com/tm-575-leadership-event
                     z-index: 1;
                 "></div>
 
-                <!-- เนื้อหาทั้งหมด -->
                 <div class="container" style="position:relative; z-index:2;">
                 
 
-                    <!-- หัวข้อ -->
                     <div class="text-center mb-5">
                         <div style="
                             display:inline-block;
@@ -715,10 +679,8 @@ https://templatemo.com/tm-575-leadership-event
                         </p>
                     </div>
 
-                    <!-- Timeline container -->
                     <div style="position:relative; max-width:800px; margin:0 auto; padding: 0 20px;">
 
-                        <!-- เส้นกลาง -->
                         <div style="
                             position:absolute;
                             left:50%; top:0; bottom:0;
@@ -727,9 +689,7 @@ https://templatemo.com/tm-575-leadership-event
                             transform:translateX(-50%);
                         "></div>
 
-                        <!-- ITEM 1 — ซ้าย -->
                         <div style="display:flex; align-items:center; margin-bottom:48px;">
-                            <!-- กล่องซ้าย -->
                             <div style="width:45%;">
                                 <div style="
                                     background: rgba(13,42,74,0.80);
@@ -759,7 +719,6 @@ https://templatemo.com/tm-575-leadership-event
                                 </div>
                             </div>
 
-                            <!-- วงกลม -->
                             <div style="width:10%; display:flex; justify-content:center;">
                                 <div style="
                                     width:52px; height:52px; border-radius:50%;
@@ -774,16 +733,12 @@ https://templatemo.com/tm-575-leadership-event
                                     </div>
                             </div>
 
-                            <!-- ฝั่งขวาว่าง -->
                             <div style="width:45%;"></div>
                         </div>
 
-                        <!-- ITEM 2 — ขวา -->
                         <div style="display:flex; align-items:center; margin-bottom:48px;">
-                            <!-- ฝั่งซ้ายว่าง -->
                             <div style="width:45%;"></div>
 
-                            <!-- วงกลม -->
                             <div style="width:10%; display:flex; justify-content:center;">
                                 <div style="
                                     width:52px; height:52px; border-radius:50%;
@@ -798,7 +753,6 @@ https://templatemo.com/tm-575-leadership-event
                                 </div>
                             </div>
 
-                            <!-- กล่องขวา -->
                             <div style="width:45%;">
                                 <div style="
                                     background: rgba(13,42,74,0.80);
@@ -830,7 +784,6 @@ https://templatemo.com/tm-575-leadership-event
                             </div>
                         </div>
 
-                        <!-- ITEM 3 — ซ้าย -->
                         <div style="display:flex; align-items:center; margin-bottom:48px;">
                             <div style="width:45%;">
                                 <div style="
@@ -860,7 +813,6 @@ https://templatemo.com/tm-575-leadership-event
                                     <a href="https://www.facebook.com/share/p/1CTdPxZFRY/" target="_blank" style="display:inline-block; margin-top:12px; background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.35); border-radius:8px; padding:7px 16px; color:#38bdf8; font-size:0.8rem; font-weight:600; cursor:pointer; font-family:inherit; text-decoration:none;">ประมวลกิจกรรมอบรมเบื้องต้น QA-RA ↗</a>
                                     <a href="https://www.facebook.com/share/p/1DhikMYK53/" target="_blank" style="display:inline-block; margin-top:12px; background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.35); border-radius:8px; padding:7px 16px; color:#38bdf8; font-size:0.8rem; font-weight:600; cursor:pointer; font-family:inherit; text-decoration:none;">ประมวลกิจกรรมอบรมเบื้องต้น BD ↗</a>
                                     <a href="https://drive.google.com/file/d/1hcLimpvveiNWEidGkVVWCU3y49W7i63N/view?usp=sharing" target="_blank" style="display:inline-block; margin-top:12px; background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.35); border-radius:8px; padding:7px 16px; color:#38bdf8; font-size:0.8rem; font-weight:600; cursor:pointer; font-family:inherit; text-decoration:none;">ประกาศผลผู้มีสิทธิ์เข้าร่วมการอบรมเข้มข้น (Intensive Course) ↗</a>
-                                    <!-- <button onclick="openModal(3, 'อบรมเบื้องต้น', 'act_03.png')" style="margin-top:12px; background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.35); border-radius:8px; padding:7px 16px; color:#38bdf8; font-size:0.8rem; font-weight:600; cursor:pointer; font-family:inherit;">ดูรายละเอียด ↗</button> -->
                                 </div>
                             </div>
                             <div style="width:10%; display:flex; justify-content:center;">
@@ -878,7 +830,6 @@ https://templatemo.com/tm-575-leadership-event
                             <div style="width:45%;"></div>
                         </div>
 
-                        <!-- ITEM 4 — ขวา -->
                         <div style="display:flex; align-items:center; margin-bottom:48px;">
                             <div style="width:45%;"></div>
                             <div style="width:10%; display:flex; justify-content:center;">
@@ -919,13 +870,12 @@ https://templatemo.com/tm-575-leadership-event
                                         รวมไปถึง แนวทางการนำเสนอเพื่อให้เครื่องมือทางการแพทย์เป็นที่จับตามอง
                                     </p>
                                     <button onclick="openModal(4, 'ตารางกิจกรรมอบรมเข้มข้น (Intensive)', 'Event may.png', 'Event june new 2.png')" style="margin-top:12px; background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.35); border-radius:8px; padding:7px 16px; color:#38bdf8; font-size:0.8rem; font-weight:600; cursor:pointer; font-family:inherit;">ตารางกิจกรรมอบรมเข้มข้น Intensive ↗</button>
-                                    <a href="https://www.facebook.com/share/p/17oKAZQJ9V/" target="_blank" style="display:inline-block; margin-top:12px; background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.35); border-radius:8px; padding:7px 16px; color:#38bdf8; font-size:0.8rem; font-weight:600; cursor:pointer; font-family:inherit; text-decoration:none;">ประกาศผลผู้ผ่านการอบรมเข้มเข้น Intensive ↗</a>
-                                    <a href="https://www.facebook.com/share/p/1BM9BFyQ6q/" target="_blank" style="display:inline-block; margin-top:12px; background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.35); border-radius:8px; padding:7px 16px; color:#38bdf8; font-size:0.8rem; font-weight:600; cursor:pointer; font-family:inherit; text-decoration:none;">ประกาศผลผู้มีสิทธิ์เข้าร่วม On-Job-Training ↗</a>
+                                    <a href="https://drive.google.com/file/d/1xyA8uQu4h9-V9kUaLe0TmyFqFfjPYJaF/view?usp=sharing" target="_blank" style="display:inline-block; margin-top:12px; background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.35); border-radius:8px; padding:7px 16px; color:#38bdf8; font-size:0.8rem; font-weight:600; cursor:pointer; font-family:inherit; text-decoration:none;">ประกาศผลผู้ผ่านการอบรมเข้มเข้น Intensive ↗</a>
+                                    <a href="https://drive.google.com/file/d/1yCVNqPJ97Wvl2sTywkyYGIEMJKN2M-1j/view?usp=sharing" target="_blank" style="display:inline-block; margin-top:12px; background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.35); border-radius:8px; padding:7px 16px; color:#38bdf8; font-size:0.8rem; font-weight:600; cursor:pointer; font-family:inherit; text-decoration:none;">ประกาศผลผู้มีสิทธิ์เข้าร่วม On-Job-Training ↗</a>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- ITEM 5 — ซ้าย -->
                         <div style="display:flex; align-items:center;">
                             <div style="width:45%;">
                                 <div style="
@@ -971,7 +921,6 @@ https://templatemo.com/tm-575-leadership-event
                     </div>
                 </div>
 
-                <!-- ══ MODAL ══ -->
                 <div id="modal-overlay" onclick="closeModal()" style="
                     display:none;
                     position:fixed; inset:0;
@@ -993,7 +942,6 @@ https://templatemo.com/tm-575-leadership-event
                         box-shadow:0 20px 60px rgba(0,0,0,0.5);
                         animation: modalIn 0.3s ease;
                     ">
-                        <!-- ปุ่ม X -->
                         <button type="button" onclick="closeModal()" style="
                             position:absolute; top:16px; right:16px;
                             background:rgba(255,255,255,0.1);
@@ -1009,7 +957,6 @@ https://templatemo.com/tm-575-leadership-event
                         onmouseout="this.style.background='rgba(255,255,255,0.1)'"
                         >✕</button>
 
-                        <!-- หัวข้อ -->
                         <div id="modal-badge" style="
                             display:inline-block;
                             background:rgba(56,189,248,0.1);
@@ -1027,7 +974,6 @@ https://templatemo.com/tm-575-leadership-event
                             font-weight:700; margin-bottom:20px;
                         "></h3>
 
-                        <!-- รูปภาพ -->
                         <img id="modal-img" src="" alt="" style="
                             width:100%; border-radius:12px;
                             object-fit:contain;
@@ -1096,7 +1042,6 @@ https://templatemo.com/tm-575-leadership-event
                 position: relative;
                 overflow: hidden;
             ">
-                <!-- แสงเรืองพื้นหลัง -->
                 <div style="
                     position: absolute; top: 50%; left: 50%;
                     transform: translate(-50%, -50%);
@@ -1108,7 +1053,6 @@ https://templatemo.com/tm-575-leadership-event
                     <div class="row justify-content-center">
                         <div class="col-lg-8 text-center">
 
-                            <!-- Badge บน -->
                             <div style="
                                 display: inline-block;
                                 background: rgba(56,189,248,0.1);
@@ -1123,7 +1067,6 @@ https://templatemo.com/tm-575-leadership-event
                                 margin-bottom: 28px;
                             ">เกี่ยวกับกิจกรรมในโอกาสหน้า </div>
 
-                            <!-- หัวข้อหลัก -->
                             <h2 style="
                                 font-size: 2.8rem;
                                 font-weight: 700;
@@ -1147,7 +1090,6 @@ https://templatemo.com/tm-575-leadership-event
                                 letter-spacing: 0.04em;
                             ">สามารถคลิ๊กปุ่มด้านล่างเพื่อกรอกแบบฟอร์มแสดงความสนใจต่อโครงการ AISaMD Workforce Development Program Batch 2 </h3>
 
-                            <!-- กรอบการ์ดเรืองแสง -->
                             <div style="
                                 background: rgba(13, 42, 74, 0.60);
                                 backdrop-filter: blur(12px);
@@ -1157,7 +1099,6 @@ https://templatemo.com/tm-575-leadership-event
                                 box-shadow: 0 0 40px rgba(56,189,248,0.08), 0 20px 60px rgba(0,0,0,0.3);
                                 margin-bottom: 32px;
                             ">
-                                <!-- ปุ่ม -->
                                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvuoSA7KHtS8CNjsodmUaH8MvGGxsafCvEDsrTXurxk3CyRQ/viewform?usp=dialog"
                                     class="btn"
                                     onclick="gtag('event', 'Batch2', { 'button_name': 'Batch2', 'type': 'ประกาศครั้งที่1' });"
@@ -1185,10 +1126,6 @@ https://templatemo.com/tm-575-leadership-event
                     </div>
                 </div>      
             </section>
-
-
-
-
 
 
             <section class="schedule section-padding" id="sponsor">
@@ -1290,7 +1227,7 @@ https://templatemo.com/tm-575-leadership-event
                     transition: 0.3s;
                 }
                 .contact-link:hover {
-                    color: #007bff; /* เปลี่ยนเป็นสีที่คุณต้องการเวลาเอาเมาส์วาง */
+                    color: #007bff;
                 }
             </style>
             
@@ -1330,7 +1267,7 @@ https://templatemo.com/tm-575-leadership-event
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.sticky.js"></script>
-        <script src="js/click-scroll.js"></script>
+        <!-- js/click-scroll.js ถูกปิดการใช้งานแล้ว เพราะมันมีระบบไฮไลต์เมนู/เปลี่ยน URL hash ของตัวเองที่คำนวณผิดพลาด (เห็นได้จาก URL ที่ขึ้น #section_3 เองแม้อยู่หน้า Contact us) แย่งชิงกับสคริปต์แก้บั๊กด้านล่างตลอดเวลา จึงปิดไปแล้วเขียนแทนทั้งหมดในสคริปต์ท้ายไฟล์นี้ (ทั้งคลิกเลื่อนหน้าจอ และไฮไลต์เมนู) -->
         <script src="js/custom.js"></script>
                 <!-- Modal ขยายรูป -->
         <div id="img-modal-overlay" onclick="closeImgModal()" style="
@@ -1389,12 +1326,10 @@ https://templatemo.com/tm-575-leadership-event
         </style>
 
         <script>
-            // เพิ่ม class ให้ทุก section
             document.querySelectorAll('section').forEach(el => {
             el.classList.add('fade-in-section');
             });
 
-            // สังเกตการณ์ scroll
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1406,6 +1341,24 @@ https://templatemo.com/tm-575-leadership-event
             document.querySelectorAll('.fade-in-section').forEach(el => {
                 observer.observe(el);
             });
-        </script> 
+        </script>
+
+        <!-- แทนที่ js/click-scroll.js: คลิกเมนูแล้วเลื่อนหน้าจอนุ่มๆ (ตัดส่วนไฮไลต์อัตโนมัติออกแล้ว เพราะแก้ไม่จบสักที) -->
+        <script>
+        (function () {
+            var scrollLinks = document.querySelectorAll('.nav-link.click-scroll');
+
+            scrollLinks.forEach(function (item) {
+                item.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var target = document.querySelector(item.getAttribute('href'));
+                    if (target) {
+                        var absoluteTop = target.getBoundingClientRect().top + window.scrollY;
+                        window.scrollTo({ top: absoluteTop, behavior: 'smooth' });
+                    }
+                });
+            });
+        })();
+        </script>
     </body>
 </html>
