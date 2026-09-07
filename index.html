@@ -391,8 +391,12 @@ https://templatemo.com/tm-575-leadership-event
             </style>
 
             <script>
-            // รายชื่อรูปในคลังบรรยากาศโครงการ — เพิ่มรูปใหม่ในอนาคต แค่เพิ่มบรรทัดต่อท้าย ไม่ต้องแก้อย่างอื่นเลย
-            var galleryImages = [
+            // ดึงรายชื่อรูปจากโฟลเดอร์ images/gallery บน GitHub อัตโนมัติ — เพิ่ม/ลบรูปแค่ push ขึ้น GitHub ก็พอ ไม่ต้องแก้โค้ดหน้านี้อีกเลย
+            var GALLERY_REPO = 'sitthatkaja/AISaMD26_webpage';
+            var GALLERY_PATH = 'images/gallery';
+
+            // รายการสำรอง ใช้เฉพาะตอนเรียก GitHub API ไม่สำเร็จ (เช่น โดน rate limit) กันหน้าเว็บว่างเปล่า
+            var GALLERY_FALLBACK = [
                 'images/gallery/768039578_122118363921257539_8778093608520268_n.jpg',
                 'images/gallery/768428374_122118531369257539_8238553026905026521_n.jpg',
                 'images/gallery/768965470_122118364407257539_7102845256710299260_n.jpg',
@@ -411,10 +415,29 @@ https://templatemo.com/tm-575-leadership-event
                 'images/gallery/790591314_122120485695257539_6639911123576525020_n.jpg'
             ];
 
-            (function () {
+            async function loadGalleryImages() {
+                try {
+                    var res = await fetch('https://api.github.com/repos/' + GALLERY_REPO + '/contents/' + GALLERY_PATH);
+                    if (!res.ok) throw new Error('GitHub API status ' + res.status);
+                    var files = await res.json();
+                    var imageExt = /\.(jpe?g|png|webp|gif)$/i;
+                    var images = files
+                        .filter(function (f) { return f.type === 'file' && imageExt.test(f.name); })
+                        .map(function (f) { return GALLERY_PATH + '/' + f.name; });
+                    return images.length ? images : GALLERY_FALLBACK;
+                } catch (err) {
+                    console.warn('โหลดรายชื่อรูปจาก GitHub ไม่สำเร็จ ใช้รายการสำรองแทน:', err);
+                    return GALLERY_FALLBACK;
+                }
+            }
+
+            (async function () {
                 var track = document.getElementById('galleryTrack');
                 var dotsWrap = document.getElementById('galleryDots');
-                if (!track || !galleryImages.length) return;
+                if (!track) return;
+
+                var galleryImages = await loadGalleryImages();
+                if (!galleryImages.length) return;
 
                 var current = 0;
                 var autoTimer = null;
